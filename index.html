@@ -627,4 +627,1862 @@ let refreshing = false;
 const info = {
 
     market: [
-     
+        "📈 Market｜市場方向",
+        `
+        <p>
+            Market 由 SPY、QQQ、SOXX、IWM 的趨勢燈號決定。
+        </p>
+
+        <table>
+            <tr>
+                <th>條件</th>
+                <th>結果</th>
+            </tr>
+            <tr>
+                <td>至少 3 支 🟢</td>
+                <td>🟢 Bull</td>
+            </tr>
+            <tr>
+                <td>至少 3 支 🔴 或 🔴🔴</td>
+                <td>🔴 Bear</td>
+            </tr>
+            <tr>
+                <td>其他組合</td>
+                <td>🟡 Mixed</td>
+            </tr>
+        </table>
+
+        <div class="note">
+            ETF 決定市場方向，VIX 調整風險。
+            VIX 25～30 不會把 Bear 覆蓋成 Bull Weakening。
+        </div>
+        `
+    ],
+
+    risk: [
+        "⚠️ Risk｜VIX 風險",
+        `
+        <table>
+            <tr>
+                <th>VIX</th>
+                <th>解讀</th>
+            </tr>
+            <tr>
+                <td>&lt; 20</td>
+                <td>正常</td>
+            </tr>
+            <tr>
+                <td>20～25</td>
+                <td>警戒</td>
+            </tr>
+            <tr>
+                <td>25～30</td>
+                <td>風險升高</td>
+            </tr>
+            <tr>
+                <td>30～40</td>
+                <td>Risk-Off</td>
+            </tr>
+            <tr>
+                <td>≥ 40</td>
+                <td>Extreme Risk</td>
+            </tr>
+        </table>
+        `
+    ],
+
+    action: [
+        "🎯 Action｜行動提示",
+        `
+        <ul>
+            <li><b>ADD：</b>趨勢完整，風險正常。</li>
+            <li><b>HOLD / SELECTIVE ADD：</b>只選擇強勢標的。</li>
+            <li><b>DO NOT ADD：</b>停止增加曝險。</li>
+            <li><b>REDUCE：</b>降低部位或槓桿。</li>
+            <li><b>DEFENSIVE：</b>極端壓力下以保存資金為優先。</li>
+            <li><b>WAIT：</b>資料不足，不依照系統訊號操作。</li>
+        </ul>
+
+        <div class="note">
+            這是規則式提示，不是保證報酬的買賣建議。
+        </div>
+        `
+    ],
+
+    custom: [
+        "📅 Custom Range Trend",
+        `
+        <p>
+            比較 SPY、QQQ、SOXX、IWM 在指定區間的
+            起點與終點收盤價。
+        </p>
+
+        <p>
+            單支 ETF 報酬大於等於正門檻為 🟢，
+            小於等於負門檻為 🔴，中間區間為 🟡。
+        </p>
+
+        <p>
+            至少 3 支 ETF 同方向，才會判定整體為
+            Custom Bullish 或 Custom Bearish。
+        </p>
+
+        <div class="note">
+            Custom Range 是額外的歷史區間分析，
+            不會修改即時 Action。
+        </div>
+        `
+    ],
+
+    vix: [
+        "VIX｜市場波動指數",
+        `
+        <p>
+            VIX 是市場預期波動指數。
+            VIX 實際值會參與 Risk 與 Action 判斷。
+        </p>
+        `
+    ],
+
+    us10y: [
+        "US 10Y｜美國 10 年期公債殖利率",
+        `
+        <p>
+            美國 10 年期公債殖利率。
+            變化使用 bp 顯示。
+        </p>
+
+        <p>
+            1 bp 等於 0.01 個百分點。
+            例如 4.20% 上升至 4.30%，就是 +10 bp。
+        </p>
+
+        <div class="note">
+            US 10Y 目前只作為市場背景資訊。
+        </div>
+        `
+    ],
+
+    gold: [
+        "Gold｜黃金期貨",
+        `
+        <p>
+            黃金可能受到美元、利率、通膨、央行購金
+            或避險需求影響。
+        </p>
+
+        <div class="note">
+            黃金上漲不一定表示 Risk-Off，
+            目前不直接改變 Action。
+        </div>
+        `
+    ],
+
+    usdtwd: [
+        "USD/TWD｜美元兌新台幣",
+        `
+        <p>
+            USD/TWD 代表 1 美元可兌換多少新台幣。
+        </p>
+
+        <ul>
+            <li>USD/TWD 上升：美元轉強，台幣相對轉弱。</li>
+            <li>USD/TWD 下降：美元轉弱，台幣相對轉強。</li>
+        </ul>
+        `
+    ],
+
+    spy: [
+        "SPY｜美國大型股",
+        `
+        <p>
+            SPY 追蹤 S&amp;P 500，
+            代表美國大型股與核心股票市場。
+        </p>
+        `
+    ],
+
+    qqq: [
+        "QQQ｜科技與成長股",
+        `
+        <p>
+            QQQ 追蹤 Nasdaq-100，
+            代表大型科技與成長型公司。
+        </p>
+        `
+    ],
+
+    soxx: [
+        "SOXX｜半導體",
+        `
+        <p>
+            SOXX 是半導體 ETF，
+            反映科技景氣與半導體風險偏好。
+        </p>
+        `
+    ],
+
+    iwm: [
+        "IWM｜小型股與市場廣度",
+        `
+        <p>
+            IWM 追蹤 Russell 2000，
+            代表美國小型股與市場廣度。
+        </p>
+        `
+    ]
+};
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+function openInfo(key) {
+
+    if (!info[key]) {
+        return;
+    }
+
+    $("modalTitle").textContent =
+        info[key][0];
+
+    $("modalBody").innerHTML =
+        info[key][1];
+
+    $("modal").classList.add("show");
+
+    $("modal").setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+    document.body.classList.add(
+        "modal-open"
+    );
+
+    $("modalClose").focus();
+}
+
+
+function closeInfo() {
+
+    $("modal").classList.remove("show");
+
+    $("modal").setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+    document.body.classList.remove(
+        "modal-open"
+    );
+}
+
+
+document.addEventListener(
+    "click",
+    event => {
+
+        const element =
+            event.target.closest(
+                "[data-info]"
+            );
+
+        if (element) {
+            openInfo(
+                element.dataset.info
+            );
+        }
+    }
+);
+
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (event.key === "Escape") {
+            closeInfo();
+        }
+
+        if (
+            (
+                event.key === "Enter" ||
+                event.key === " "
+            ) &&
+            event.target.dataset.info
+        ) {
+            event.preventDefault();
+
+            openInfo(
+                event.target.dataset.info
+            );
+        }
+    }
+);
+
+
+$("modalClose").addEventListener(
+    "click",
+    closeInfo
+);
+
+
+$("modal").addEventListener(
+    "click",
+    event => {
+
+        if (event.target === $("modal")) {
+            closeInfo();
+        }
+    }
+);
+
+
+/* =========================================================
+   UTILITIES
+========================================================= */
+
+function valid(value) {
+    return Number.isFinite(value);
+}
+
+
+function fixed(
+    value,
+    digits = 2
+) {
+
+    if (!valid(value)) {
+        return "--";
+    }
+
+    return value.toFixed(digits);
+}
+
+
+function escapeHTML(value) {
+
+    return String(value).replace(
+        /[&<>"']/g,
+        character => ({
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#039;"
+        })[character]
+    );
+}
+
+
+function localISO(date) {
+
+    const adjusted =
+        new Date(
+            date.getTime() -
+            date.getTimezoneOffset() *
+            60000
+        );
+
+    return adjusted
+        .toISOString()
+        .slice(0, 10);
+}
+
+
+/* =========================================================
+   FETCH
+========================================================= */
+
+async function fetchWithTimeout(url) {
+
+    const controller =
+        new AbortController();
+
+    const timer =
+        setTimeout(
+            () => controller.abort(),
+            FETCH_TIMEOUT
+        );
+
+    try {
+
+        const response =
+            await fetch(
+                url,
+                {
+                    signal: controller.signal,
+                    cache: "no-store"
+                }
+            );
+
+        if (!response.ok) {
+
+            throw new Error(
+                `HTTP ${response.status}`
+            );
+        }
+
+        return response;
+
+    } finally {
+
+        clearTimeout(timer);
+    }
+}
+
+
+async function getMarketData(symbol) {
+
+    const url =
+        `${WORKER_URL}/?symbol=${encodeURIComponent(symbol)}&range=2y&interval=1d`;
+
+    const response =
+        await fetchWithTimeout(url);
+
+    const data =
+        await response.json();
+
+    const result =
+        data?.chart?.result?.[0];
+
+    if (!result) {
+
+        throw new Error(
+            data?.chart?.error?.description ||
+            `No data: ${symbol}`
+        );
+    }
+
+    const close =
+        result
+            ?.indicators
+            ?.quote?.[0]
+            ?.close;
+
+    const timestamps =
+        result?.timestamp;
+
+    if (!Array.isArray(close)) {
+
+        throw new Error(
+            `No close array: ${symbol}`
+        );
+    }
+
+    const series = [];
+
+    for (
+        let index = 0;
+        index < close.length;
+        index++
+    ) {
+
+        if (valid(close[index])) {
+
+            series.push({
+                close: close[index],
+
+                timestamp:
+                    Array.isArray(timestamps) &&
+                    valid(timestamps[index])
+                        ? timestamps[index]
+                        : null
+            });
+        }
+    }
+
+    if (series.length === 0) {
+
+        throw new Error(
+            `Empty data: ${symbol}`
+        );
+    }
+
+    return {
+        symbol,
+        series,
+        values: series.map(
+            item => item.close
+        ),
+        price:
+            series[
+                series.length - 1
+            ].close
+    };
+}
+
+
+/* =========================================================
+   INDICATORS
+========================================================= */
+
+function sma(
+    values,
+    period
+) {
+
+    if (values.length < period) {
+        return null;
+    }
+
+    const selected =
+        values.slice(-period);
+
+    return selected.reduce(
+        (sum, value) =>
+            sum + value,
+        0
+    ) / period;
+}
+
+
+function rsi(
+    values,
+    period = 14
+) {
+
+    if (values.length <= period) {
+        return null;
+    }
+
+    let gains = 0;
+    let losses = 0;
+
+    for (
+        let index =
+            values.length - period;
+
+        index < values.length;
+
+        index++
+    ) {
+
+        const difference =
+            values[index] -
+            values[index - 1];
+
+        if (difference > 0) {
+            gains += difference;
+        } else {
+            losses +=
+                Math.abs(difference);
+        }
+    }
+
+    if (losses === 0) {
+        return 100;
+    }
+
+    const relativeStrength =
+        gains / losses;
+
+    return (
+        100 -
+        100 /
+        (1 + relativeStrength)
+    );
+}
+
+
+function percentageChange(
+    values,
+    days
+) {
+
+    if (values.length <= days) {
+        return null;
+    }
+
+    const current =
+        values[
+            values.length - 1
+        ];
+
+    const previous =
+        values[
+            values.length -
+            1 -
+            days
+        ];
+
+    if (
+        !valid(current) ||
+        !valid(previous) ||
+        previous === 0
+    ) {
+        return null;
+    }
+
+    return (
+        current / previous - 1
+    ) * 100;
+}
+
+
+function yieldChangeBP(
+    values,
+    days
+) {
+
+    if (values.length <= days) {
+        return null;
+    }
+
+    const current =
+        values[
+            values.length - 1
+        ];
+
+    const previous =
+        values[
+            values.length -
+            1 -
+            days
+        ];
+
+    return (
+        current - previous
+    ) * 100;
+}
+
+
+/* =========================================================
+   FORMAT
+========================================================= */
+
+function formatChange(value) {
+
+    if (!valid(value)) {
+        return `<span class="gray">--</span>`;
+    }
+
+    if (value > 0) {
+
+        return `
+        <span class="red">
+            ▲ +${value.toFixed(2)}%
+        </span>
+        `;
+    }
+
+    if (value < 0) {
+
+        return `
+        <span class="green">
+            ▼ ${value.toFixed(2)}%
+        </span>
+        `;
+    }
+
+    return `
+    <span class="gray">
+        0.00%
+    </span>
+    `;
+}
+
+
+function formatBP(value) {
+
+    if (!valid(value)) {
+        return `<span class="gray">--</span>`;
+    }
+
+    if (value > 0) {
+
+        return `
+        <span class="red">
+            ▲ +${value.toFixed(1)} bp
+        </span>
+        `;
+    }
+
+    if (value < 0) {
+
+        return `
+        <span class="green">
+            ▼ ${value.toFixed(1)} bp
+        </span>
+        `;
+    }
+
+    return `
+    <span class="gray">
+        0.0 bp
+    </span>
+    `;
+}
+
+
+function formatAssetValue(
+    symbol,
+    value
+) {
+
+    if (symbol === "^TNX") {
+        return `${value.toFixed(2)}%`;
+    }
+
+    if (symbol === "GC=F") {
+        return `$${value.toFixed(2)}`;
+    }
+
+    if (symbol === "TWD=X") {
+        return value.toFixed(3);
+    }
+
+    return value.toFixed(2);
+}
+
+
+/* =========================================================
+   TREND
+========================================================= */
+
+function trendLight(
+    price,
+    ma20,
+    ma50,
+    ma200
+) {
+
+    if (
+        ![
+            price,
+            ma20,
+            ma50,
+            ma200
+        ].every(valid)
+    ) {
+        return "⚪";
+    }
+
+    if (
+        price > ma20 &&
+        ma20 > ma50 &&
+        ma50 > ma200
+    ) {
+        return "🟢";
+    }
+
+    if (
+        price < ma50 &&
+        ma50 < ma200
+    ) {
+        return "🔴🔴";
+    }
+
+    if (
+        price < ma20 &&
+        ma20 < ma50
+    ) {
+        return "🔴";
+    }
+
+    return "🟡";
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+function vixStatus(value) {
+
+    if (value < 15) {
+        return "🟢 Very Calm";
+    }
+
+    if (value < 20) {
+        return "🟢 Normal";
+    }
+
+    if (value < 25) {
+        return "🟡 Caution";
+    }
+
+    if (value < 30) {
+        return "🟠 Elevated Risk";
+    }
+
+    if (value < 40) {
+        return "🔴 High Risk";
+    }
+
+    return "🔴 Panic";
+}
+
+
+function yieldStatus(value) {
+
+    if (value < 3.5) {
+        return "🟢 Low Yield";
+    }
+
+    if (value < 4.2) {
+        return "🟢 Normal";
+    }
+
+    if (value < 4.7) {
+        return "🟡 High Yield";
+    }
+
+    if (value < 5) {
+        return "🟠 Very High";
+    }
+
+    return "🔴 Extreme";
+}
+
+
+function goldStatus(value) {
+
+    if (!valid(value)) {
+        return "⚪ Neutral";
+    }
+
+    if (value >= 5) {
+        return "🟡 Strong Up";
+    }
+
+    if (value >= 2) {
+        return "🟢 Up";
+    }
+
+    if (value <= -5) {
+        return "🔴 Strong Down";
+    }
+
+    if (value <= -2) {
+        return "🟠 Down";
+    }
+
+    return "⚪ Neutral";
+}
+
+
+function twdStatus(value) {
+
+    if (!valid(value)) {
+        return "⚪ Stable";
+    }
+
+    if (value >= 3) {
+        return "🔴 TWD Weakening";
+    }
+
+    if (value >= 1) {
+        return "🟠 USD Strong";
+    }
+
+    if (value <= -3) {
+        return "🟢 TWD Strong";
+    }
+
+    if (value <= -1) {
+        return "🟢 USD Weak";
+    }
+
+    return "⚪ Stable";
+}
+
+
+/* =========================================================
+   MACRO
+========================================================= */
+
+async function refreshMacro() {
+
+    const definitions = [
+        {
+            name: "VIX",
+            symbol: "^VIX",
+            infoKey: "vix"
+        },
+        {
+            name: "US 10Y",
+            symbol: "^TNX",
+            infoKey: "us10y"
+        },
+        {
+            name: "Gold",
+            symbol: "GC=F",
+            infoKey: "gold"
+        },
+        {
+            name: "USD/TWD",
+            symbol: "TWD=X",
+            infoKey: "usdtwd"
+        }
+    ];
+
+    const results =
+        await Promise.all(
+
+            definitions.map(
+                async definition => {
+
+                    try {
+
+                        return {
+                            ...definition,
+                            ...await getMarketData(
+                                definition.symbol
+                            ),
+                            error: false
+                        };
+
+                    } catch (error) {
+
+                        return {
+                            ...definition,
+                            error: true,
+                            message: error.message
+                        };
+                    }
+                }
+            )
+        );
+
+    $("macroTable").innerHTML =
+        results.map(item => {
+
+            if (item.error) {
+
+                return `
+                <tr>
+                    <td>
+                        <button
+                            class="asset-button"
+                            data-info="${item.infoKey}"
+                            type="button"
+                        >
+                            ${escapeHTML(item.name)} ⓘ
+                        </button>
+                    </td>
+
+                    <td colspan="5" class="red">
+                        ⚠️ ${escapeHTML(item.message)}
+                    </td>
+                </tr>
+                `;
+            }
+
+            const change1D =
+                percentageChange(
+                    item.values,
+                    1
+                );
+
+            const change5D =
+                percentageChange(
+                    item.values,
+                    5
+                );
+
+            const change20D =
+                percentageChange(
+                    item.values,
+                    20
+                );
+
+            let display1D =
+                formatChange(change1D);
+
+            let display5D =
+                formatChange(change5D);
+
+            let display20D =
+                formatChange(change20D);
+
+            let status =
+                "⚪ Neutral";
+
+            if (item.symbol === "^TNX") {
+
+                display1D =
+                    formatBP(
+                        yieldChangeBP(
+                            item.values,
+                            1
+                        )
+                    );
+
+                display5D =
+                    formatBP(
+                        yieldChangeBP(
+                            item.values,
+                            5
+                        )
+                    );
+
+                display20D =
+                    formatBP(
+                        yieldChangeBP(
+                            item.values,
+                            20
+                        )
+                    );
+
+                status =
+                    yieldStatus(item.price);
+            }
+
+            if (item.symbol === "^VIX") {
+                status =
+                    vixStatus(item.price);
+            }
+
+            if (item.symbol === "GC=F") {
+                status =
+                    goldStatus(change20D);
+            }
+
+            if (item.symbol === "TWD=X") {
+                status =
+                    twdStatus(change20D);
+            }
+
+            return `
+            <tr>
+                <td>
+                    <button
+                        class="asset-button"
+                        data-info="${item.infoKey}"
+                        type="button"
+                    >
+                        ${escapeHTML(item.name)} ⓘ
+                    </button>
+                </td>
+
+                <td class="blue">
+                    <b>
+                        ${formatAssetValue(
+                            item.symbol,
+                            item.price
+                        )}
+                    </b>
+                </td>
+
+                <td>${display1D}</td>
+                <td>${display5D}</td>
+                <td>${display20D}</td>
+                <td>${status}</td>
+            </tr>
+            `;
+
+        }).join("");
+
+    return results;
+}
+
+
+/* =========================================================
+   ETF
+========================================================= */
+
+async function refreshETF() {
+
+    const results =
+        await Promise.all(
+
+            ETF_SYMBOLS.map(
+                async symbol => {
+
+                    try {
+
+                        const data =
+                            await getMarketData(
+                                symbol
+                            );
+
+                        etfSeriesCache[symbol] =
+                            data.series;
+
+                        const ma20 =
+                            sma(
+                                data.values,
+                                20
+                            );
+
+                        const ma50 =
+                            sma(
+                                data.values,
+                                50
+                            );
+
+                        const ma200 =
+                            sma(
+                                data.values,
+                                200
+                            );
+
+                        const rsi14 =
+                            rsi(
+                                data.values,
+                                14
+                            );
+
+                        return {
+                            symbol,
+                            price: data.price,
+                            ma20,
+                            ma50,
+                            ma200,
+                            rsi14,
+                            trend:
+                                trendLight(
+                                    data.price,
+                                    ma20,
+                                    ma50,
+                                    ma200
+                                ),
+                            error: false
+                        };
+
+                    } catch (error) {
+
+                        return {
+                            symbol,
+                            error: true,
+                            message: error.message
+                        };
+                    }
+                }
+            )
+        );
+
+    $("etfTable").innerHTML =
+        results.map(item => {
+
+            if (item.error) {
+
+                return `
+                <tr>
+                    <td>
+                        <button
+                            class="asset-button"
+                            data-info="${item.symbol.toLowerCase()}"
+                            type="button"
+                        >
+                            ${item.symbol} ⓘ
+                        </button>
+                    </td>
+
+                    <td colspan="6" class="red">
+                        ⚠️ ${escapeHTML(item.message)}
+                    </td>
+                </tr>
+                `;
+            }
+
+            return `
+            <tr>
+                <td>
+                    <button
+                        class="asset-button"
+                        data-info="${item.symbol.toLowerCase()}"
+                        type="button"
+                    >
+                        ${item.symbol} ⓘ
+                    </button>
+                </td>
+
+                <td class="blue">
+                    <b>${fixed(item.price)}</b>
+                </td>
+
+                <td>${fixed(item.ma20)}</td>
+                <td>${fixed(item.ma50)}</td>
+                <td>${fixed(item.ma200)}</td>
+                <td>${fixed(item.rsi14, 1)}</td>
+
+                <td style="font-size:21px;">
+                    ${item.trend}
+                </td>
+            </tr>
+            `;
+
+        }).join("");
+
+    return results;
+}
+
+
+/* =========================================================
+   MARKET DECISION
+========================================================= */
+
+function updateMarketDecision(
+    etfs,
+    macro
+) {
+
+    const validETF =
+        etfs.filter(
+            item => !item.error
+        );
+
+    const greenCount =
+        validETF.filter(
+            item =>
+                item.trend === "🟢"
+        ).length;
+
+    const redCount =
+        validETF.filter(
+            item =>
+                item.trend === "🔴" ||
+                item.trend === "🔴🔴"
+        ).length;
+
+    const vix =
+        macro.find(
+            item =>
+                item.symbol === "^VIX" &&
+                !item.error
+        );
+
+    let market;
+    let risk;
+    let action;
+
+    if (greenCount >= 3) {
+
+        market = "🟢 Bull";
+        risk = "LOW";
+        action = "ADD";
+
+    } else if (redCount >= 3) {
+
+        market = "🔴 Bear";
+        risk = "HIGH";
+        action = "REDUCE";
+
+    } else {
+
+        market = "🟡 Mixed";
+        risk = "NORMAL";
+        action = "HOLD";
+    }
+
+    if (vix) {
+
+        if (vix.price >= 40) {
+
+            market =
+                "🔴 EXTREME RISK";
+
+            risk =
+                "EXTREME";
+
+            action =
+                "DEFENSIVE";
+
+        } else if (vix.price >= 30) {
+
+            market =
+                "🔴 Risk-Off";
+
+            risk =
+                "HIGH";
+
+            action =
+                "REDUCE";
+
+        } else if (vix.price >= 25) {
+
+            if (redCount >= 3) {
+
+                market =
+                    "🔴 Bear";
+
+                risk =
+                    "HIGH";
+
+                action =
+                    "REDUCE";
+
+            } else if (greenCount >= 3) {
+
+                market =
+                    "🟡 Bull Weakening";
+
+                risk =
+                    "RISING";
+
+                action =
+                    "HOLD / DO NOT ADD";
+
+            } else {
+
+                market =
+                    "🟠 Transition";
+
+                risk =
+                    "HIGH";
+
+                action =
+                    "DO NOT ADD";
+            }
+
+        } else if (vix.price >= 20) {
+
+            if (redCount >= 3) {
+
+                market =
+                    "🔴 Bear";
+
+                risk =
+                    "HIGH";
+
+                action =
+                    "REDUCE";
+
+            } else if (greenCount >= 3) {
+
+                market =
+                    "🟢 Bull";
+
+                risk =
+                    "MODERATE";
+
+                action =
+                    "HOLD / SELECTIVE ADD";
+
+            } else {
+
+                market =
+                    "🟡 Mixed";
+
+                risk =
+                    "RISING";
+
+                action =
+                    "HOLD";
+            }
+        }
+    }
+
+    if (validETF.length === 0) {
+
+        market =
+            "⚪ DATA ERROR";
+
+        risk =
+            "UNKNOWN";
+
+        action =
+            "WAIT";
+    }
+
+    $("marketStatus").textContent =
+        market;
+
+    $("riskStatus").textContent =
+        risk;
+
+    $("actionStatus").textContent =
+        action;
+}
+
+
+/* =========================================================
+   CUSTOM RANGE
+========================================================= */
+
+function setQuickRange(rangeName) {
+
+    const end =
+        new Date();
+
+    const start =
+        new Date(end);
+
+    if (rangeName === "1W") {
+
+        start.setDate(
+            end.getDate() - 7
+        );
+
+    } else if (rangeName === "1M") {
+
+        start.setMonth(
+            end.getMonth() - 1
+        );
+
+    } else if (rangeName === "3M") {
+
+        start.setMonth(
+            end.getMonth() - 3
+        );
+
+    } else if (rangeName === "6M") {
+
+        start.setMonth(
+            end.getMonth() - 6
+        );
+
+    } else if (rangeName === "YTD") {
+
+        start.setFullYear(
+            end.getFullYear(),
+            0,
+            1
+        );
+
+    } else if (rangeName === "1Y") {
+
+        start.setFullYear(
+            end.getFullYear() - 1
+        );
+    }
+
+    $("startDate").value =
+        localISO(start);
+
+    $("endDate").value =
+        localISO(end);
+
+    document
+        .querySelectorAll("[data-range]")
+        .forEach(button => {
+
+            button.classList.toggle(
+                "active",
+                button.dataset.range ===
+                    rangeName
+            );
+        });
+
+    analyzeCustomRange();
+}
+
+
+function analyzeCustomRange() {
+
+    const startDate =
+        $("startDate").value;
+
+    const endDate =
+        $("endDate").value;
+
+    let neutralBand =
+        Number(
+            $("neutralBand").value
+        );
+
+    if (!valid(neutralBand)) {
+        neutralBand = 2;
+    }
+
+    neutralBand =
+        Math.min(
+            30,
+            Math.max(
+                0.1,
+                neutralBand
+            )
+        );
+
+    $("neutralBand").value =
+        neutralBand.toFixed(1);
+
+    const rangeError =
+        $("rangeError");
+
+    rangeError.style.display =
+        "none";
+
+    if (
+        !startDate ||
+        !endDate ||
+        startDate > endDate
+    ) {
+
+        rangeError.textContent =
+            "請輸入有效日期，且開始日期不能晚於結束日期。";
+
+        rangeError.style.display =
+            "block";
+
+        return;
+    }
+
+    const startTimestamp =
+        new Date(
+            `${startDate}T00:00:00`
+        ).getTime() / 1000;
+
+    const endTimestamp =
+        new Date(
+            `${endDate}T23:59:59`
+        ).getTime() / 1000;
+
+    let bullishCount = 0;
+    let bearishCount = 0;
+    let validCount = 0;
+
+    const rows = [];
+
+    for (
+        const symbol of ETF_SYMBOLS
+    ) {
+
+        const allSeries =
+            etfSeriesCache[symbol] ||
+            [];
+
+        const selectedSeries =
+            allSeries.filter(
+                item =>
+                    valid(item.timestamp) &&
+                    item.timestamp >=
+                        startTimestamp &&
+                    item.timestamp <=
+                        endTimestamp
+            );
+
+        if (
+            selectedSeries.length < 2
+        ) {
+
+            rows.push(`
+            <tr>
+                <td>${symbol}</td>
+
+                <td colspan="5" class="red">
+                    區間資料不足。請確認 Worker 回傳 timestamp，
+                    並提供足夠的歷史期間。
+                </td>
+            </tr>
+            `);
+
+            continue;
+        }
+
+        validCount++;
+
+        const first =
+            selectedSeries[0];
+
+        const last =
+            selectedSeries[
+                selectedSeries.length - 1
+            ];
+
+        const returnPercentage =
+            (
+                last.close /
+                first.close -
+                1
+            ) * 100;
+
+        let signal =
+            "🟡 Neutral";
+
+        if (
+            returnPercentage >=
+            neutralBand
+        ) {
+
+            signal =
+                "🟢 Bullish";
+
+            bullishCount++;
+
+        } else if (
+            returnPercentage <=
+            -neutralBand
+        ) {
+
+            signal =
+                "🔴 Bearish";
+
+            bearishCount++;
+        }
+
+        const colorClass =
+            returnPercentage > 0
+                ? "red"
+                : returnPercentage < 0
+                    ? "green"
+                    : "gray";
+
+        const startUsed =
+            new Date(
+                first.timestamp * 1000
+            ).toLocaleDateString(
+                "zh-TW"
+            );
+
+        const endUsed =
+            new Date(
+                last.timestamp * 1000
+            ).toLocaleDateString(
+                "zh-TW"
+            );
+
+        rows.push(`
+        <tr>
+            <td>
+                <b>${symbol}</b>
+            </td>
+
+            <td>
+                ${first.close.toFixed(2)}
+            </td>
+
+            <td>
+                ${last.close.toFixed(2)}
+            </td>
+
+            <td class="${colorClass}">
+                ${
+                    returnPercentage >= 0
+                        ? "+"
+                        : ""
+                }${returnPercentage.toFixed(2)}%
+            </td>
+
+            <td>
+                ${signal}
+            </td>
+
+            <td>
+                ${startUsed} → ${endUsed}
+            </td>
+        </tr>
+        `);
+    }
+
+    $("rangeTable").innerHTML =
+        rows.join("");
+
+    let rangeStatus =
+        "🟡 Mixed / Neutral";
+
+    if (validCount === 0) {
+
+        rangeStatus =
+            "⚪ DATA ERROR";
+
+    } else if (bullishCount >= 3) {
+
+        rangeStatus =
+            "🟢 Custom Bullish";
+
+    } else if (bearishCount >= 3) {
+
+        rangeStatus =
+            "🔴 Custom Bearish";
+    }
+
+    $("rangeStatus").textContent =
+        rangeStatus;
+
+    $("rangeSummary").textContent =
+        `門檻 ±${neutralBand.toFixed(1)}%；` +
+        `Bullish ${bullishCount} 支，` +
+        `Bearish ${bearishCount} 支。` +
+        `此結果不覆蓋即時 Action。`;
+}
+
+
+/* =========================================================
+   REFRESH ALL
+========================================================= */
+
+async function refreshAll() {
+
+    if (refreshing) {
+        return;
+    }
+
+    refreshing = true;
+
+    $("refreshButton").disabled =
+        true;
+
+    $("refreshButton").textContent =
+        "⏳ 更新中...";
+
+    $("loadingStatus").textContent =
+        "正在取得市場資料...";
+
+    $("errorBox").style.display =
+        "none";
+
+    try {
+
+        const results =
+            await Promise.allSettled([
+                refreshMacro(),
+                refreshETF()
+            ]);
+
+        let macro = [];
+        let etfs = [];
+
+        if (
+            results[0].status ===
+            "fulfilled"
+        ) {
+
+            macro =
+                results[0].value;
+
+        } else {
+
+            $("macroTable").innerHTML = `
+            <tr>
+                <td colspan="6" class="red">
+                    ⚠️ Macro 更新失敗
+                </td>
+            </tr>
+            `;
+        }
+
+        if (
+            results[1].status ===
+            "fulfilled"
+        ) {
+
+            etfs =
+                results[1].value;
+
+        } else {
+
+            $("etfTable").innerHTML = `
+            <tr>
+                <td colspan="7" class="red">
+                    ⚠️ ETF 更新失敗
+                </td>
+            </tr>
+            `;
+        }
+
+        updateMarketDecision(
+            etfs,
+            macro
+        );
+
+        $("lastUpdate").textContent =
+            "最後更新：" +
+            new Date()
+                .toLocaleString(
+                    "zh-TW"
+                );
+
+        $("loadingStatus").textContent =
+            "✅ 更新完成";
+
+        if (
+            $("startDate").value &&
+            $("endDate").value
+        ) {
+            analyzeCustomRange();
+        }
+
+    } catch (error) {
+
+        $("errorBox").textContent =
+            "⚠️ 更新失敗：" +
+            error.message;
+
+        $("errorBox").style.display =
+            "block";
+
+        $("loadingStatus").textContent =
+            "更新失敗";
+
+        $("marketStatus").textContent =
+            "⚪ ERROR";
+
+        $("riskStatus").textContent =
+            "UNKNOWN";
+
+        $("actionStatus").textContent =
+            "WAIT";
+
+    } finally {
+
+        refreshing = false;
+
+        $("refreshButton").disabled =
+            false;
+
+        $("refreshButton").textContent =
+            "🔄 立即更新";
+    }
+}
+
+
+/* =========================================================
+   EVENTS
+========================================================= */
+
+$("quickButtons").addEventListener(
+    "click",
+    event => {
+
+        const button =
+            event.target.closest(
+                "[data-range]"
+            );
+
+        if (button) {
+
+            setQuickRange(
+                button.dataset.range
+            );
+        }
+    }
+);
+
+
+$("analyzeRange").addEventListener(
+    "click",
+    analyzeCustomRange
+);
+
+
+$("refreshButton").addEventListener(
+    "click",
+    refreshAll
+);
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+const today =
+    new Date();
+
+const oneMonthAgo =
+    new Date(today);
+
+oneMonthAgo.setMonth(
+    today.getMonth() - 1
+);
+
+$("startDate").value =
+    localISO(oneMonthAgo);
+
+$("endDate").value =
+    localISO(today);
+
+refreshAll();
+
+setInterval(
+    refreshAll,
+    REFRESH_INTERVAL
+);
+</script>
+
+</body>
+</html>
