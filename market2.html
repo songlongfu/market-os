@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Market Operating System</title>
+
+<style>
+body{
+    background:#0f172a;
+    color:white;
+    font-family:Arial,sans-serif;
+    margin:0;
+    padding:20px;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.card{
+    background:#1e293b;
+    padding:20px;
+    border-radius:15px;
+    margin-bottom:20px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+}
+
+label{
+    display:block;
+    margin-bottom:8px;
+}
+
+select{
+    width:100%;
+    padding:10px;
+    border-radius:8px;
+    border:none;
+    font-size:16px;
+}
+
+button{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#16a34a;
+}
+
+.result{
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+    margin-top:20px;
+}
+
+.output{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:15px;
+    margin-top:20px;
+}
+
+.output-card{
+    background:#0f766e;
+    padding:20px;
+    border-radius:15px;
+}
+
+.small{
+    color:#cbd5e1;
+    font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📈 Market Operating System</h1>
+
+<div class="card">
+
+<h2>ETF Trend</h2>
+
+<div class="grid">
+
+<div>
+<label>SPY</label>
+<select id="spy">
+<option>🟢</option>
+<option>🟡</option>
+<option>⚪</option>
+<option>🔴</option>
+<option>🔴🔴</option>
+</select>
+</div>
+
+<div>
+<label>QQQ</label>
+<select id="qqq">
+<option>🟢</option>
+<option>🟡</option>
+<option>⚪</option>
+<option>🔴</option>
+<option>🔴🔴</option>
+</select>
+</div>
+
+<div>
+<label>SOXX</label>
+<select id="soxx">
+<option>🟢</option>
+<option>🟡</option>
+<option>⚪</option>
+<option>🔴</option>
+<option>🔴🔴</option>
+</select>
+</div>
+
+<div>
+<label>IWM</label>
+<select id="iwm">
+<option>🟢</option>
+<option>🟡</option>
+<option>⚪</option>
+<option>🔴</option>
+<option>🔴🔴</option>
+</select>
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Breadth</h2>
+
+<select id="breadth">
+<option>🟢</option>
+<option>🟡</option>
+<option>🔴</option>
+</select>
+
+</div>
+
+<div class="card">
+
+<h2>VIX</h2>
+
+<select id="vix">
+<option>🟢</option>
+<option>🟡</option>
+<option>🟠</option>
+<option>🔴</option>
+</select>
+
+</div>
+
+<div class="card">
+
+<h2>Momentum</h2>
+
+<select id="momentum">
+<option>🟢</option>
+<option>⚪</option>
+<option>🔴</option>
+</select>
+
+</div>
+
+<div class="card">
+
+<h2>Risk Appetite</h2>
+
+<select id="riskAppetite">
+<option>🟢</option>
+<option>🟡</option>
+<option>🔴</option>
+</select>
+
+</div>
+
+<div class="card">
+
+<h2>News</h2>
+
+<select id="news">
+<option>Bullish</option>
+<option>Neutral</option>
+<option>Bearish</option>
+</select>
+
+</div>
+
+<div class="card">
+
+<h2>Price Reaction</h2>
+
+<select id="reaction">
+<option>⭐ Hidden Strength</option>
+<option>🟢 Strength</option>
+<option>⚪ Normal</option>
+<option>⚠️ Hidden Weakness</option>
+<option>🔴 Weakness</option>
+</select>
+
+</div>
+
+<div class="card">
+
+<h2>Social Sentiment</h2>
+
+<select id="social">
+<option>😱 Extreme Fear</option>
+<option>😟 Fear</option>
+<option>😐 Neutral</option>
+<option>🙂 Optimistic</option>
+<option>🤩 Extreme Optimism</option>
+</select>
+
+</div>
+
+<button onclick="analyzeMarket()">
+分析市場
+</button>
+
+<div class="output">
+
+<div class="output-card">
+<div class="small">Market</div>
+<div id="marketResult">-</div>
+</div>
+
+<div class="output-card">
+<div class="small">Risk</div>
+<div id="riskResult">-</div>
+</div>
+
+<div class="output-card">
+<div class="small">Action</div>
+<div id="actionResult">-</div>
+</div>
+
+</div>
+
+<div class="result" id="summary"></div>
+
+</div>
+
+<script>
+
+function analyzeMarket(){
+
+    const spy = document.getElementById("spy").value;
+    const qqq = document.getElementById("qqq").value;
+    const soxx = document.getElementById("soxx").value;
+    const iwm = document.getElementById("iwm").value;
+
+    const breadth = document.getElementById("breadth").value;
+    const vix = document.getElementById("vix").value;
+    const momentum = document.getElementById("momentum").value;
+    const riskAppetite =
+        document.getElementById("riskAppetite").value;
+
+    let greenCount = 0;
+    let redCount = 0;
+
+    const list = [
+        spy,
+        qqq,
+        soxx,
+        iwm,
+        breadth,
+        momentum,
+        riskAppetite
+    ];
+
+    list.forEach(x=>{
+
+        if(x==="🟢"){
+            greenCount++;
+        }
+
+        if(
+           x==="🔴" ||
+           x==="🔴🔴"
+        ){
+            redCount++;
+        }
+
+    });
+
+    let market = "";
+    let risk = "";
+    let action = "";
+
+    if(
+       greenCount >= 5 &&
+       vix === "🟢"
+    ){
+        market = "🟢 STRONG BULL";
+        risk = "LOW";
+        action = "ADD";
+    }
+
+    else if(
+        spy==="🟢" &&
+        (
+          soxx==="🔴" ||
+          iwm==="🔴" ||
+          breadth==="🟡"
+        )
+    ){
+        market = "🟡 BULL WEAKENING";
+        risk = "RISING";
+        action = "HOLD / DO NOT ADD";
+    }
+
+    else if(
+        redCount >= 4 ||
+        vix === "🔴"
+    ){
+        market = "🔴 BEAR";
+        risk = "HIGH";
+        action = "REDUCE EXPOSURE";
+    }
+
+    else{
+        market = "⚪ NEUTRAL";
+        risk = "NORMAL";
+        action = "HOLD";
+    }
+
+    document.getElementById("marketResult").innerHTML =
+        market;
+
+    document.getElementById("riskResult").innerHTML =
+        risk;
+
+    document.getElementById("actionResult").innerHTML =
+        action;
+
+    document.getElementById("summary").innerHTML =
+        market + " | " + risk + " | " + action;
+}
+
+</script>
+
+</body>
+</html>
