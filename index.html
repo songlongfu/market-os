@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Market Operating System V3</title>
+<title>Market Operating System V4</title>
 
 <style>
 * {
@@ -13,11 +13,11 @@
 }
 
 body {
+    margin: 0;
+    padding: 20px;
     background: #0f172a;
     color: #ffffff;
     font-family: Arial, "Microsoft JhengHei", sans-serif;
-    margin: 0;
-    padding: 20px;
 }
 
 body.modal-open {
@@ -47,7 +47,7 @@ h2 {
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 15px;
 }
 
@@ -56,43 +56,79 @@ h2 {
     font-weight: bold;
 }
 
-button {
-    font-family: inherit;
+button,
+input {
+    font: inherit;
 }
 
-#refreshButton {
+button {
+    cursor: pointer;
+}
+
+.primary {
     background: #22c55e;
     color: white;
     border: none;
-    padding: 12px 20px;
+    padding: 11px 18px;
     border-radius: 10px;
-    cursor: pointer;
-    font-size: 16px;
     font-weight: bold;
 }
 
-#refreshButton:hover {
+.primary:hover {
     background: #16a34a;
 }
 
-#refreshButton:disabled {
+.primary:disabled {
     background: #64748b;
     cursor: not-allowed;
 }
 
-#lastUpdate {
-    margin-top: 12px;
+.secondary {
+    background: #334155;
+    color: white;
+    border: 1px solid #475569;
+    padding: 9px 13px;
+    border-radius: 9px;
 }
 
-#loadingStatus {
-    color: #94a3b8;
-    margin-top: 8px;
+.secondary:hover,
+.secondary.active {
+    background: #0369a1;
+    border-color: #38bdf8;
 }
 
-#errorBox {
-    color: #fca5a5;
-    margin-top: 10px;
-    display: none;
+.quick-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.range-controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+    gap: 12px;
+    align-items: end;
+    margin-top: 15px;
+}
+
+.field label {
+    display: block;
+    color: #cbd5e1;
+    font-size: 13px;
+    margin-bottom: 6px;
+}
+
+.field input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 9px;
+    border: 1px solid #475569;
+    background: #0f172a;
+    color: white;
+}
+
+.table-wrapper {
+    overflow-x: auto;
 }
 
 table {
@@ -100,19 +136,16 @@ table {
     border-collapse: collapse;
 }
 
-td,
-th {
+th,
+td {
     padding: 10px;
     border-bottom: 1px solid #334155;
     text-align: left;
+    white-space: nowrap;
 }
 
 th {
     color: #93c5fd;
-}
-
-.table-wrapper {
-    overflow-x: auto;
 }
 
 .red {
@@ -135,193 +168,144 @@ th {
     color: #38bdf8;
 }
 
-.gray {
+.gray,
+.small {
     color: #94a3b8;
 }
 
 .small {
-    color: #93b5df;
     font-size: 13px;
-    margin-top: 10px;
     line-height: 1.6;
+    margin-top: 9px;
 }
 
-.click-hint {
-    color: #94a3b8;
-    font-size: 13px;
-    margin-top: 8px;
-}
-
-.explainable {
+.status-card,
+.clickable,
+.asset-button {
     cursor: pointer;
+}
+
+.status-card {
     transition:
         transform 0.15s ease,
-        border-color 0.15s ease,
-        background-color 0.15s ease;
+        border-color 0.15s ease;
 }
 
-.explainable:hover {
+.status-card:hover {
     border-color: #38bdf8;
-}
-
-.status-card.explainable:hover {
     transform: translateY(-2px);
-    background: #23334a;
 }
 
-.explainable:focus-visible {
+.status-card:focus-visible,
+.clickable:focus-visible,
+.asset-button:focus-visible {
     outline: 3px solid #38bdf8;
     outline-offset: 3px;
 }
 
-.clickable-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    cursor: pointer;
+.clickable {
     border-radius: 6px;
-    padding: 3px 5px;
-    margin-left: -5px;
+    padding: 2px 5px;
 }
 
-.clickable-label:hover {
-    background: rgba(56, 189, 248, 0.12);
+.clickable:hover,
+.asset-button:hover {
     color: #7dd3fc;
-}
-
-.info-icon {
-    color: #38bdf8;
-    font-size: 12px;
+    background: rgba(56, 189, 248, 0.1);
 }
 
 .asset-button {
-    padding: 6px 8px;
-    margin: -6px -8px;
-    color: #ffffff;
     background: transparent;
+    color: white;
     border: none;
-    border-radius: 7px;
-    cursor: pointer;
-    font-size: inherit;
+    border-radius: 6px;
+    padding: 5px;
     font-weight: bold;
-    text-align: left;
 }
 
-.asset-button:hover {
-    background: rgba(56, 189, 248, 0.12);
-    color: #7dd3fc;
+.hint {
+    font-size: 12px;
+    color: #94a3b8;
+    margin-top: 7px;
 }
 
-.asset-button:focus-visible {
-    outline: 2px solid #38bdf8;
-    outline-offset: 2px;
+#lastUpdate {
+    margin-top: 12px;
 }
 
-.modal-overlay {
+#errorBox,
+.range-error {
+    display: none;
+    color: #fca5a5;
+    margin-top: 9px;
+}
+
+.modal {
     display: none;
     position: fixed;
     inset: 0;
     z-index: 1000;
-    padding: 20px;
-    background: rgba(2, 6, 23, 0.82);
+    background: rgba(2, 6, 23, 0.84);
+    padding: 14px;
     align-items: center;
     justify-content: center;
 }
 
-.modal-overlay.show {
+.modal.show {
     display: flex;
 }
 
-.modal-dialog {
+.dialog {
     width: min(720px, 100%);
-    max-height: 88vh;
-    overflow-y: auto;
+    max-height: 90vh;
+    overflow: auto;
     background: #1e293b;
     border: 1px solid #475569;
-    border-radius: 18px;
-    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.45);
+    border-radius: 16px;
 }
 
-.modal-header {
+.modal-head {
     position: sticky;
     top: 0;
     z-index: 2;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    gap: 16px;
-    padding: 18px 20px;
+    align-items: center;
     background: #1e293b;
     border-bottom: 1px solid #334155;
-    border-radius: 18px 18px 0 0;
+    padding: 16px 20px;
 }
 
-.modal-title {
+.modal-head h2 {
     margin: 0;
     color: #7dd3fc;
-    font-size: 22px;
 }
 
-.modal-close {
-    flex: 0 0 auto;
-    width: 40px;
-    height: 40px;
-    border: none;
-    border-radius: 10px;
+.close {
     background: #334155;
-    color: #ffffff;
-    cursor: pointer;
+    color: white;
+    border: none;
+    width: 38px;
+    height: 38px;
+    border-radius: 9px;
     font-size: 24px;
-    line-height: 1;
-}
-
-.modal-close:hover {
-    background: #475569;
 }
 
 .modal-body {
     padding: 20px;
     line-height: 1.7;
-    color: #e2e8f0;
-}
-
-.modal-body p:first-child {
-    margin-top: 0;
-}
-
-.modal-body h3 {
-    color: #f8fafc;
-    margin: 22px 0 8px;
-}
-
-.modal-body ul {
-    padding-left: 22px;
-}
-
-.modal-body li {
-    margin-bottom: 8px;
 }
 
 .modal-body table {
-    margin: 12px 0;
+    margin: 10px 0;
 }
 
-.modal-note {
-    padding: 12px 14px;
-    margin-top: 14px;
-    border-left: 4px solid #38bdf8;
-    border-radius: 7px;
+.note {
     background: rgba(56, 189, 248, 0.1);
-}
-
-.logic-line {
-    display: inline-block;
-    padding: 8px 12px;
-    margin: 4px 0;
-    background: #0f172a;
-    border-radius: 8px;
-    color: #cbd5e1;
-    font-family: Consolas, monospace;
+    border-left: 4px solid #38bdf8;
+    padding: 10px 12px;
+    border-radius: 7px;
+    margin-top: 12px;
 }
 
 @media (max-width: 600px) {
@@ -329,40 +313,18 @@ th {
         padding: 10px;
     }
 
-    h1 {
-        font-size: 25px;
-    }
-
     .card {
         padding: 15px;
     }
 
     .big {
-        font-size: 26px;
+        font-size: 25px;
     }
 
-    td,
-    th {
+    th,
+    td {
         padding: 8px;
         font-size: 13px;
-        white-space: nowrap;
-    }
-
-    .modal-overlay {
-        padding: 10px;
-    }
-
-    .modal-dialog {
-        max-height: 92vh;
-    }
-
-    .modal-header,
-    .modal-body {
-        padding: 16px;
-    }
-
-    .modal-title {
-        font-size: 19px;
     }
 }
 </style>
@@ -372,88 +334,167 @@ th {
 
 <div class="container">
 
-    <h1>📈 Market Operating System V3</h1>
+    <h1>📈 Market Operating System V4</h1>
 
-    <!-- 更新控制 -->
     <div class="card">
-        <button id="refreshButton" type="button">
+        <button id="refreshButton" class="primary" type="button">
             🔄 立即更新
         </button>
 
         <div id="lastUpdate">尚未更新</div>
-        <div id="loadingStatus"></div>
+        <div id="loadingStatus" class="small"></div>
         <div id="errorBox"></div>
     </div>
 
-    <!-- Market / Risk / Action -->
     <div class="grid">
 
         <div
-            class="card status-card explainable"
-            data-explain="market"
-            role="button"
+            class="card status-card"
+            data-info="market"
             tabindex="0"
-            aria-label="查看 Market 判斷說明"
+            role="button"
         >
-            <h2>
-                Market
-                <span class="info-icon">ⓘ</span>
-            </h2>
-
-            <div id="marketStatus" class="big">
-                載入中...
-            </div>
-
-            <div class="click-hint">
-                點擊查看市場方向判斷方式
-            </div>
+            <h2>Market ⓘ</h2>
+            <div id="marketStatus" class="big">載入中...</div>
+            <div class="hint">點擊查看判斷方式</div>
         </div>
 
         <div
-            class="card status-card explainable"
-            data-explain="risk"
-            role="button"
+            class="card status-card"
+            data-info="risk"
             tabindex="0"
-            aria-label="查看 Risk 判斷說明"
+            role="button"
         >
-            <h2>
-                Risk
-                <span class="info-icon">ⓘ</span>
-            </h2>
-
-            <div id="riskStatus" class="big">
-                載入中...
-            </div>
-
-            <div class="click-hint">
-                點擊查看 VIX 風險分級
-            </div>
+            <h2>Risk ⓘ</h2>
+            <div id="riskStatus" class="big">載入中...</div>
+            <div class="hint">點擊查看 VIX 分級</div>
         </div>
 
         <div
-            class="card status-card explainable"
-            data-explain="action"
-            role="button"
+            class="card status-card"
+            data-info="action"
             tabindex="0"
-            aria-label="查看 Action 判斷說明"
+            role="button"
         >
-            <h2>
-                Action
-                <span class="info-icon">ⓘ</span>
-            </h2>
-
-            <div id="actionStatus" class="big">
-                載入中...
-            </div>
-
-            <div class="click-hint">
-                點擊查看行動訊號定義
-            </div>
+            <h2>Action ⓘ</h2>
+            <div id="actionStatus" class="big">載入中...</div>
+            <div class="hint">點擊查看訊號定義</div>
         </div>
 
     </div>
 
-    <!-- Macro / Risk Monitor -->
+    <!-- Custom Range Trend -->
+
+    <div class="card">
+
+        <h2>
+            📅 Custom Range Trend
+            <span
+                class="clickable"
+                data-info="custom"
+                tabindex="0"
+                role="button"
+            >
+                ⓘ
+            </span>
+        </h2>
+
+        <div class="quick-buttons" id="quickButtons">
+            <button class="secondary" data-range="1W" type="button">1W</button>
+            <button class="secondary" data-range="1M" type="button">1M</button>
+            <button class="secondary" data-range="3M" type="button">3M</button>
+            <button class="secondary" data-range="6M" type="button">6M</button>
+            <button class="secondary" data-range="YTD" type="button">YTD</button>
+            <button class="secondary" data-range="1Y" type="button">1Y</button>
+        </div>
+
+        <div class="range-controls">
+
+            <div class="field">
+                <label for="startDate">開始日期</label>
+                <input id="startDate" type="date">
+            </div>
+
+            <div class="field">
+                <label for="endDate">結束日期</label>
+                <input id="endDate" type="date">
+            </div>
+
+            <div class="field">
+                <label for="neutralBand">多空門檻（±%）</label>
+
+                <input
+                    id="neutralBand"
+                    type="number"
+                    min="0.1"
+                    max="30"
+                    step="0.1"
+                    value="2.0"
+                >
+            </div>
+
+            <div>
+                <button id="analyzeRange" class="primary" type="button">
+                    分析區間
+                </button>
+            </div>
+
+        </div>
+
+        <div id="rangeError" class="range-error"></div>
+
+        <div class="grid" style="margin-top:15px;">
+
+            <div
+                class="card"
+                style="margin:0; background:#0f172a;"
+            >
+                <h3>Range Result</h3>
+
+                <div id="rangeStatus" class="big">
+                    尚未分析
+                </div>
+
+                <div id="rangeSummary" class="small">
+                    選擇日期或快速區間後開始分析。
+                </div>
+            </div>
+
+        </div>
+
+        <div class="table-wrapper" style="margin-top:15px;">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ETF</th>
+                        <th>Start</th>
+                        <th>End</th>
+                        <th>Return</th>
+                        <th>Signal</th>
+                        <th>Used Dates</th>
+                    </tr>
+                </thead>
+
+                <tbody id="rangeTable">
+                    <tr>
+                        <td colspan="6">尚未分析</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="small">
+            區間起訖若不是交易日，系統會使用範圍內第一個與最後一個
+            有效交易日。Custom Range 不會覆蓋上方即時
+            Market / Risk / Action。
+        </div>
+
+    </div>
+
+    <!-- Macro -->
+
     <div class="card">
 
         <h2>🌎 Macro / Risk Monitor</h2>
@@ -464,61 +505,11 @@ th {
                 <thead>
                     <tr>
                         <th>Asset</th>
-
-                        <th>
-                            <span
-                                class="clickable-label explainable"
-                                data-explain="value"
-                                role="button"
-                                tabindex="0"
-                            >
-                                Value <span class="info-icon">ⓘ</span>
-                            </span>
-                        </th>
-
-                        <th>
-                            <span
-                                class="clickable-label explainable"
-                                data-explain="change1d"
-                                role="button"
-                                tabindex="0"
-                            >
-                                1D <span class="info-icon">ⓘ</span>
-                            </span>
-                        </th>
-
-                        <th>
-                            <span
-                                class="clickable-label explainable"
-                                data-explain="change5d"
-                                role="button"
-                                tabindex="0"
-                            >
-                                5D <span class="info-icon">ⓘ</span>
-                            </span>
-                        </th>
-
-                        <th>
-                            <span
-                                class="clickable-label explainable"
-                                data-explain="change20d"
-                                role="button"
-                                tabindex="0"
-                            >
-                                20D <span class="info-icon">ⓘ</span>
-                            </span>
-                        </th>
-
-                        <th>
-                            <span
-                                class="clickable-label explainable"
-                                data-explain="macroStatus"
-                                role="button"
-                                tabindex="0"
-                            >
-                                Status <span class="info-icon">ⓘ</span>
-                            </span>
-                        </th>
+                        <th>Value</th>
+                        <th>1D</th>
+                        <th>5D</th>
+                        <th>20D</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
 
@@ -531,14 +522,10 @@ th {
 
         </div>
 
-        <div class="small">
-            點擊 Asset 名稱或欄位標題可查看說明。VIX 會參與風險判斷；
-            US 10Y、Gold、USD/TWD 目前作為市場背景資訊。
-        </div>
-
     </div>
 
-    <!-- ETF Dashboard -->
+    <!-- ETF -->
+
     <div class="card">
 
         <h2>📊 ETF Dashboard</h2>
@@ -549,72 +536,12 @@ th {
                 <thead>
                     <tr>
                         <th>ETF</th>
-
-                        <th>
-                            <span
-                                class="clickable-label explainable"
-                                data-explain="price"
-                                role="button"
-                                tabindex="0"
-                            >
-                                Price <span class="info-icon">ⓘ</span>
-                            </span>
-                        </th>
-
-                        <th>
-                            <span
-                                class="clickable-label explainable"
-                                data-explain="ma20"
-                                role="button"
-                                tabindex="0"
-                            >
-                                MA20 <span class="info-icon">ⓘ</span>
-                            </span>
-                        </th>
-
-                        <th>
-                            <span
-                                class="clickable-label explainable"
-                                data-explain="ma50"
-                                role="button"
-                                tabindex="0"
-                            >
-                                MA50 <span class="info-icon">ⓘ</span>
-                            </span>
-                        </th>
-
-                        <th>
-                            <span
-                                class="clickable-label explainable"
-                                data-explain="ma200"
-                                role="button"
-                                tabindex="0"
-                            >
-                                MA200 <span class="info-icon">ⓘ</span>
-                            </span>
-                        </th>
-
-                        <th>
-                            <span
-                                class="clickable-label explainable"
-                                data-explain="rsi"
-                                role="button"
-                                tabindex="0"
-                            >
-                                RSI14 <span class="info-icon">ⓘ</span>
-                            </span>
-                        </th>
-
-                        <th>
-                            <span
-                                class="clickable-label explainable"
-                                data-explain="trend"
-                                role="button"
-                                tabindex="0"
-                            >
-                                Trend <span class="info-icon">ⓘ</span>
-                            </span>
-                        </th>
+                        <th>Price</th>
+                        <th>MA20</th>
+                        <th>MA50</th>
+                        <th>MA200</th>
+                        <th>RSI14</th>
+                        <th>Trend</th>
                     </tr>
                 </thead>
 
@@ -627,43 +554,40 @@ th {
 
         </div>
 
-        <div class="small">
-            點擊 ETF 名稱或技術指標欄位可查看定義與判斷方式。
-        </div>
-
     </div>
 
 </div>
 
-<!-- 說明視窗 -->
-<div
-    id="infoModal"
-    class="modal-overlay"
-    aria-hidden="true"
->
+<!-- Modal -->
+
+<div id="modal" class="modal" aria-hidden="true">
+
     <div
-        class="modal-dialog"
+        class="dialog"
         role="dialog"
         aria-modal="true"
         aria-labelledby="modalTitle"
     >
-        <div class="modal-header">
-            <h2 id="modalTitle" class="modal-title">
-                項目說明
-            </h2>
+
+        <div class="modal-head">
+
+            <h2 id="modalTitle">說明</h2>
 
             <button
                 id="modalClose"
-                class="modal-close"
+                class="close"
                 type="button"
-                aria-label="關閉說明視窗"
+                aria-label="關閉視窗"
             >
                 ×
             </button>
+
         </div>
 
         <div id="modalBody" class="modal-body"></div>
+
     </div>
+
 </div>
 
 <script>
@@ -676,1847 +600,31 @@ th {
 const WORKER_URL =
     "https://fancy-mountain-4938.az87981303.workers.dev";
 
+const FETCH_TIMEOUT = 15000;
+
 const REFRESH_INTERVAL =
     15 * 60 * 1000;
 
-const FETCH_TIMEOUT =
-    15000;
-
-
-/* =========================================================
-   DOM
-========================================================= */
-
-const refreshButton =
-    document.getElementById("refreshButton");
-
-const lastUpdate =
-    document.getElementById("lastUpdate");
-
-const loadingStatus =
-    document.getElementById("loadingStatus");
-
-const errorBox =
-    document.getElementById("errorBox");
-
-const macroTable =
-    document.getElementById("macroTable");
-
-const etfTable =
-    document.getElementById("etfTable");
-
-const marketStatus =
-    document.getElementById("marketStatus");
-
-const riskStatus =
-    document.getElementById("riskStatus");
-
-const actionStatus =
-    document.getElementById("actionStatus");
-
-const infoModal =
-    document.getElementById("infoModal");
-
-const modalTitle =
-    document.getElementById("modalTitle");
-
-const modalBody =
-    document.getElementById("modalBody");
-
-const modalClose =
-    document.getElementById("modalClose");
-
-
-/* =========================================================
-   CLICK EXPLANATIONS
-========================================================= */
-
-const explanations = {
-
-    market: {
-        title: "📈 Market｜市場方向",
-        content: `
-            <p>
-                Market 代表目前股票市場的主要趨勢。
-                系統先分析 SPY、QQQ、SOXX、IWM 的技術排列，
-                再統計多頭與空頭 ETF 的數量。
-            </p>
-
-            <h3>四支 ETF 的功能</h3>
-
-            <ul>
-                <li><b>SPY：</b>美國大型股與整體市場核心方向。</li>
-                <li><b>QQQ：</b>大型科技股與 Growth 動能。</li>
-                <li><b>SOXX：</b>半導體產業與科技景氣敏感度。</li>
-                <li><b>IWM：</b>美國小型股與市場廣度。</li>
-            </ul>
-
-            <h3>Market Regime</h3>
-
-            <table>
-                <tr>
-                    <th>條件</th>
-                    <th>結果</th>
-                </tr>
-                <tr>
-                    <td>3 支以上 ETF 顯示 🟢</td>
-                    <td>🟢 Bull</td>
-                </tr>
-                <tr>
-                    <td>3 支以上 ETF 顯示 🔴 或 🔴🔴</td>
-                    <td>🔴 Bear</td>
-                </tr>
-                <tr>
-                    <td>其他組合</td>
-                    <td>🟡 Mixed</td>
-                </tr>
-            </table>
-
-            <div class="modal-note">
-                ETF Trend 決定市場方向。VIX 主要是 Risk Modifier，
-                不會在 VIX 25～30 時把已確認的 Bear 改成 Bull。
-            </div>
-        `
-    },
-
-    risk: {
-        title: "⚠️ Risk｜市場風險",
-        content: `
-            <p>
-                Risk 主要根據 VIX 絕對值，再配合 ETF Market Regime 調整。
-                VIX 越高，代表市場預期波動通常越大。
-            </p>
-
-            <table>
-                <tr>
-                    <th>VIX</th>
-                    <th>風險解讀</th>
-                </tr>
-                <tr>
-                    <td>&lt; 20</td>
-                    <td>🟢 正常或較低風險</td>
-                </tr>
-                <tr>
-                    <td>20～25</td>
-                    <td>🟡 Caution / Moderate</td>
-                </tr>
-                <tr>
-                    <td>25～30</td>
-                    <td>🟠 Elevated / Rising Risk</td>
-                </tr>
-                <tr>
-                    <td>30～40</td>
-                    <td>🔴 Risk-Off</td>
-                </tr>
-                <tr>
-                    <td>≥ 40</td>
-                    <td>🔴 Extreme Risk</td>
-                </tr>
-            </table>
-
-            <div class="modal-note">
-                VIX 30 以上可直接將系統切換至 Risk-Off；
-                VIX 40 以上則視為 Extreme Risk。
-            </div>
-        `
-    },
-
-    action: {
-        title: "🎯 Action｜行動訊號",
-        content: `
-            <p>
-                Action 是 Market Regime 與 VIX Risk 組合後的操作提示，
-                不是保證報酬的買賣指令。
-            </p>
-
-            <ul>
-                <li><b>ADD：</b>趨勢完整、VIX 正常，可依原定策略增加部位。</li>
-                <li><b>SELECTIVE ADD：</b>只選擇相對強勢標的，避免全面追價。</li>
-                <li><b>HOLD：</b>維持現有部位，等待方向更明確。</li>
-                <li><b>DO NOT ADD：</b>不增加新部位，控制風險曝險。</li>
-                <li><b>REDUCE：</b>降低部位或槓桿，優先處理弱勢標的。</li>
-                <li><b>DEFENSIVE：</b>市場壓力極高，以風險控制和資金保存為優先。</li>
-                <li><b>WAIT：</b>資料不足或 API 錯誤，暫不依系統訊號操作。</li>
-            </ul>
-
-            <div class="modal-note">
-                Action 應配合個人持倉、成本、停損規則與資金管理，
-                不應單獨作為投資決策。
-            </div>
-        `
-    },
-
-    vix: {
-        title: "VIX｜市場波動指數",
-        content: `
-            <p>
-                VIX 用來觀察美國市場預期波動與風險程度。
-                Market OS 會使用 VIX 的實際值調整 Risk 與 Action。
-            </p>
-
-            <ul>
-                <li><b>VIX &lt; 20：</b>一般視為正常或較平靜。</li>
-                <li><b>VIX 20～25：</b>風險開始升高。</li>
-                <li><b>VIX 25～30：</b>不適合積極追價。</li>
-                <li><b>VIX 30～40：</b>系統進入 Risk-Off。</li>
-                <li><b>VIX ≥ 40：</b>極端市場壓力。</li>
-            </ul>
-
-            <p>
-                1D、5D、20D 變化可以補充判斷風險是在升高還是下降。
-                例如 VIX 由 19 快速升至 24，雖然尚未超過 25，
-                但風險正在惡化。
-            </p>
-        `
-    },
-
-    us10y: {
-        title: "US 10Y｜美國 10 年期公債殖利率",
-        content: `
-            <p>
-                US 10Y 顯示美國 10 年期公債殖利率。
-                殖利率變化會影響股票估值、資金成本與美元強弱。
-            </p>
-
-            <p>
-                這個 Dashboard 使用 <b>bp，也就是 basis point</b> 顯示變化。
-            </p>
-
-            <div class="logic-line">
-                1 bp = 0.01 個百分點
-            </div>
-
-            <p>
-                例如殖利率由 4.20% 上升至 4.30%，
-                代表上升 0.10 個百分點，也就是 +10 bp。
-            </p>
-
-            <div class="modal-note">
-                US 10Y 目前只提供市場背景資訊，
-                尚未直接改變 Market / Risk / Action。
-            </div>
-        `
-    },
-
-    gold: {
-        title: "Gold｜黃金期貨",
-        content: `
-            <p>
-                Gold 使用黃金期貨價格，顯示目前價格以及
-                1D、5D、20D 的百分比變化。
-            </p>
-
-            <p>
-                黃金可能受到美元、實質利率、通膨預期、
-                央行購金與地緣政治風險影響。
-            </p>
-
-            <div class="modal-note">
-                黃金上漲不一定代表 Risk-Off。
-                因此目前 Gold 只作為市場背景，不直接改變 Action。
-            </div>
-        `
-    },
-
-    usdtwd: {
-        title: "USD/TWD｜美元兌新台幣",
-        content: `
-            <p>
-                USD/TWD 代表 1 美元可以兌換多少新台幣。
-            </p>
-
-            <ul>
-                <li><b>USD/TWD 上升：</b>美元轉強，新台幣相對轉弱。</li>
-                <li><b>USD/TWD 下降：</b>美元轉弱，新台幣相對轉強。</li>
-            </ul>
-
-            <p>
-                例如 USD/TWD 從 31.50 上升至 32.00，
-                代表 1 美元需要更多新台幣兌換，因此是台幣走弱。
-            </p>
-
-            <div class="modal-note">
-                USD/TWD 目前是市場背景指標，
-                尚未直接影響美股 Market Regime。
-            </div>
-        `
-    },
-
-    spy: {
-        title: "SPY｜美國大型股市場",
-        content: `
-            <p>
-                SPY 追蹤 S&amp;P 500，代表美國大型企業與整體股票市場核心方向。
-            </p>
-
-            <p>
-                在 Market OS 中，SPY 是四支主要 ETF 之一，
-                與 QQQ、SOXX、IWM 共同決定 Bull、Mixed 或 Bear。
-            </p>
-        `
-    },
-
-    qqq: {
-        title: "QQQ｜大型科技與成長股",
-        content: `
-            <p>
-                QQQ 追蹤 Nasdaq-100，成分偏重大型科技與 Growth 公司。
-            </p>
-
-            <p>
-                QQQ 強勢通常代表科技與成長風格的風險偏好較高；
-                QQQ 轉弱則可能反映高估值成長股壓力。
-            </p>
-        `
-    },
-
-    soxx: {
-        title: "SOXX｜半導體產業",
-        content: `
-            <p>
-                SOXX 用來觀察美國半導體產業趨勢。
-                半導體通常對科技需求、資本支出與景氣循環較敏感。
-            </p>
-
-            <p>
-                在 Market OS 中，SOXX 可補充 SPY 與 QQQ，
-                協助確認科技市場的趨勢是否有半導體產業支持。
-            </p>
-        `
-    },
-
-    iwm: {
-        title: "IWM｜美國小型股與市場廣度",
-        content: `
-            <p>
-                IWM 追蹤 Russell 2000 小型股。
-                小型股通常對美國內需、融資成本與經濟環境較敏感。
-            </p>
-
-            <p>
-                如果 SPY、QQQ 上漲但 IWM 持續偏弱，
-                可能表示漲勢集中在少數大型公司，市場廣度較不足。
-            </p>
-        `
-    },
-
-    value: {
-        title: "Value｜目前實際值",
-        content: `
-            <p>
-                Value 顯示目前取得的最新有效市場數值。
-            </p>
-
-            <ul>
-                <li>VIX：波動指數點位。</li>
-                <li>US 10Y：10 年期公債殖利率。</li>
-                <li>Gold：黃金期貨價格。</li>
-                <li>USD/TWD：1 美元可兌換的新台幣數量。</li>
-            </ul>
-        `
-    },
-
-    change1d: {
-        title: "1D｜最近 1 個交易日變化",
-        content: `
-            <p>
-                1D 比較最近一筆資料與前一個有效交易日。
-                主要用於觀察單日市場衝擊。
-            </p>
-
-            <p>
-                VIX、Gold、USD/TWD 使用百分比；
-                US 10Y 使用 bp。
-            </p>
-        `
-    },
-
-    change5d: {
-        title: "5D｜最近 5 個交易日變化",
-        content: `
-            <p>
-                5D 約代表一個交易週的變化，
-                用來降低單日雜訊並觀察短期方向。
-            </p>
-
-            <p>
-                對 VIX 而言，5D 快速上升代表短期市場風險正在升高；
-                快速下降則代表市場壓力可能正在緩和。
-            </p>
-        `
-    },
-
-    change20d: {
-        title: "20D｜最近 20 個交易日變化",
-        content: `
-            <p>
-                20D 約代表一個交易月的變化，
-                適合觀察較完整的波段方向。
-            </p>
-
-            <p>
-                1D、5D、20D 應一起閱讀，避免只因單日波動就改變判斷。
-            </p>
-        `
-    },
-
-    macroStatus: {
-        title: "Macro Status｜總體狀態",
-        content: `
-            <p>
-                Status 是各總體指標自己的狀態分類。
-            </p>
-
-            <ul>
-                <li>VIX：依絕對值分成 Normal、Caution、Risk-Off 等。</li>
-                <li>US 10Y：依殖利率水準分級。</li>
-                <li>Gold：依 20D 報酬判斷 Up、Down 或 Neutral。</li>
-                <li>USD/TWD：依 20D 變化判斷美元或台幣相對強弱。</li>
-            </ul>
-
-            <div class="modal-note">
-                除了 VIX，其他 Macro Status 目前不直接改變 Market Action。
-            </div>
-        `
-    },
-
-    price: {
-        title: "Price｜最新 ETF 價格",
-        content: `
-            <p>
-                Price 是最新有效收盤價。
-                系統會把 Price 與 MA20、MA50、MA200 比較，
-                判定 ETF 的趨勢排列。
-            </p>
-        `
-    },
-
-    ma20: {
-        title: "MA20｜20 日移動平均線",
-        content: `
-            <p>
-                MA20 是最近 20 個交易日收盤價的簡單平均，
-                約代表一個交易月的短期趨勢。
-            </p>
-
-            <p>
-                Price 高於 MA20 通常代表短期價格偏強；
-                低於 MA20 則代表短期動能可能轉弱。
-            </p>
-        `
-    },
-
-    ma50: {
-        title: "MA50｜50 日移動平均線",
-        content: `
-            <p>
-                MA50 約代表兩個半月的中期市場趨勢。
-                系統使用 MA20 與 MA50 的相對位置辨認短中期排列。
-            </p>
-
-            <p>
-                MA20 高於 MA50 通常較有利於多頭；
-                MA20 低於 MA50 則表示短期趨勢弱於中期趨勢。
-            </p>
-        `
-    },
-
-    ma200: {
-        title: "MA200｜200 日移動平均線",
-        content: `
-            <p>
-                MA200 是常見的長期趨勢基準，約涵蓋接近一年的交易日。
-            </p>
-
-            <p>
-                MA50 高於 MA200 是多頭排列的一部分；
-                MA50 低於 MA200 則代表中長期結構偏弱。
-            </p>
-        `
-    },
-
-    rsi: {
-        title: "RSI14｜14 日相對強弱指標",
-        content: `
-            <p>
-                RSI14 用來觀察最近 14 個交易日的上漲與下跌動能。
-            </p>
-
-            <table>
-                <tr>
-                    <th>RSI</th>
-                    <th>一般解讀</th>
-                </tr>
-                <tr>
-                    <td>&gt; 70</td>
-                    <td>偏熱或 Overbought</td>
-                </tr>
-                <tr>
-                    <td>50～70</td>
-                    <td>正向動能</td>
-                </tr>
-                <tr>
-                    <td>30～50</td>
-                    <td>動能偏弱</td>
-                </tr>
-                <tr>
-                    <td>&lt; 30</td>
-                    <td>偏超賣或 Oversold</td>
-                </tr>
-            </table>
-
-            <div class="modal-note">
-                RSI14 目前只作為人工參考，
-                不直接改變 Market、Risk 或 Action。
-            </div>
-        `
-    },
-
-    trend: {
-        title: "Trend｜ETF 趨勢燈號",
-        content: `
-            <p>
-                Trend 使用 Price、MA20、MA50、MA200 的相對位置判定。
-            </p>
-
-            <table>
-                <tr>
-                    <th>燈號</th>
-                    <th>條件</th>
-                    <th>解讀</th>
-                </tr>
-                <tr>
-                    <td>🟢</td>
-                    <td>Price &gt; MA20 &gt; MA50 &gt; MA200</td>
-                    <td>完整多頭排列</td>
-                </tr>
-                <tr>
-                    <td>🔴🔴</td>
-                    <td>Price &lt; MA50 且 MA50 &lt; MA200</td>
-                    <td>中長期偏空</td>
-                </tr>
-                <tr>
-                    <td>🔴</td>
-                    <td>Price &lt; MA20 且 MA20 &lt; MA50</td>
-                    <td>短中期轉弱</td>
-                </tr>
-                <tr>
-                    <td>🟡</td>
-                    <td>不符合以上條件</td>
-                    <td>Mixed / Transition</td>
-                </tr>
-            </table>
-        `
-    }
-};
-
-
-/* =========================================================
-   MODAL
-========================================================= */
-
-let lastFocusedElement = null;
-
-function openExplanation(key) {
-    const explanation = explanations[key];
-
-    if (!explanation) {
-        return;
-    }
-
-    lastFocusedElement = document.activeElement;
-
-    modalTitle.textContent =
-        explanation.title;
-
-    modalBody.innerHTML =
-        explanation.content;
-
-    infoModal.classList.add("show");
-    infoModal.setAttribute("aria-hidden", "false");
-
-    document.body.classList.add("modal-open");
-
-    modalClose.focus();
-}
-
-function closeExplanation() {
-    infoModal.classList.remove("show");
-    infoModal.setAttribute("aria-hidden", "true");
-
-    document.body.classList.remove("modal-open");
-
-    if (
-        lastFocusedElement &&
-        typeof lastFocusedElement.focus === "function"
-    ) {
-        lastFocusedElement.focus();
-    }
-}
-
-function activateExplanation(element) {
-    const key =
-        element.dataset.explain;
-
-    openExplanation(key);
-}
-
-document.addEventListener("click", event => {
-    const explainable =
-        event.target.closest("[data-explain]");
-
-    if (explainable) {
-        activateExplanation(explainable);
-    }
-});
-
-document.addEventListener("keydown", event => {
-    const explainable =
-        event.target.closest("[data-explain]");
-
-    if (
-        explainable &&
-        (event.key === "Enter" || event.key === " ")
-    ) {
-        event.preventDefault();
-        activateExplanation(explainable);
-    }
-
-    if (
-        event.key === "Escape" &&
-        infoModal.classList.contains("show")
-    ) {
-        closeExplanation();
-    }
-});
-
-modalClose.addEventListener(
-    "click",
-    closeExplanation
-);
-
-infoModal.addEventListener(
-    "click",
-    event => {
-        if (event.target === infoModal) {
-            closeExplanation();
-        }
-    }
-);
-
-
-/* =========================================================
-   UTILITIES
-========================================================= */
-
-function isValidNumber(value) {
-    return Number.isFinite(value);
-}
-
-function safeFixed(value, digits = 2) {
-    if (!isValidNumber(value)) {
-        return "--";
-    }
-
-    return value.toFixed(digits);
-}
-
-function escapeHTML(value) {
-    return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-}
-
-
-/* =========================================================
-   FETCH
-========================================================= */
-
-async function fetchWithTimeout(
-    url,
-    timeout = FETCH_TIMEOUT
-) {
-    const controller =
-        new AbortController();
-
-    const timer =
-        setTimeout(
-            () => controller.abort(),
-            timeout
-        );
-
-    try {
-        const response =
-            await fetch(url, {
-                signal: controller.signal,
-                cache: "no-store"
-            });
-
-        if (!response.ok) {
-            throw new Error(
-                `HTTP ${response.status}`
-            );
-        }
-
-        return response;
-
-    } finally {
-        clearTimeout(timer);
-    }
-}
-
-async function getMarketData(symbol) {
-    console.log(
-        `[MarketOS] Loading ${symbol}`
-    );
-
-    const url =
-        `${WORKER_URL}/?symbol=${encodeURIComponent(symbol)}`;
-
-    const response =
-        await fetchWithTimeout(url);
-
-    const data =
-        await response.json();
-
-    const result =
-        data?.chart?.result?.[0];
-
-    if (!result) {
-        const yahooError =
-            data?.chart?.error?.description;
-
-        throw new Error(
-            yahooError ||
-            `No chart result for ${symbol}`
-        );
-    }
-
-    const close =
-        result
-            ?.indicators
-            ?.quote?.[0]
-            ?.close;
-
-    if (!Array.isArray(close)) {
-        throw new Error(
-            `No close array for ${symbol}`
-        );
-    }
-
-    const values =
-        close.filter(
-            value => Number.isFinite(value)
-        );
-
-    if (values.length === 0) {
-        throw new Error(
-            `No valid prices for ${symbol}`
-        );
-    }
-
-    console.log(
-        `[MarketOS] ${symbol} OK`,
-        values.length,
-        "points"
-    );
-
-    return {
-        symbol,
-        values,
-        price: values[values.length - 1]
-    };
-}
-
-
-/* =========================================================
-   INDICATORS
-========================================================= */
-
-function sma(values, period) {
-    if (
-        !Array.isArray(values) ||
-        values.length < period
-    ) {
-        return null;
-    }
-
-    const data =
-        values.slice(-period);
-
-    const total =
-        data.reduce(
-            (sum, value) =>
-                sum + value,
-            0
-        );
-
-    return total / period;
-}
-
-function rsi(values, period = 14) {
-    if (
-        !Array.isArray(values) ||
-        values.length <= period
-    ) {
-        return null;
-    }
-
-    let gains = 0;
-    let losses = 0;
-
-    const start =
-        values.length - period;
-
-    for (
-        let i = start;
-        i < values.length;
-        i++
-    ) {
-        const previous =
-            values[i - 1];
-
-        const current =
-            values[i];
-
-        if (
-            !isValidNumber(previous) ||
-            !isValidNumber(current)
-        ) {
-            continue;
-        }
-
-        const difference =
-            current - previous;
-
-        if (difference > 0) {
-            gains += difference;
-        } else {
-            losses +=
-                Math.abs(difference);
-        }
-    }
-
-    if (losses === 0) {
-        return 100;
-    }
-
-    const rs =
-        gains / losses;
-
-    return (
-        100 -
-        100 / (1 + rs)
-    );
-}
-
-function changePct(values, days) {
-    if (
-        !Array.isArray(values) ||
-        values.length <= days
-    ) {
-        return null;
-    }
-
-    const now =
-        values[values.length - 1];
-
-    const previous =
-        values[
-            values.length - 1 - days
-        ];
-
-    if (
-        !isValidNumber(now) ||
-        !isValidNumber(previous) ||
-        previous === 0
-    ) {
-        return null;
-    }
-
-    return (
-        (now / previous - 1) *
-        100
-    );
-}
-
-function yieldChangeBP(values, days) {
-    if (
-        !Array.isArray(values) ||
-        values.length <= days
-    ) {
-        return null;
-    }
-
-    const now =
-        values[values.length - 1];
-
-    const previous =
-        values[
-            values.length - 1 - days
-        ];
-
-    if (
-        !isValidNumber(now) ||
-        !isValidNumber(previous)
-    ) {
-        return null;
-    }
-
-    return (
-        now - previous
-    ) * 100;
-}
-
-
-/* =========================================================
-   FORMAT
-========================================================= */
-
-function formatChange(value) {
-    if (!isValidNumber(value)) {
-        return `
-            <span class="gray">--</span>
-        `;
-    }
-
-    if (value > 0) {
-        return `
-            <span class="red">
-                ▲ +${value.toFixed(2)}%
-            </span>
-        `;
-    }
-
-    if (value < 0) {
-        return `
-            <span class="green">
-                ▼ ${value.toFixed(2)}%
-            </span>
-        `;
-    }
-
-    return `
-        <span class="gray">
-            0.00%
-        </span>
-    `;
-}
-
-function formatBP(value) {
-    if (!isValidNumber(value)) {
-        return `
-            <span class="gray">--</span>
-        `;
-    }
-
-    if (value > 0) {
-        return `
-            <span class="red">
-                ▲ +${value.toFixed(1)} bp
-            </span>
-        `;
-    }
-
-    if (value < 0) {
-        return `
-            <span class="green">
-                ▼ ${value.toFixed(1)} bp
-            </span>
-        `;
-    }
-
-    return `
-        <span class="gray">
-            0.0 bp
-        </span>
-    `;
-}
-
-function formatAssetValue(symbol, value) {
-    if (!isValidNumber(value)) {
-        return "--";
-    }
-
-    if (symbol === "^VIX") {
-        return value.toFixed(2);
-    }
-
-    if (symbol === "^TNX") {
-        return `${value.toFixed(2)}%`;
-    }
-
-    if (symbol === "GC=F") {
-        return `$${value.toFixed(2)}`;
-    }
-
-    if (symbol === "TWD=X") {
-        return value.toFixed(3);
-    }
-
-    return value.toFixed(2);
-}
-
-
-/* =========================================================
-   TREND AND STATUS
-========================================================= */
-
-function trendLight(
-    price,
-    ma20,
-    ma50,
-    ma200
-) {
-    if (
-        !isValidNumber(price) ||
-        !isValidNumber(ma20) ||
-        !isValidNumber(ma50) ||
-        !isValidNumber(ma200)
-    ) {
-        return "⚪";
-    }
-
-    if (
-        price > ma20 &&
-        ma20 > ma50 &&
-        ma50 > ma200
-    ) {
-        return "🟢";
-    }
-
-    if (
-        price < ma50 &&
-        ma50 < ma200
-    ) {
-        return "🔴🔴";
-    }
-
-    if (
-        price < ma20 &&
-        ma20 < ma50
-    ) {
-        return "🔴";
-    }
-
-    return "🟡";
-}
-
-function getVixStatus(value) {
-    if (value < 15) {
-        return "🟢 Very Calm";
-    }
-
-    if (value < 20) {
-        return "🟢 Normal";
-    }
-
-    if (value < 25) {
-        return "🟡 Caution";
-    }
-
-    if (value < 30) {
-        return "🟠 Elevated Risk";
-    }
-
-    if (value < 40) {
-        return "🔴 High Risk";
-    }
-
-    return "🔴 Panic";
-}
-
-function getUS10YStatus(value) {
-    if (value < 3.5) {
-        return "🟢 Low Yield";
-    }
-
-    if (value < 4.2) {
-        return "🟢 Normal";
-    }
-
-    if (value < 4.7) {
-        return "🟡 High Yield";
-    }
-
-    if (value < 5) {
-        return "🟠 Very High";
-    }
-
-    return "🔴 Extreme";
-}
-
-function getGoldStatus(d20) {
-    if (!isValidNumber(d20)) {
-        return "⚪ Neutral";
-    }
-
-    if (d20 >= 5) {
-        return "🟡 Strong Up";
-    }
-
-    if (d20 >= 2) {
-        return "🟢 Up";
-    }
-
-    if (d20 <= -5) {
-        return "🔴 Strong Down";
-    }
-
-    if (d20 <= -2) {
-        return "🟠 Down";
-    }
-
-    return "⚪ Neutral";
-}
-
-function getTWDStatus(d20) {
-    if (!isValidNumber(d20)) {
-        return "⚪ Stable";
-    }
-
-    if (d20 >= 3) {
-        return "🔴 TWD Weakening";
-    }
-
-    if (d20 >= 1) {
-        return "🟠 USD Strong";
-    }
-
-    if (d20 <= -3) {
-        return "🟢 TWD Strong";
-    }
-
-    if (d20 <= -1) {
-        return "🟢 USD Weak";
-    }
-
-    return "⚪ Stable";
-}
-
-function getMacroExplanationKey(symbol) {
-    const mapping = {
-        "^VIX": "vix",
-        "^TNX": "us10y",
-        "GC=F": "gold",
-        "TWD=X": "usdtwd"
-    };
-
-    return mapping[symbol] || "";
-}
-
-function getETFExplanationKey(symbol) {
-    return symbol.toLowerCase();
-}
-
-
-/* =========================================================
-   REFRESH MACRO
-========================================================= */
-
-async function refreshMacro() {
-    const assets = [
-        {
-            name: "VIX",
-            symbol: "^VIX"
-        },
-        {
-            name: "US 10Y",
-            symbol: "^TNX"
-        },
-        {
-            name: "Gold",
-            symbol: "GC=F"
-        },
-        {
-            name: "USD/TWD",
-            symbol: "TWD=X"
-        }
-    ];
-
-    const results =
-        await Promise.all(
-            assets.map(async asset => {
-                try {
-                    const raw =
-                        await getMarketData(
-                            asset.symbol
-                        );
-
-                    return {
-                        ...asset,
-                        ...raw,
-                        d1: changePct(
-                            raw.values,
-                            1
-                        ),
-                        d5: changePct(
-                            raw.values,
-                            5
-                        ),
-                        d20: changePct(
-                            raw.values,
-                            20
-                        ),
-                        error: false
-                    };
-
-                } catch (error) {
-                    console.error(
-                        `[MarketOS] ${asset.symbol} ERROR`,
-                        error
-                    );
-
-                    return {
-                        ...asset,
-                        error: true,
-                        errorMessage: error.message
-                    };
-                }
-            })
-        );
-
-    let html = "";
-
-    results.forEach(asset => {
-        if (asset.error) {
-            html += `
-                <tr>
-                    <td>
-                        <button
-                            class="asset-button"
-                            type="button"
-                            data-explain="${getMacroExplanationKey(asset.symbol)}"
-                        >
-                            ${escapeHTML(asset.name)} ⓘ
-                        </button>
-                    </td>
-
-                    <td colspan="5" class="red">
-                        ⚠️ ${escapeHTML(asset.errorMessage)}
-                    </td>
-                </tr>
-            `;
-
-            return;
-        }
-
-        let status = "⚪ Neutral";
-
-        let change1D;
-        let change5D;
-        let change20D;
-
-        if (asset.symbol === "^TNX") {
-            change1D =
-                formatBP(
-                    yieldChangeBP(
-                        asset.values,
-                        1
-                    )
-                );
-
-            change5D =
-                formatBP(
-                    yieldChangeBP(
-                        asset.values,
-                        5
-                    )
-                );
-
-            change20D =
-                formatBP(
-                    yieldChangeBP(
-                        asset.values,
-                        20
-                    )
-                );
-
-            status =
-                getUS10YStatus(
-                    asset.price
-                );
-
-        } else {
-            change1D =
-                formatChange(asset.d1);
-
-            change5D =
-                formatChange(asset.d5);
-
-            change20D =
-                formatChange(asset.d20);
-        }
-
-        if (asset.symbol === "^VIX") {
-            status =
-                getVixStatus(
-                    asset.price
-                );
-        }
-
-        if (asset.symbol === "GC=F") {
-            status =
-                getGoldStatus(
-                    asset.d20
-                );
-        }
-
-        if (asset.symbol === "TWD=X") {
-            status =
-                getTWDStatus(
-                    asset.d20
-                );
-        }
-
-        html += `
-            <tr>
-                <td>
-                    <button
-                        class="asset-button"
-                        type="button"
-                        data-explain="${getMacroExplanationKey(asset.symbol)}"
-                    >
-                        ${escapeHTML(asset.name)} ⓘ
-                    </button>
-                </td>
-
-                <td class="blue">
-                    <b>
-                        ${formatAssetValue(
-                            asset.symbol,
-                            asset.price
-                        )}
-                    </b>
-                </td>
-
-                <td>${change1D}</td>
-                <td>${change5D}</td>
-                <td>${change20D}</td>
-                <td>${status}</td>
-            </tr>
-        `;
-    });
-
-    macroTable.innerHTML = html;
-
-    return results;
-}
-
-
-/* =========================================================
-   REFRESH ETF
-========================================================= */
-
-async function refreshETF() {
-    const symbols = [
-        "SPY",
-        "QQQ",
-        "SOXX",
-        "IWM"
-    ];
-
-    const results =
-        await Promise.all(
-            symbols.map(async symbol => {
-                try {
-                    const data =
-                        await getMarketData(
-                            symbol
-                        );
-
-                    const ma20 =
-                        sma(data.values, 20);
-
-                    const ma50 =
-                        sma(data.values, 50);
-
-                    const ma200 =
-                        sma(data.values, 200);
-
-                    const rsi14 =
-                        rsi(data.values, 14);
-
-                    const trend =
-                        trendLight(
-                            data.price,
-                            ma20,
-                            ma50,
-                            ma200
-                        );
-
-                    return {
-                        symbol,
-                        price: data.price,
-                        ma20,
-                        ma50,
-                        ma200,
-                        rsi14,
-                        trend,
-                        error: false
-                    };
-
-                } catch (error) {
-                    console.error(
-                        `[MarketOS] ${symbol} ERROR`,
-                        error
-                    );
-
-                    return {
-                        symbol,
-                        error: true,
-                        errorMessage: error.message
-                    };
-                }
-            })
-        );
-
-    let html = "";
-
-    results.forEach(asset => {
-        if (asset.error) {
-            html += `
-                <tr>
-                    <td>
-                        <button
-                            class="asset-button"
-                            type="button"
-                            data-explain="${getETFExplanationKey(asset.symbol)}"
-                        >
-                            ${escapeHTML(asset.symbol)} ⓘ
-                        </button>
-                    </td>
-
-                    <td colspan="6" class="red">
-                        ⚠️ ${escapeHTML(asset.errorMessage)}
-                    </td>
-                </tr>
-            `;
-
-            return;
-        }
-
-        html += `
-            <tr>
-                <td>
-                    <button
-                        class="asset-button"
-                        type="button"
-                        data-explain="${getETFExplanationKey(asset.symbol)}"
-                    >
-                        ${escapeHTML(asset.symbol)} ⓘ
-                    </button>
-                </td>
-
-                <td class="blue">
-                    <b>
-                        ${safeFixed(
-                            asset.price,
-                            2
-                        )}
-                    </b>
-                </td>
-
-                <td>
-                    ${safeFixed(
-                        asset.ma20,
-                        2
-                    )}
-                </td>
-
-                <td>
-                    ${safeFixed(
-                        asset.ma50,
-                        2
-                    )}
-                </td>
-
-                <td>
-                    ${safeFixed(
-                        asset.ma200,
-                        2
-                    )}
-                </td>
-
-                <td>
-                    ${safeFixed(
-                        asset.rsi14,
-                        1
-                    )}
-                </td>
-
-                <td style="font-size:22px;">
-                    ${asset.trend}
-                </td>
-            </tr>
-        `;
-    });
-
-    etfTable.innerHTML = html;
-
-    return results;
-}
-
-
-/* =========================================================
-   MARKET DECISION
-========================================================= */
-
-function updateMarketDecision(
-    etfs,
-    macro
-) {
-    const validETF =
-        etfs.filter(
-            item => !item.error
-        );
-
-    const greenCount =
-        validETF.filter(
-            item => item.trend === "🟢"
-        ).length;
-
-    const redCount =
-        validETF.filter(
-            item =>
-                item.trend === "🔴" ||
-                item.trend === "🔴🔴"
-        ).length;
-
-    const vix =
-        macro.find(
-            item =>
-                item.symbol === "^VIX" &&
-                !item.error
-        );
-
-    let market = "⚪ Neutral";
-    let risk = "NORMAL";
-    let action = "HOLD";
-
-    /*
-    Step 1:
-    ETF 決定基本 Market Regime
-    */
-
-    if (greenCount >= 3) {
-        market = "🟢 Bull";
-        risk = "LOW";
-        action = "ADD";
-
-    } else if (redCount >= 3) {
-        market = "🔴 Bear";
-        risk = "HIGH";
-        action = "REDUCE";
-
-    } else {
-        market = "🟡 Mixed";
-        risk = "NORMAL";
-        action = "HOLD";
-    }
-
-    /*
-    Step 2:
-    VIX 作為 Risk Modifier
-    */
-
-    if (vix) {
-        if (vix.price < 20) {
-            if (redCount >= 3) {
-                market = "🔴 Bear";
-                risk = "HIGH";
-                action = "REDUCE";
-
-            } else if (greenCount >= 3) {
-                market = "🟢 Bull";
-                risk = "LOW";
-                action = "ADD";
-            }
-
-        } else if (
-            vix.price >= 20 &&
-            vix.price < 25
-        ) {
-            if (redCount >= 3) {
-                market = "🔴 Bear";
-                risk = "HIGH";
-                action = "REDUCE";
-
-            } else if (greenCount >= 3) {
-                market = "🟢 Bull";
-                risk = "MODERATE";
-                action = "HOLD / SELECTIVE ADD";
-
-            } else {
-                market = "🟡 Mixed";
-                risk = "RISING";
-                action = "HOLD";
-            }
-
-        } else if (
-            vix.price >= 25 &&
-            vix.price < 30
-        ) {
-            /*
-            重要：
-            ETF 已是 Bear 時，
-            不會被 VIX 覆蓋為 Bull Weakening。
-            */
-
-            if (redCount >= 3) {
-                market = "🔴 Bear";
-                risk = "HIGH";
-                action = "REDUCE";
-
-            } else if (greenCount >= 3) {
-                market = "🟡 Bull Weakening";
-                risk = "RISING";
-                action = "HOLD / DO NOT ADD";
-
-            } else {
-                market = "🟠 Transition";
-                risk = "HIGH";
-                action = "DO NOT ADD";
-            }
-
-        } else if (
-            vix.price >= 30 &&
-            vix.price < 40
-        ) {
-            market = "🔴 Risk-Off";
-            risk = "HIGH";
-            action = "REDUCE";
-
-        } else if (vix.price >= 40) {
-            market = "🔴 EXTREME RISK";
-            risk = "EXTREME";
-            action = "DEFENSIVE";
-        }
-    }
-
-    if (validETF.length === 0) {
-        market = "⚪ DATA ERROR";
-        risk = "UNKNOWN";
-        action = "WAIT";
-    }
-
-    marketStatus.textContent = market;
-    riskStatus.textContent = risk;
-    actionStatus.textContent = action;
-
-    console.log(
-        "[MarketOS] Decision",
-        {
-            greenCount,
-            redCount,
-            vix: vix ? vix.price : null,
-            market,
-            risk,
-            action
-        }
-    );
-}
-
-
-/* =========================================================
-   REFRESH ALL
-========================================================= */
+const ETF_SYMBOLS = [
+    "SPY",
+    "QQQ",
+    "SOXX",
+    "IWM"
+];
+
+const $ = id =>
+    document.getElementById(id);
+
+let etfSeriesCache = {};
 
 let refreshing = false;
 
-async function refreshAll() {
-    if (refreshing) {
-        console.log(
-            "[MarketOS] Refresh already running"
-        );
-
-        return;
-    }
-
-    refreshing = true;
-
-    refreshButton.disabled = true;
-
-    refreshButton.textContent =
-        "⏳ 更新中...";
-
-    loadingStatus.textContent =
-        "正在取得市場資料...";
-
-    errorBox.style.display =
-        "none";
-
-    errorBox.textContent = "";
-
-    console.log(
-        "[MarketOS] Refresh started"
-    );
-
-    try {
-        const results =
-            await Promise.allSettled([
-                refreshMacro(),
-                refreshETF()
-            ]);
-
-        let macro = [];
-        let etfs = [];
-
-        if (
-            results[0].status ===
-            "fulfilled"
-        ) {
-            macro =
-                results[0].value;
-
-        } else {
-            console.error(
-                "[MarketOS] Macro failed",
-                results[0].reason
-            );
-
-            macroTable.innerHTML = `
-                <tr>
-                    <td colspan="6" class="red">
-                        ⚠️ Macro 更新失敗
-                    </td>
-                </tr>
-            `;
-        }
-
-        if (
-            results[1].status ===
-            "fulfilled"
-        ) {
-            etfs =
-                results[1].value;
-
-        } else {
-            console.error(
-                "[MarketOS] ETF failed",
-                results[1].reason
-            );
-
-            etfTable.innerHTML = `
-                <tr>
-                    <td colspan="7" class="red">
-                        ⚠️ ETF 更新失敗
-                    </td>
-                </tr>
-            `;
-        }
-
-        if (etfs.length > 0) {
-            updateMarketDecision(
-                etfs,
-                macro
-            );
-
-        } else {
-            marketStatus.textContent =
-                "⚪ DATA ERROR";
-
-            riskStatus.textContent =
-                "UNKNOWN";
-
-            actionStatus.textContent =
-                "WAIT";
-        }
-
-        const failedMacro =
-            macro.filter(
-                item => item.error
-            ).length;
-
-        const failedETF =
-            etfs.filter(
-                item => item.error
-            ).length;
-
-        if (
-            failedMacro > 0 ||
-            failedETF > 0
-        ) {
-            errorBox.textContent =
-                `⚠️ 部分資料失敗：Macro ${failedMacro} / ETF ${failedETF}`;
-
-            errorBox.style.display =
-                "block";
-        }
-
-        lastUpdate.textContent =
-            "最後更新：" +
-            new Date().toLocaleString(
-                "zh-TW"
-            );
-
-        loadingStatus.textContent =
-            "✅ 更新完成";
-
-        console.log(
-            "[MarketOS] Refresh completed"
-        );
-
-    } catch (error) {
-        console.error(
-            "[MarketOS] Fatal error:",
-            error
-        );
-
-        errorBox.textContent =
-            "⚠️ 更新失敗：" +
-            error.message;
-
-        errorBox.style.display =
-            "block";
-
-        loadingStatus.textContent =
-            "更新失敗";
-
-        marketStatus.textContent =
-            "⚪ ERROR";
-
-        riskStatus.textContent =
-            "UNKNOWN";
-
-        actionStatus.textContent =
-            "WAIT";
-
-    } finally {
-        refreshing = false;
-
-        refreshButton.disabled =
-            false;
-
-        refreshButton.textContent =
-            "🔄 立即更新";
-    }
-}
-
 
 /* =========================================================
-   EVENTS AND START
+   INFO CONTENT
 ========================================================= */
 
-refreshButton.addEventListener(
-    "click",
-    refreshAll
-);
+const info = {
 
-console.log(
-    "[MarketOS] JavaScript loaded successfully"
-);
-
-refreshAll();
-
-setInterval(
-    refreshAll,
-    REFRESH_INTERVAL
-);
-</script>
-
-</body>
-</html>
+    market: [
+     
