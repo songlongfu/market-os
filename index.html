@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Market OS V2</title>
+<style>
+body{background:#0f172a;color:white;font-family:Arial,sans-serif;margin:0;padding:20px}
+.container{max-width:1400px;margin:auto}
+.card{background:#1e293b;padding:20px;border-radius:15px;margin-bottom:20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:15px}
+.big{font-size:32px;font-weight:bold}
+button{background:#22c55e;color:white;border:none;padding:12px 20px;border-radius:10px;cursor:pointer}
+table{width:100%;border-collapse:collapse}td,th{padding:8px;border-bottom:1px solid #334155;text-align:left}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>📈 Market Operating System V2</h1>
+<div class="card"><button onclick="refreshData()">🔄 立即更新</button><div id="lastUpdate">尚未更新</div></div>
+<div class="grid">
+<div class="card"><h2>Market</h2><div id="marketStatus" class="big">載入中...</div></div>
+<div class="card"><h2>Risk</h2><div id="riskStatus" class="big">載入中...</div></div>
+<div class="card"><h2>Action</h2><div id="actionStatus" class="big">載入中...</div></div>
+</div>
+<div class="card"><h2>📊 VIX Monitor</h2><div id="vixValue" class="big">--</div><div id="vixState">--</div></div>
+<div class="card"><h2>ETF Dashboard</h2><table><thead><tr><th>ETF</th><th>Price</th><th>MA20</th><th>MA50</th><th>MA200</th><th>RSI14</th><th>Trend</th></tr></thead><tbody id="etfTable"></tbody></table></div>
+</div>
+<script>
+const WORKER_URL='https://fancy-mountain-4938.az87981303.workers.dev';
+function sma(v,p){return v.slice(-p).reduce((a,b)=>a+b,0)/p}
+function rsi(v,p=14){let g=0,l=0;for(let i=v.length-p;i<v.length;i++){const d=v[i]-v[i-1];if(d>0)g+=d;else l+=Math.abs(d)}if(l===0)return 100;const rs=g/l;return 100-(100/(1+rs))}
+function trendLight(price,ma20,ma50,ma200){if(price>ma20&&ma20>ma50&&ma50>ma200)return '🟢';if(price<ma50&&ma50<ma200)return '🔴🔴';if(price<ma20&&ma20<ma50)return '🔴';return '🟡'}
+function getVixStatus(v){if(v<15)return '🟢 市場非常平靜';if(v<20)return '🟢 正常';if(v<25)return '🟡 注意';if(v<30)return '🟠 Risk-Off';if(v<40)return '🔴 High Risk';return '🔴 Panic'}
+async function getETF(s){const res=await fetch(`${WORKER_URL}/?symbol=${encodeURIComponent(s)}`);const data=await res.json();const c=data.chart.result[0].indicators.quote[0].close.filter(x=>x!==null);const price=c[c.length-1];return{symbol:s,price,ma20:sma(c,20),ma50:sma(c,50),ma200:sma(c,200),rsi:rsi(c)}}
+async function refreshData(){const sy=['SPY','QQQ','SOXX','IWM'];const data=await Promise.all(sy.map(getETF));const vix=await getETF('^VIX');let html='';let green=0;data.forEach(x=>{const t=trendLight(x.price,x.ma20,x.ma50,x.ma200);if(t==='🟢')green++;html+=`<tr><td>${x.symbol}</td><td>${x.price.toFixed(2)}</td><td>${x.ma20.toFixed(2)}</td><td>${x.ma50.toFixed(2)}</td><td>${x.ma200.toFixed(2)}</td><td>${x.rsi.toFixed(1)}</td><td>${t}</td></tr>`});document.getElementById('etfTable').innerHTML=html;document.getElementById('vixValue').innerText=vix.price.toFixed(2);document.getElementById('vixState').innerText=getVixStatus(vix.price);let market='⚪ Neutral',risk='NORMAL',action='HOLD';if(green>=3){market='🟢 Bull';risk='LOW';action='ADD'}if(vix.price>25){market='🟡 Bull Weakening';risk='RISING';action='HOLD / DO NOT ADD'}if(vix.price>30){market='🔴 Bear';risk='HIGH';action='REDUCE'};document.getElementById('marketStatus').innerText=market;document.getElementById('riskStatus').innerText=risk;document.getElementById('actionStatus').innerText=action;document.getElementById('lastUpdate').innerText='最後更新：'+new Date().toLocaleString('zh-TW')}
+refreshData();setInterval(refreshData,900000);
+</script></body></html>
