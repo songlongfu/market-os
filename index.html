@@ -2,12 +2,18 @@
 <html lang="zh-Hant">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Market Operating System V4</title>
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Market Operating System V5</title>
 
 <style>
+
 * {
     box-sizing: border-box;
 }
@@ -15,583 +21,1160 @@
 body {
     margin: 0;
     padding: 20px;
+
     background: #0f172a;
     color: #ffffff;
-    font-family: Arial, "Microsoft JhengHei", sans-serif;
-}
 
-body.modal-open {
-    overflow: hidden;
+    font-family:
+        Arial,
+        "Microsoft JhengHei",
+        sans-serif;
 }
 
 .container {
+
     max-width: 1400px;
     margin: auto;
+
 }
 
 h1 {
+
     margin: 0 0 20px;
+
 }
 
 h2 {
+
     margin-top: 0;
+
 }
 
 .card {
+
     background: #1e293b;
+
     padding: 20px;
+
     border-radius: 15px;
+
     margin-bottom: 20px;
+
     border: 1px solid transparent;
+
 }
 
 .grid {
+
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(260px, 1fr)
+        );
+
     gap: 15px;
+
 }
 
 .big {
+
     font-size: 32px;
-    font-weight: bold;
+
+    font-weight: 700;
+
 }
 
 button,
 input {
+
     font: inherit;
+
 }
 
 button {
+
     cursor: pointer;
+
 }
 
+
+/* =========================
+   PRIMARY BUTTON
+========================= */
+
 .primary {
+
     background: #22c55e;
+
     color: white;
+
     border: none;
+
     padding: 11px 18px;
+
     border-radius: 10px;
-    font-weight: bold;
+
+    font-weight: 700;
+
 }
 
 .primary:hover {
+
     background: #16a34a;
+
 }
 
 .primary:disabled {
+
     background: #64748b;
+
     cursor: not-allowed;
+
 }
 
+
+/* =========================
+   SECONDARY BUTTON
+========================= */
+
 .secondary {
+
     background: #334155;
+
     color: white;
+
     border: 1px solid #475569;
+
     padding: 9px 13px;
+
     border-radius: 9px;
+
 }
 
 .secondary:hover,
 .secondary.active {
+
     background: #0369a1;
+
     border-color: #38bdf8;
+
 }
 
-.quick-buttons {
+
+/* =========================
+   CUSTOM RANGE
+========================= */
+
+.quick {
+
     display: flex;
+
     flex-wrap: wrap;
+
     gap: 8px;
+
 }
 
-.range-controls {
+.controls {
+
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(155px, 1fr)
+        );
+
     gap: 12px;
+
     align-items: end;
+
     margin-top: 15px;
+
 }
 
 .field label {
+
     display: block;
+
     color: #cbd5e1;
+
     font-size: 13px;
+
     margin-bottom: 6px;
+
 }
 
 .field input {
+
     width: 100%;
+
     padding: 10px;
+
     border-radius: 9px;
+
     border: 1px solid #475569;
+
     background: #0f172a;
+
     color: white;
+
 }
 
-.table-wrapper {
+
+/* =========================
+   TABLE
+========================= */
+
+.table-wrap {
+
     overflow-x: auto;
+
 }
 
 table {
+
     width: 100%;
+
     border-collapse: collapse;
+
 }
 
 th,
 td {
+
     padding: 10px;
-    border-bottom: 1px solid #334155;
+
+    border-bottom:
+        1px solid #334155;
+
     text-align: left;
+
     white-space: nowrap;
+
 }
 
 th {
+
     color: #93c5fd;
+
 }
 
+
+/* =========================
+   COLORS
+========================= */
+
 .red {
+
     color: #f87171;
+
 }
 
 .green {
+
     color: #4ade80;
-}
 
-.yellow {
-    color: #facc15;
-}
-
-.orange {
-    color: #fb923c;
 }
 
 .blue {
+
     color: #38bdf8;
+
 }
 
 .gray,
 .small {
+
     color: #94a3b8;
+
 }
 
 .small {
+
     font-size: 13px;
-    line-height: 1.6;
+
+    line-height: 1.55;
+
     margin-top: 9px;
+
 }
 
+
+/* =========================
+   CLICKABLE ITEMS
+========================= */
+
 .status-card,
-.clickable,
-.asset-button {
+.asset {
+
     cursor: pointer;
+
 }
 
 .status-card {
+
     transition:
         transform 0.15s ease,
         border-color 0.15s ease;
+
 }
 
 .status-card:hover {
+
     border-color: #38bdf8;
-    transform: translateY(-2px);
+
+    transform:
+        translateY(-2px);
+
 }
 
-.status-card:focus-visible,
-.clickable:focus-visible,
-.asset-button:focus-visible {
-    outline: 3px solid #38bdf8;
-    outline-offset: 3px;
-}
+.asset {
 
-.clickable {
-    border-radius: 6px;
-    padding: 2px 5px;
-}
-
-.clickable:hover,
-.asset-button:hover {
-    color: #7dd3fc;
-    background: rgba(56, 189, 248, 0.1);
-}
-
-.asset-button {
     background: transparent;
+
     color: white;
+
     border: none;
+
     border-radius: 6px;
+
     padding: 5px;
-    font-weight: bold;
+
+    font-weight: 700;
+
+}
+
+.asset:hover {
+
+    color: #7dd3fc;
+
+    background:
+        rgba(
+            56,
+            189,
+            248,
+            0.1
+        );
+
 }
 
 .hint {
+
     font-size: 12px;
+
     color: #94a3b8;
+
     margin-top: 7px;
+
 }
 
+
+/* =========================
+   STATUS
+========================= */
+
 #lastUpdate {
+
     margin-top: 12px;
+
 }
 
 #errorBox,
-.range-error {
+#rangeError {
+
     display: none;
+
     color: #fca5a5;
+
     margin-top: 9px;
+
 }
 
+
+/* =========================
+   MODAL
+========================= */
+
 .modal {
+
     display: none;
+
     position: fixed;
+
     inset: 0;
+
     z-index: 1000;
-    background: rgba(2, 6, 23, 0.84);
+
+    background:
+        rgba(
+            2,
+            6,
+            23,
+            0.84
+        );
+
     padding: 14px;
+
     align-items: center;
+
     justify-content: center;
+
 }
 
 .modal.show {
+
     display: flex;
+
 }
 
 .dialog {
-    width: min(720px, 100%);
+
+    width:
+        min(
+            720px,
+            100%
+        );
+
     max-height: 90vh;
+
     overflow: auto;
+
     background: #1e293b;
-    border: 1px solid #475569;
+
+    border:
+        1px solid #475569;
+
     border-radius: 16px;
+
 }
 
 .modal-head {
+
     position: sticky;
+
     top: 0;
-    z-index: 2;
+
     display: flex;
-    justify-content: space-between;
+
+    justify-content:
+        space-between;
+
     align-items: center;
+
     background: #1e293b;
-    border-bottom: 1px solid #334155;
+
+    border-bottom:
+        1px solid #334155;
+
     padding: 16px 20px;
+
 }
 
 .modal-head h2 {
+
     margin: 0;
+
     color: #7dd3fc;
+
 }
 
 .close {
+
     background: #334155;
+
     color: white;
+
     border: none;
+
     width: 38px;
+
     height: 38px;
+
     border-radius: 9px;
+
     font-size: 24px;
+
 }
 
 .modal-body {
-    padding: 20px;
-    line-height: 1.7;
-}
 
-.modal-body table {
-    margin: 10px 0;
+    padding: 20px;
+
+    line-height: 1.7;
+
 }
 
 .note {
-    background: rgba(56, 189, 248, 0.1);
-    border-left: 4px solid #38bdf8;
+
+    background:
+        rgba(
+            56,
+            189,
+            248,
+            0.1
+        );
+
+    border-left:
+        4px solid #38bdf8;
+
     padding: 10px 12px;
+
     border-radius: 7px;
+
     margin-top: 12px;
+
 }
 
-@media (max-width: 600px) {
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (
+    max-width: 600px
+) {
+
     body {
+
         padding: 10px;
+
     }
 
     .card {
+
         padding: 15px;
+
     }
 
     .big {
+
         font-size: 25px;
+
     }
 
     th,
     td {
+
         padding: 8px;
+
         font-size: 13px;
+
     }
+
 }
+
 </style>
+
 </head>
+
 
 <body>
 
 <div class="container">
 
-    <h1>📈 Market Operating System V4</h1>
 
-    <div class="card">
-        <button id="refreshButton" class="primary" type="button">
-            🔄 立即更新
-        </button>
+<!-- =========================
+     TITLE
+========================= -->
 
-        <div id="lastUpdate">尚未更新</div>
-        <div id="loadingStatus" class="small"></div>
-        <div id="errorBox"></div>
+<h1>
+📈 Market Operating System V5
+</h1>
+
+
+<!-- =========================
+     REFRESH
+========================= -->
+
+<div class="card">
+
+    <button
+        id="refreshButton"
+        class="primary"
+        type="button"
+    >
+        🔄 立即更新
+    </button>
+
+
+    <div id="lastUpdate">
+        尚未更新
     </div>
 
-    <div class="grid">
-
-        <div
-            class="card status-card"
-            data-info="market"
-            tabindex="0"
-            role="button"
-        >
-            <h2>Market ⓘ</h2>
-            <div id="marketStatus" class="big">載入中...</div>
-            <div class="hint">點擊查看判斷方式</div>
-        </div>
-
-        <div
-            class="card status-card"
-            data-info="risk"
-            tabindex="0"
-            role="button"
-        >
-            <h2>Risk ⓘ</h2>
-            <div id="riskStatus" class="big">載入中...</div>
-            <div class="hint">點擊查看 VIX 分級</div>
-        </div>
-
-        <div
-            class="card status-card"
-            data-info="action"
-            tabindex="0"
-            role="button"
-        >
-            <h2>Action ⓘ</h2>
-            <div id="actionStatus" class="big">載入中...</div>
-            <div class="hint">點擊查看訊號定義</div>
-        </div>
-
-    </div>
-
-    <!-- Custom Range Trend -->
-
-    <div class="card">
-
-        <h2>
-            📅 Custom Range Trend
-            <span
-                class="clickable"
-                data-info="custom"
-                tabindex="0"
-                role="button"
-            >
-                ⓘ
-            </span>
-        </h2>
-
-        <div class="quick-buttons" id="quickButtons">
-            <button class="secondary" data-range="1W" type="button">1W</button>
-            <button class="secondary" data-range="1M" type="button">1M</button>
-            <button class="secondary" data-range="3M" type="button">3M</button>
-            <button class="secondary" data-range="6M" type="button">6M</button>
-            <button class="secondary" data-range="YTD" type="button">YTD</button>
-            <button class="secondary" data-range="1Y" type="button">1Y</button>
-        </div>
-
-        <div class="range-controls">
-
-            <div class="field">
-                <label for="startDate">開始日期</label>
-                <input id="startDate" type="date">
-            </div>
-
-            <div class="field">
-                <label for="endDate">結束日期</label>
-                <input id="endDate" type="date">
-            </div>
-
-            <div class="field">
-                <label for="neutralBand">多空門檻（±%）</label>
-
-                <input
-                    id="neutralBand"
-                    type="number"
-                    min="0.1"
-                    max="30"
-                    step="0.1"
-                    value="2.0"
-                >
-            </div>
-
-            <div>
-                <button id="analyzeRange" class="primary" type="button">
-                    分析區間
-                </button>
-            </div>
-
-        </div>
-
-        <div id="rangeError" class="range-error"></div>
-
-        <div class="grid" style="margin-top:15px;">
-
-            <div
-                class="card"
-                style="margin:0; background:#0f172a;"
-            >
-                <h3>Range Result</h3>
-
-                <div id="rangeStatus" class="big">
-                    尚未分析
-                </div>
-
-                <div id="rangeSummary" class="small">
-                    選擇日期或快速區間後開始分析。
-                </div>
-            </div>
-
-        </div>
-
-        <div class="table-wrapper" style="margin-top:15px;">
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>ETF</th>
-                        <th>Start</th>
-                        <th>End</th>
-                        <th>Return</th>
-                        <th>Signal</th>
-                        <th>Used Dates</th>
-                    </tr>
-                </thead>
-
-                <tbody id="rangeTable">
-                    <tr>
-                        <td colspan="6">尚未分析</td>
-                    </tr>
-                </tbody>
-            </table>
-
-        </div>
-
-        <div class="small">
-            區間起訖若不是交易日，系統會使用範圍內第一個與最後一個
-            有效交易日。Custom Range 不會覆蓋上方即時
-            Market / Risk / Action。
-        </div>
-
-    </div>
-
-    <!-- Macro -->
-
-    <div class="card">
-
-        <h2>🌎 Macro / Risk Monitor</h2>
-
-        <div class="table-wrapper">
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Asset</th>
-                        <th>Value</th>
-                        <th>1D</th>
-                        <th>5D</th>
-                        <th>20D</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-
-                <tbody id="macroTable">
-                    <tr>
-                        <td colspan="6">載入中...</td>
-                    </tr>
-                </tbody>
-            </table>
-
-        </div>
-
-    </div>
-
-    <!-- ETF -->
-
-    <div class="card">
-
-        <h2>📊 ETF Dashboard</h2>
-
-        <div class="table-wrapper">
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>ETF</th>
-                        <th>Price</th>
-                        <th>MA20</th>
-                        <th>MA50</th>
-                        <th>MA200</th>
-                        <th>RSI14</th>
-                        <th>Trend</th>
-                    </tr>
-                </thead>
-
-                <tbody id="etfTable">
-                    <tr>
-                        <td colspan="7">載入中...</td>
-                    </tr>
-                </tbody>
-            </table>
-
-        </div>
-
-    </div>
-
-</div>
-
-<!-- Modal -->
-
-<div id="modal" class="modal" aria-hidden="true">
 
     <div
-        class="dialog"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="modalTitle"
+        id="loadingStatus"
+        class="small"
+    >
+    </div>
+
+
+    <div id="errorBox">
+    </div>
+
+</div>
+
+
+<!-- =========================
+     MARKET / RISK / ACTION
+========================= -->
+
+<div class="grid">
+
+
+    <!-- MARKET -->
+
+    <div
+        class="card status-card"
+        data-info="market"
+        tabindex="0"
     >
 
-        <div class="modal-head">
+        <h2>
+            Market ⓘ
+        </h2>
 
-            <h2 id="modalTitle">說明</h2>
 
-            <button
-                id="modalClose"
-                class="close"
-                type="button"
-                aria-label="關閉視窗"
-            >
-                ×
-            </button>
+        <div
+            id="marketStatus"
+            class="big"
+        >
+            載入中...
+        </div>
+
+
+        <div class="hint">
+
+            ETF 趨勢
+            + VIX
+            + Fear & Greed
 
         </div>
 
-        <div id="modalBody" class="modal-body"></div>
+    </div>
+
+
+    <!-- RISK -->
+
+    <div
+        class="card status-card"
+        data-info="risk"
+        tabindex="0"
+    >
+
+        <h2>
+            Risk ⓘ
+        </h2>
+
+
+        <div
+            id="riskStatus"
+            class="big"
+        >
+            載入中...
+        </div>
+
+
+        <div class="hint">
+
+            VIX 為主要風險控制
+
+        </div>
+
+    </div>
+
+
+    <!-- ACTION -->
+
+    <div
+        class="card status-card"
+        data-info="action"
+        tabindex="0"
+    >
+
+        <h2>
+            Action ⓘ
+        </h2>
+
+
+        <div
+            id="actionStatus"
+            class="big"
+        >
+            載入中...
+        </div>
+
+
+        <div class="hint">
+
+            規則式行動提示
+
+        </div>
 
     </div>
 
 </div>
+
+
+<!-- =========================
+     CUSTOM RANGE TREND
+========================= -->
+
+<div class="card">
+
+
+<h2>
+
+    📅 Custom Range Trend
+
+    <button
+        class="asset"
+        data-info="custom"
+        type="button"
+    >
+        ⓘ
+    </button>
+
+</h2>
+
+
+<!-- QUICK BUTTON -->
+
+<div
+    class="quick"
+    id="quickButtons"
+>
+
+    <button
+        class="secondary"
+        data-range="1W"
+        type="button"
+    >
+        1W
+    </button>
+
+
+    <button
+        class="secondary"
+        data-range="1M"
+        type="button"
+    >
+        1M
+    </button>
+
+
+    <button
+        class="secondary"
+        data-range="3M"
+        type="button"
+    >
+        3M
+    </button>
+
+
+    <button
+        class="secondary"
+        data-range="6M"
+        type="button"
+    >
+        6M
+    </button>
+
+
+    <button
+        class="secondary"
+        data-range="YTD"
+        type="button"
+    >
+        YTD
+    </button>
+
+
+    <button
+        class="secondary"
+        data-range="1Y"
+        type="button"
+    >
+        1Y
+    </button>
+
+</div>
+
+
+<!-- CUSTOM INPUT -->
+
+<div class="controls">
+
+
+    <div class="field">
+
+        <label for="startDate">
+            開始日期
+        </label>
+
+        <input
+            id="startDate"
+            type="date"
+        >
+
+    </div>
+
+
+    <div class="field">
+
+        <label for="endDate">
+            結束日期
+        </label>
+
+        <input
+            id="endDate"
+            type="date"
+        >
+
+    </div>
+
+
+    <div class="field">
+
+        <label for="neutralBand">
+
+            多空門檻（±%）
+
+        </label>
+
+
+        <input
+            id="neutralBand"
+            type="number"
+            min="0.1"
+            max="30"
+            step="0.1"
+            value="2.0"
+        >
+
+    </div>
+
+
+    <button
+        id="analyzeRange"
+        class="primary"
+        type="button"
+    >
+
+        分析區間
+
+    </button>
+
+
+</div>
+
+
+<div id="rangeError">
+</div>
+
+
+<!-- RANGE RESULT -->
+
+<div
+    class="card"
+    style="
+        margin:15px 0 0;
+        background:#0f172a;
+    "
+>
+
+    <h3>
+        Range Result
+    </h3>
+
+
+    <div
+        id="rangeStatus"
+        class="big"
+    >
+
+        尚未分析
+
+    </div>
+
+
+    <div
+        id="rangeSummary"
+        class="small"
+    >
+
+        選擇日期或快速區間後開始分析。
+
+    </div>
+
+</div>
+
+
+<!-- RANGE TABLE -->
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+    <th>ETF</th>
+
+    <th>Start</th>
+
+    <th>End</th>
+
+    <th>Return</th>
+
+    <th>Signal</th>
+
+    <th>Used Dates</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="rangeTable">
+
+<tr>
+
+    <td colspan="6">
+        尚未分析
+    </td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+
+<div class="small">
+
+    Custom Range
+    不會覆蓋即時
+    Market / Risk / Action。
+
+</div>
+
+
+</div>
+
+
+<!-- =========================
+     MACRO / RISK
+========================= -->
+
+<div class="card">
+
+
+<h2>
+
+    🌎 Macro / Risk Monitor
+
+</h2>
+
+
+<div class="table-wrap">
+
+<table>
+
+
+<thead>
+
+<tr>
+
+    <th>Asset</th>
+
+    <th>Value</th>
+
+    <th>1D</th>
+
+    <th>5D</th>
+
+    <th>20D</th>
+
+    <th>Status</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="macroTable">
+
+<tr>
+
+    <td colspan="6">
+
+        載入中...
+
+    </td>
+
+</tr>
+
+</tbody>
+
+
+</table>
+
+</div>
+
+
+<div class="small">
+
+    Fear & Greed、
+    VIX、
+    US 10Y、
+    Gold、
+    USD/TWD
+
+</div>
+
+
+</div>
+
+
+<!-- =========================
+     ETF DASHBOARD
+========================= -->
+
+<div class="card">
+
+
+<h2>
+
+    📊 ETF Dashboard
+
+</h2>
+
+
+<div class="table-wrap">
+
+<table>
+
+
+<thead>
+
+<tr>
+
+    <th>ETF</th>
+
+    <th>Price</th>
+
+    <th>MA20</th>
+
+    <th>MA50</th>
+
+    <th>MA200</th>
+
+    <th>RSI14</th>
+
+    <th>Trend</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="etfTable">
+
+<tr>
+
+    <td colspan="7">
+
+        載入中...
+
+    </td>
+
+</tr>
+
+</tbody>
+
+
+</table>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+<!-- =========================
+     INFORMATION MODAL
+========================= -->
+
+<div
+    id="modal"
+    class="modal"
+    aria-hidden="true"
+>
+
+
+<div
+    class="dialog"
+    role="dialog"
+    aria-modal="true"
+>
+
+
+<div class="modal-head">
+
+
+<h2 id="modalTitle">
+
+    說明
+
+</h2>
+
+
+<button
+    id="modalClose"
+    class="close"
+    type="button"
+    aria-label="關閉"
+>
+
+    ×
+
+</button>
+
+
+</div>
+
+
+<div
+    id="modalBody"
+    class="modal-body"
+>
+</div>
+
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     JAVASCRIPT START
+
+     第 2/4 段會從這裡開始
+===================================================== -->
 
 <script>
 "use strict";
+
 
 /* =========================================================
    CONFIG
@@ -600,7 +1183,11 @@ th {
 const WORKER_URL =
     "https://fancy-mountain-4938.az87981303.workers.dev";
 
-const FETCH_TIMEOUT = 15000;
+const FEAR_GREED_URL =
+    "https://feargreedflow.com/api/fear-greed";
+
+const FETCH_TIMEOUT =
+    15000;
 
 const REFRESH_INTERVAL =
     15 * 60 * 1000;
@@ -612,6 +1199,11 @@ const ETF_SYMBOLS = [
     "IWM"
 ];
 
+
+/* =========================================================
+   DOM HELPER / STATE
+========================================================= */
+
 const $ = id =>
     document.getElementById(id);
 
@@ -621,221 +1213,570 @@ let refreshing = false;
 
 
 /* =========================================================
-   INFO CONTENT
+   CLICKABLE INFORMATION CONTENT
 ========================================================= */
 
 const info = {
 
     market: [
+
         "📈 Market｜市場方向",
+
         `
         <p>
-            Market 由 SPY、QQQ、SOXX、IWM 的趨勢燈號決定。
+            Market OS 的判斷優先順序：
         </p>
 
+        <p>
+            <b>
+                ETF Trend → VIX → Fear & Greed
+            </b>
+        </p>
+
+        <h3>
+            ETF Market Regime
+        </h3>
+
         <table>
+
             <tr>
                 <th>條件</th>
                 <th>結果</th>
             </tr>
+
             <tr>
-                <td>至少 3 支 🟢</td>
-                <td>🟢 Bull</td>
+                <td>
+                    至少 3 支 ETF 為 🟢
+                </td>
+
+                <td>
+                    🟢 Bull
+                </td>
             </tr>
+
             <tr>
-                <td>至少 3 支 🔴 或 🔴🔴</td>
-                <td>🔴 Bear</td>
+                <td>
+                    至少 3 支 ETF 為
+                    🔴 或 🔴🔴
+                </td>
+
+                <td>
+                    🔴 Bear
+                </td>
             </tr>
+
             <tr>
-                <td>其他組合</td>
-                <td>🟡 Mixed</td>
+                <td>
+                    其他組合
+                </td>
+
+                <td>
+                    🟡 Mixed
+                </td>
             </tr>
+
         </table>
 
         <div class="note">
-            ETF 決定市場方向，VIX 調整風險。
-            VIX 25～30 不會把 Bear 覆蓋成 Bull Weakening。
+
+            ETF Trend 負責判斷市場方向。
+
+            VIX 負責主要風險控制。
+
+            Fear & Greed
+            負責市場情緒修正。
+
+            Bear 不會因為 Fear & Greed
+            很低而自動翻成 Bull。
+
         </div>
         `
     ],
+
 
     risk: [
-        "⚠️ Risk｜VIX 風險",
+
+        "⚠️ Risk｜市場風險",
+
         `
+        <p>
+            VIX 是 Market OS
+            最主要的 Risk Modifier。
+        </p>
+
         <table>
+
             <tr>
                 <th>VIX</th>
-                <th>解讀</th>
+                <th>Risk</th>
             </tr>
+
             <tr>
-                <td>&lt; 20</td>
-                <td>正常</td>
+                <td>
+                    &lt; 20
+                </td>
+
+                <td>
+                    🟢 Normal
+                </td>
             </tr>
+
             <tr>
-                <td>20～25</td>
-                <td>警戒</td>
+                <td>
+                    20 ～ 25
+                </td>
+
+                <td>
+                    🟡 Caution
+                </td>
             </tr>
+
             <tr>
-                <td>25～30</td>
-                <td>風險升高</td>
+                <td>
+                    25 ～ 30
+                </td>
+
+                <td>
+                    🟠 Elevated Risk
+                </td>
             </tr>
+
             <tr>
-                <td>30～40</td>
-                <td>Risk-Off</td>
+                <td>
+                    30 ～ 40
+                </td>
+
+                <td>
+                    🔴 Risk-Off
+                </td>
             </tr>
+
             <tr>
-                <td>≥ 40</td>
-                <td>Extreme Risk</td>
+                <td>
+                    ≥ 40
+                </td>
+
+                <td>
+                    🔴 Extreme Risk
+                </td>
             </tr>
+
         </table>
+
+        <div class="note">
+
+            VIX ≥ 30 是 Hard Override。
+
+            即使 Fear & Greed
+            顯示 Greed，
+            系統仍然會維持 Risk-Off。
+
+        </div>
         `
     ],
+
 
     action: [
+
         "🎯 Action｜行動提示",
+
         `
         <ul>
-            <li><b>ADD：</b>趨勢完整，風險正常。</li>
-            <li><b>HOLD / SELECTIVE ADD：</b>只選擇強勢標的。</li>
-            <li><b>DO NOT ADD：</b>停止增加曝險。</li>
-            <li><b>REDUCE：</b>降低部位或槓桿。</li>
-            <li><b>DEFENSIVE：</b>極端壓力下以保存資金為優先。</li>
-            <li><b>WAIT：</b>資料不足，不依照系統訊號操作。</li>
+
+            <li>
+                <b>ADD：</b>
+                市場趨勢與風險環境皆支持增加曝險。
+            </li>
+
+            <li>
+                <b>SELECTIVE ADD：</b>
+                可以增加部位，但優先選擇相對強勢標的。
+            </li>
+
+            <li>
+                <b>HOLD：</b>
+                保持部位，等待更明確訊號。
+            </li>
+
+            <li>
+                <b>DO NOT ADD：</b>
+                不增加新曝險。
+            </li>
+
+            <li>
+                <b>REDUCE：</b>
+                降低部位或槓桿。
+            </li>
+
+            <li>
+                <b>DEFENSIVE：</b>
+                極端風險環境，
+                優先考慮資金與風險控制。
+            </li>
+
+            <li>
+                <b>WAIT：</b>
+                市場資料不完整，
+                不使用系統訊號操作。
+            </li>
+
         </ul>
 
         <div class="note">
-            這是規則式提示，不是保證報酬的買賣建議。
+
+            Action 是規則式市場環境提示，
+            不是保證獲利的買賣建議。
+
         </div>
         `
     ],
+
 
     custom: [
+
         "📅 Custom Range Trend",
+
         `
         <p>
-            比較 SPY、QQQ、SOXX、IWM 在指定區間的
-            起點與終點收盤價。
+            Custom Range Trend
+            比較 SPY、QQQ、SOXX、IWM
+            在指定時間區間內的價格變化。
         </p>
 
         <p>
-            單支 ETF 報酬大於等於正門檻為 🟢，
-            小於等於負門檻為 🔴，中間區間為 🟡。
-        </p>
-
-        <p>
-            至少 3 支 ETF 同方向，才會判定整體為
-            Custom Bullish 或 Custom Bearish。
-        </p>
-
-        <div class="note">
-            Custom Range 是額外的歷史區間分析，
-            不會修改即時 Action。
-        </div>
-        `
-    ],
-
-    vix: [
-        "VIX｜市場波動指數",
-        `
-        <p>
-            VIX 是市場預期波動指數。
-            VIX 實際值會參與 Risk 與 Action 判斷。
-        </p>
-        `
-    ],
-
-    us10y: [
-        "US 10Y｜美國 10 年期公債殖利率",
-        `
-        <p>
-            美國 10 年期公債殖利率。
-            變化使用 bp 顯示。
-        </p>
-
-        <p>
-            1 bp 等於 0.01 個百分點。
-            例如 4.20% 上升至 4.30%，就是 +10 bp。
-        </p>
-
-        <div class="note">
-            US 10Y 目前只作為市場背景資訊。
-        </div>
-        `
-    ],
-
-    gold: [
-        "Gold｜黃金期貨",
-        `
-        <p>
-            黃金可能受到美元、利率、通膨、央行購金
-            或避險需求影響。
-        </p>
-
-        <div class="note">
-            黃金上漲不一定表示 Risk-Off，
-            目前不直接改變 Action。
-        </div>
-        `
-    ],
-
-    usdtwd: [
-        "USD/TWD｜美元兌新台幣",
-        `
-        <p>
-            USD/TWD 代表 1 美元可兌換多少新台幣。
+            預設門檻為 ±2%：
         </p>
 
         <ul>
-            <li>USD/TWD 上升：美元轉強，台幣相對轉弱。</li>
-            <li>USD/TWD 下降：美元轉弱，台幣相對轉強。</li>
+
+            <li>
+                報酬 ≥ +2%
+                → 🟢 Bullish
+            </li>
+
+            <li>
+                -2% ～ +2%
+                → 🟡 Neutral
+            </li>
+
+            <li>
+                報酬 ≤ -2%
+                → 🔴 Bearish
+            </li>
+
         </ul>
+
+        <p>
+            至少 3 支 ETF
+            同方向，才會判斷整體
+            Custom Bullish 或
+            Custom Bearish。
+        </p>
+
+        <div class="note">
+
+            Custom Range
+            只做歷史區間分析。
+
+            不會覆蓋目前即時
+            Market / Risk / Action。
+
+        </div>
         `
     ],
+
+
+    feargreed: [
+
+        "😨😃 Fear & Greed Index",
+
+        `
+        <p>
+            Fear & Greed Index
+            使用 0 ～ 100
+            表示市場情緒。
+        </p>
+
+        <table>
+
+            <tr>
+                <th>Index</th>
+                <th>Sentiment</th>
+            </tr>
+
+            <tr>
+                <td>0 ～ 24</td>
+                <td>🔴 Extreme Fear</td>
+            </tr>
+
+            <tr>
+                <td>25 ～ 44</td>
+                <td>🟠 Fear</td>
+            </tr>
+
+            <tr>
+                <td>45 ～ 55</td>
+                <td>🟡 Neutral</td>
+            </tr>
+
+            <tr>
+                <td>56 ～ 75</td>
+                <td>🟢 Greed</td>
+            </tr>
+
+            <tr>
+                <td>76 ～ 100</td>
+                <td>🟣 Extreme Greed</td>
+            </tr>
+
+        </table>
+
+        <p>
+            Market OS 同時觀察
+            5D 點數變化，
+            判斷 Sentiment
+            是 Improving
+            還是 Deteriorating。
+        </p>
+
+        <div class="note">
+
+            Fear & Greed
+            是第二層情緒修正器。
+
+            ETF Trend
+            仍然是市場方向的主要依據，
+            VIX 仍然具有更高優先級。
+
+        </div>
+        `
+    ],
+
+
+    vix: [
+
+        "VIX｜市場波動指數",
+
+        `
+        <p>
+            VIX 用來衡量市場
+            預期波動程度。
+        </p>
+
+        <p>
+            Market OS 使用
+            VIX 實際值直接調整
+            Risk 與 Action。
+        </p>
+
+        <p>
+            同時顯示：
+        </p>
+
+        <ul>
+
+            <li>1D 變化</li>
+            <li>5D 變化</li>
+            <li>20D 變化</li>
+
+        </ul>
+
+        <div class="note">
+
+            同樣是 VIX 25，
+
+            從 18 → 25
+
+            和
+
+            32 → 25
+
+            所代表的風險方向並不相同。
+
+        </div>
+        `
+    ],
+
+
+    us10y: [
+
+        "US 10Y｜美國 10 年期公債殖利率",
+
+        `
+        <p>
+            US 10Y 顯示美國
+            10 年期公債殖利率。
+        </p>
+
+        <p>
+            變化使用 basis points
+            顯示。
+        </p>
+
+        <p>
+            1 bp = 0.01 個百分點。
+        </p>
+
+        <p>
+            例如：
+        </p>
+
+        <p>
+            4.20% → 4.30%
+            = +10 bp
+        </p>
+
+        <div class="note">
+
+            US 10Y
+            目前只提供 Macro Context，
+            不直接改變 Action。
+
+        </div>
+        `
+    ],
+
+
+    gold: [
+
+        "Gold｜黃金期貨",
+
+        `
+        <p>
+            Gold 顯示黃金期貨價格
+            與 1D / 5D / 20D
+            變化。
+        </p>
+
+        <p>
+            黃金可能受到：
+        </p>
+
+        <ul>
+
+            <li>美元</li>
+            <li>實質利率</li>
+            <li>通膨預期</li>
+            <li>央行購金</li>
+            <li>地緣政治避險</li>
+
+        </ul>
+
+        <div class="note">
+
+            Gold 上漲
+            不會直接被 Market OS
+            解讀成 Risk-Off。
+
+        </div>
+        `
+    ],
+
+
+    usdtwd: [
+
+        "USD/TWD｜美元兌新台幣",
+
+        `
+        <p>
+            USD/TWD 表示：
+        </p>
+
+        <p>
+            1 USD
+            可以兌換多少 TWD。
+        </p>
+
+        <ul>
+
+            <li>
+                USD/TWD 上升
+                → USD 強
+                → TWD 相對弱
+            </li>
+
+            <li>
+                USD/TWD 下降
+                → USD 弱
+                → TWD 相對強
+            </li>
+
+        </ul>
+
+        <div class="note">
+
+            USD/TWD
+            目前只作為 Macro Context。
+
+        </div>
+        `
+    ],
+
 
     spy: [
-        "SPY｜美國大型股",
+
+        "SPY｜S&P 500",
+
         `
         <p>
-            SPY 追蹤 S&amp;P 500，
-            代表美國大型股與核心股票市場。
+            SPY 代表美國大型股，
+            是 Market OS
+            的核心市場方向指標。
         </p>
         `
     ],
+
 
     qqq: [
-        "QQQ｜科技與成長股",
+
+        "QQQ｜Nasdaq-100",
+
         `
         <p>
-            QQQ 追蹤 Nasdaq-100，
-            代表大型科技與成長型公司。
+            QQQ 代表大型科技股
+            與 Growth 風格。
         </p>
         `
     ],
+
 
     soxx: [
-        "SOXX｜半導體",
+
+        "SOXX｜Semiconductor",
+
         `
         <p>
-            SOXX 是半導體 ETF，
-            反映科技景氣與半導體風險偏好。
+            SOXX 代表美國半導體產業，
+            可觀察科技景氣與
+            半導體風險偏好。
         </p>
         `
     ],
 
+
     iwm: [
-        "IWM｜小型股與市場廣度",
+
+        "IWM｜Russell 2000",
+
         `
         <p>
-            IWM 追蹤 Russell 2000，
-            代表美國小型股與市場廣度。
+            IWM 代表美國小型股，
+            用來補充 Market Breadth。
+        </p>
+
+        <p>
+            如果大型股很強，
+            但 IWM 持續弱勢，
+            市場廣度可能不足。
         </p>
         `
     ]
+
 };
 
 
 /* =========================================================
-   MODAL
+   INFORMATION MODAL
 ========================================================= */
 
 function openInfo(key) {
@@ -844,39 +1785,40 @@ function openInfo(key) {
         return;
     }
 
+
     $("modalTitle").textContent =
         info[key][0];
+
 
     $("modalBody").innerHTML =
         info[key][1];
 
-    $("modal").classList.add("show");
+
+    $("modal").classList.add(
+        "show"
+    );
+
 
     $("modal").setAttribute(
         "aria-hidden",
         "false"
     );
 
-    document.body.classList.add(
-        "modal-open"
-    );
-
-    $("modalClose").focus();
 }
 
 
 function closeInfo() {
 
-    $("modal").classList.remove("show");
+    $("modal").classList.remove(
+        "show"
+    );
+
 
     $("modal").setAttribute(
         "aria-hidden",
         "true"
     );
 
-    document.body.classList.remove(
-        "modal-open"
-    );
 }
 
 
@@ -889,11 +1831,15 @@ document.addEventListener(
                 "[data-info]"
             );
 
+
         if (element) {
+
             openInfo(
                 element.dataset.info
             );
+
         }
+
     }
 );
 
@@ -902,9 +1848,15 @@ document.addEventListener(
     "keydown",
     event => {
 
-        if (event.key === "Escape") {
+        if (
+            event.key ===
+            "Escape"
+        ) {
+
             closeInfo();
+
         }
+
 
         if (
             (
@@ -913,12 +1865,16 @@ document.addEventListener(
             ) &&
             event.target.dataset.info
         ) {
+
             event.preventDefault();
+
 
             openInfo(
                 event.target.dataset.info
             );
+
         }
+
     }
 );
 
@@ -933,19 +1889,29 @@ $("modal").addEventListener(
     "click",
     event => {
 
-        if (event.target === $("modal")) {
+        if (
+            event.target ===
+            $("modal")
+        ) {
+
             closeInfo();
+
         }
+
     }
 );
 
 
 /* =========================================================
-   UTILITIES
+   BASIC UTILITIES
 ========================================================= */
 
 function valid(value) {
-    return Number.isFinite(value);
+
+    return Number.isFinite(
+        value
+    );
+
 }
 
 
@@ -955,45 +1921,44 @@ function fixed(
 ) {
 
     if (!valid(value)) {
+
         return "--";
+
     }
 
-    return value.toFixed(digits);
+
+    return value.toFixed(
+        digits
+    );
+
 }
 
 
 function escapeHTML(value) {
 
-    return String(value).replace(
-        /[&<>"']/g,
-        character => ({
-            "&": "&amp;",
-            "<": "&lt;",
-            ">": "&gt;",
-            '"': "&quot;",
-            "'": "&#039;"
-        })[character]
-    );
-}
+    return String(value)
+        .replace(
+            /[&<>"']/g,
+            character => ({
 
+                "&": "&amp;",
 
-function localISO(date) {
+                "<": "&lt;",
 
-    const adjusted =
-        new Date(
-            date.getTime() -
-            date.getTimezoneOffset() *
-            60000
+                ">": "&gt;",
+
+                '"': "&quot;",
+
+                "'": "&#039;"
+
+            })[character]
         );
 
-    return adjusted
-        .toISOString()
-        .slice(0, 10);
 }
 
 
 /* =========================================================
-   FETCH
+   FETCH WITH TIMEOUT
 ========================================================= */
 
 async function fetchWithTimeout(url) {
@@ -1001,11 +1966,17 @@ async function fetchWithTimeout(url) {
     const controller =
         new AbortController();
 
+
     const timer =
         setTimeout(
-            () => controller.abort(),
+            () => {
+
+                controller.abort();
+
+            },
             FETCH_TIMEOUT
         );
+
 
     try {
 
@@ -1013,110 +1984,361 @@ async function fetchWithTimeout(url) {
             await fetch(
                 url,
                 {
-                    signal: controller.signal,
-                    cache: "no-store"
+
+                    signal:
+                        controller.signal,
+
+                    cache:
+                        "no-store"
+
                 }
             );
+
 
         if (!response.ok) {
 
             throw new Error(
                 `HTTP ${response.status}`
             );
+
         }
+
 
         return response;
 
-    } finally {
-
-        clearTimeout(timer);
     }
+
+    finally {
+
+        clearTimeout(
+            timer
+        );
+
+    }
+
 }
 
+
+/* =========================================================
+   YAHOO MARKET DATA
+========================================================= */
 
 async function getMarketData(symbol) {
 
     const url =
         `${WORKER_URL}/?symbol=${encodeURIComponent(symbol)}&range=2y&interval=1d`;
 
+
     const response =
-        await fetchWithTimeout(url);
+        await fetchWithTimeout(
+            url
+        );
+
 
     const data =
         await response.json();
 
+
     const result =
-        data?.chart?.result?.[0];
+        data
+            ?.chart
+            ?.result
+            ?.[0];
+
 
     if (!result) {
 
         throw new Error(
-            data?.chart?.error?.description ||
+
+            data
+                ?.chart
+                ?.error
+                ?.description
+
+            ||
+
             `No data: ${symbol}`
+
         );
+
     }
+
 
     const close =
         result
             ?.indicators
-            ?.quote?.[0]
+            ?.quote
+            ?.[0]
             ?.close;
 
-    const timestamps =
-        result?.timestamp;
 
-    if (!Array.isArray(close)) {
+    const timestamps =
+        result
+            ?.timestamp;
+
+
+    if (
+        !Array.isArray(close)
+    ) {
 
         throw new Error(
-            `No close array: ${symbol}`
+            `No close data: ${symbol}`
         );
+
     }
+
 
     const series = [];
 
+
     for (
         let index = 0;
+
         index < close.length;
+
         index++
     ) {
 
-        if (valid(close[index])) {
 
-            series.push({
-                close: close[index],
+        const price =
+            close[index];
 
-                timestamp:
-                    Array.isArray(timestamps) &&
-                    valid(timestamps[index])
-                        ? timestamps[index]
-                        : null
-            });
+
+        if (
+            !valid(price)
+        ) {
+
+            continue;
+
         }
+
+
+        let timestamp =
+            null;
+
+
+        if (
+            Array.isArray(
+                timestamps
+            ) &&
+            valid(
+                timestamps[index]
+            )
+        ) {
+
+            timestamp =
+                timestamps[index];
+
+        }
+
+
+        series.push({
+
+            close:
+                price,
+
+            timestamp:
+                timestamp
+
+        });
+
     }
 
-    if (series.length === 0) {
+
+    if (
+        series.length === 0
+    ) {
 
         throw new Error(
             `Empty data: ${symbol}`
         );
+
     }
 
+
     return {
-        symbol,
-        series,
-        values: series.map(
-            item => item.close
-        ),
+
+        symbol:
+            symbol,
+
+        series:
+            series,
+
+        values:
+            series.map(
+                item =>
+                    item.close
+            ),
+
         price:
             series[
                 series.length - 1
             ].close
+
     };
+
 }
 
 
 /* =========================================================
-   INDICATORS
+   FEAR & GREED DATA
+========================================================= */
+
+async function getFearGreedData() {
+
+    const response =
+        await fetchWithTimeout(
+            FEAR_GREED_URL
+        );
+
+
+    const data =
+        await response.json();
+
+
+    if (
+        !Array.isArray(
+            data.dates
+        ) ||
+        !Array.isArray(
+            data.values
+        )
+    ) {
+
+        throw new Error(
+            "Invalid Fear & Greed data"
+        );
+
+    }
+
+
+    const series = [];
+
+
+    for (
+        let index = 0;
+
+        index < data.values.length;
+
+        index++
+    ) {
+
+
+        const value =
+            Number(
+                data.values[index]
+            );
+
+
+        const date =
+            data.dates[index];
+
+
+        if (
+            !date ||
+            !valid(value)
+        ) {
+
+            continue;
+
+        }
+
+
+        series.push({
+
+            date:
+                date,
+
+            value:
+                value
+
+        });
+
+    }
+
+
+    if (
+        series.length === 0
+    ) {
+
+        throw new Error(
+            "Fear & Greed data empty"
+        );
+
+    }
+
+
+    const current =
+        series[
+            series.length - 1
+        ].value;
+
+
+    function pointChange(days) {
+
+        if (
+            series.length <= days
+        ) {
+
+            return null;
+
+        }
+
+
+        const previous =
+            series[
+                series.length -
+                1 -
+                days
+            ].value;
+
+
+        return (
+            current -
+            previous
+        );
+
+    }
+
+
+    return {
+
+        symbol:
+            "FEAR_GREED",
+
+        name:
+            "Fear & Greed",
+
+        infoKey:
+            "feargreed",
+
+        price:
+            current,
+
+        d1:
+            pointChange(1),
+
+        d5:
+            pointChange(5),
+
+        d20:
+            pointChange(20),
+
+        date:
+            series[
+                series.length - 1
+            ].date,
+
+        error:
+            false
+
+    };
+
+}
+
+
+/* =========================================================
+   SMA
 ========================================================= */
 
 function sma(
@@ -1124,82 +2346,162 @@ function sma(
     period
 ) {
 
-    if (values.length < period) {
+    if (
+        values.length <
+        period
+    ) {
+
         return null;
+
     }
 
-    const selected =
-        values.slice(-period);
 
-    return selected.reduce(
-        (sum, value) =>
-            sum + value,
-        0
-    ) / period;
+    const selected =
+        values.slice(
+            -period
+        );
+
+
+    const total =
+        selected.reduce(
+            (
+                sum,
+                value
+            ) => {
+
+                return (
+                    sum +
+                    value
+                );
+
+            },
+            0
+        );
+
+
+    return (
+        total /
+        period
+    );
+
 }
 
+
+/* =========================================================
+   RSI14
+========================================================= */
 
 function rsi(
     values,
     period = 14
 ) {
 
-    if (values.length <= period) {
+    if (
+        values.length <=
+        period
+    ) {
+
         return null;
+
     }
 
+
     let gains = 0;
+
     let losses = 0;
+
 
     for (
         let index =
-            values.length - period;
+            values.length -
+            period;
 
-        index < values.length;
+        index <
+            values.length;
 
         index++
     ) {
+
 
         const difference =
             values[index] -
             values[index - 1];
 
-        if (difference > 0) {
-            gains += difference;
-        } else {
-            losses +=
-                Math.abs(difference);
+
+        if (
+            difference > 0
+        ) {
+
+            gains +=
+                difference;
+
         }
+
+        else {
+
+            losses +=
+                Math.abs(
+                    difference
+                );
+
+        }
+
     }
 
-    if (losses === 0) {
+
+    if (
+        losses === 0
+    ) {
+
         return 100;
+
     }
+
 
     const relativeStrength =
-        gains / losses;
+        gains /
+        losses;
+
 
     return (
+
         100 -
+
         100 /
-        (1 + relativeStrength)
+        (
+            1 +
+            relativeStrength
+        )
+
     );
+
 }
 
+
+/* =========================================================
+   % CHANGE
+========================================================= */
 
 function percentageChange(
     values,
     days
 ) {
 
-    if (values.length <= days) {
+    if (
+        values.length <=
+        days
+    ) {
+
         return null;
+
     }
+
 
     const current =
         values[
             values.length - 1
         ];
+
 
     const previous =
         values[
@@ -1207,34 +2509,56 @@ function percentageChange(
             1 -
             days
         ];
+
 
     if (
         !valid(current) ||
         !valid(previous) ||
         previous === 0
     ) {
+
         return null;
+
     }
 
+
     return (
-        current / previous - 1
+
+        (
+            current /
+            previous
+        ) -
+        1
+
     ) * 100;
+
 }
 
+
+/* =========================================================
+   TREASURY BASIS POINT CHANGE
+========================================================= */
 
 function yieldChangeBP(
     values,
     days
 ) {
 
-    if (values.length <= days) {
+    if (
+        values.length <=
+        days
+    ) {
+
         return null;
+
     }
+
 
     const current =
         values[
             values.length - 1
         ];
+
 
     const previous =
         values[
@@ -1243,103 +2567,211 @@ function yieldChangeBP(
             days
         ];
 
+
+    if (
+        !valid(current) ||
+        !valid(previous)
+    ) {
+
+        return null;
+
+    }
+
+
     return (
-        current - previous
+        current -
+        previous
     ) * 100;
+
 }
 
 
 /* =========================================================
-   FORMAT
+   FORMAT %
 ========================================================= */
 
-function formatChange(value) {
-
-    if (!valid(value)) {
-        return `<span class="gray">--</span>`;
-    }
-
-    if (value > 0) {
-
-        return `
-        <span class="red">
-            ▲ +${value.toFixed(2)}%
-        </span>
-        `;
-    }
-
-    if (value < 0) {
-
-        return `
-        <span class="green">
-            ▼ ${value.toFixed(2)}%
-        </span>
-        `;
-    }
-
-    return `
-    <span class="gray">
-        0.00%
-    </span>
-    `;
-}
-
-
-function formatBP(value) {
-
-    if (!valid(value)) {
-        return `<span class="gray">--</span>`;
-    }
-
-    if (value > 0) {
-
-        return `
-        <span class="red">
-            ▲ +${value.toFixed(1)} bp
-        </span>
-        `;
-    }
-
-    if (value < 0) {
-
-        return `
-        <span class="green">
-            ▼ ${value.toFixed(1)} bp
-        </span>
-        `;
-    }
-
-    return `
-    <span class="gray">
-        0.0 bp
-    </span>
-    `;
-}
-
-
-function formatAssetValue(
-    symbol,
+function formatChange(
     value
 ) {
 
-    if (symbol === "^TNX") {
-        return `${value.toFixed(2)}%`;
+    if (
+        !valid(value)
+    ) {
+
+        return `
+        <span class="gray">
+            --
+        </span>
+        `;
+
     }
 
-    if (symbol === "GC=F") {
-        return `$${value.toFixed(2)}`;
+
+    if (
+        value > 0
+    ) {
+
+        return `
+        <span class="red">
+
+            ▲ +${value.toFixed(2)}%
+
+        </span>
+        `;
+
     }
 
-    if (symbol === "TWD=X") {
-        return value.toFixed(3);
+
+    if (
+        value < 0
+    ) {
+
+        return `
+        <span class="green">
+
+            ▼ ${value.toFixed(2)}%
+
+        </span>
+        `;
+
     }
 
-    return value.toFixed(2);
+
+    return `
+    <span class="gray">
+
+        0.00%
+
+    </span>
+    `;
+
 }
 
 
 /* =========================================================
-   TREND
+   FORMAT BASIS POINTS
+========================================================= */
+
+function formatBP(
+    value
+) {
+
+    if (
+        !valid(value)
+    ) {
+
+        return `
+        <span class="gray">
+            --
+        </span>
+        `;
+
+    }
+
+
+    if (
+        value > 0
+    ) {
+
+        return `
+        <span class="red">
+
+            ▲ +${value.toFixed(1)} bp
+
+        </span>
+        `;
+
+    }
+
+
+    if (
+        value < 0
+    ) {
+
+        return `
+        <span class="green">
+
+            ▼ ${value.toFixed(1)} bp
+
+        </span>
+        `;
+
+    }
+
+
+    return `
+    <span class="gray">
+
+        0.0 bp
+
+    </span>
+    `;
+
+}
+
+
+/* =========================================================
+   FORMAT FEAR & GREED POINTS
+========================================================= */
+
+function formatPoints(
+    value
+) {
+
+    if (
+        !valid(value)
+    ) {
+
+        return `
+        <span class="gray">
+            --
+        </span>
+        `;
+
+    }
+
+
+    if (
+        value > 0
+    ) {
+
+        return `
+        <span class="red">
+
+            ▲ +${value.toFixed(1)} pts
+
+        </span>
+        `;
+
+    }
+
+
+    if (
+        value < 0
+    ) {
+
+        return `
+        <span class="green">
+
+            ▼ ${value.toFixed(1)} pts
+
+        </span>
+        `;
+
+    }
+
+
+    return `
+    <span class="gray">
+
+        0.0 pts
+
+    </span>
+    `;
+
+}
+/* =========================================================
+   ETF TREND LIGHT
 ========================================================= */
 
 function trendLight(
@@ -1357,331 +2789,1033 @@ function trendLight(
             ma200
         ].every(valid)
     ) {
+
         return "⚪";
+
     }
+
+
+    /*
+    完整多頭排列：
+
+    Price > MA20 > MA50 > MA200
+    */
 
     if (
         price > ma20 &&
         ma20 > ma50 &&
         ma50 > ma200
     ) {
+
         return "🟢";
+
     }
+
+
+    /*
+    中長期偏空：
+
+    Price < MA50
+    且
+    MA50 < MA200
+    */
 
     if (
         price < ma50 &&
         ma50 < ma200
     ) {
+
         return "🔴🔴";
+
     }
+
+
+    /*
+    短中期轉弱：
+
+    Price < MA20
+    且
+    MA20 < MA50
+    */
 
     if (
         price < ma20 &&
         ma20 < ma50
     ) {
+
         return "🔴";
+
     }
+
+
+    /*
+    其他排列
+    */
 
     return "🟡";
+
 }
 
 
 /* =========================================================
-   STATUS
+   FEAR & GREED STATUS
 ========================================================= */
 
-function vixStatus(value) {
+function fearGreedStatus(
+    value
+) {
 
-    if (value < 15) {
-        return "🟢 Very Calm";
+    if (
+        !valid(value)
+    ) {
+
+        return "⚪ Unknown";
+
     }
 
-    if (value < 20) {
-        return "🟢 Normal";
+
+    if (
+        value <= 24
+    ) {
+
+        return "🔴 Extreme Fear";
+
     }
 
-    if (value < 25) {
-        return "🟡 Caution";
+
+    if (
+        value <= 44
+    ) {
+
+        return "🟠 Fear";
+
     }
 
-    if (value < 30) {
-        return "🟠 Elevated Risk";
+
+    if (
+        value <= 55
+    ) {
+
+        return "🟡 Neutral";
+
     }
 
-    if (value < 40) {
-        return "🔴 High Risk";
+
+    if (
+        value <= 75
+    ) {
+
+        return "🟢 Greed";
+
     }
 
-    return "🔴 Panic";
-}
 
+    return "🟣 Extreme Greed";
 
-function yieldStatus(value) {
-
-    if (value < 3.5) {
-        return "🟢 Low Yield";
-    }
-
-    if (value < 4.2) {
-        return "🟢 Normal";
-    }
-
-    if (value < 4.7) {
-        return "🟡 High Yield";
-    }
-
-    if (value < 5) {
-        return "🟠 Very High";
-    }
-
-    return "🔴 Extreme";
-}
-
-
-function goldStatus(value) {
-
-    if (!valid(value)) {
-        return "⚪ Neutral";
-    }
-
-    if (value >= 5) {
-        return "🟡 Strong Up";
-    }
-
-    if (value >= 2) {
-        return "🟢 Up";
-    }
-
-    if (value <= -5) {
-        return "🔴 Strong Down";
-    }
-
-    if (value <= -2) {
-        return "🟠 Down";
-    }
-
-    return "⚪ Neutral";
-}
-
-
-function twdStatus(value) {
-
-    if (!valid(value)) {
-        return "⚪ Stable";
-    }
-
-    if (value >= 3) {
-        return "🔴 TWD Weakening";
-    }
-
-    if (value >= 1) {
-        return "🟠 USD Strong";
-    }
-
-    if (value <= -3) {
-        return "🟢 TWD Strong";
-    }
-
-    if (value <= -1) {
-        return "🟢 USD Weak";
-    }
-
-    return "⚪ Stable";
 }
 
 
 /* =========================================================
-   MACRO
+   FEAR & GREED DIRECTION
+========================================================= */
+
+function fearGreedTrend(
+    fiveDayChange
+) {
+
+    if (
+        !valid(
+            fiveDayChange
+        )
+    ) {
+
+        return "";
+
+    }
+
+
+    if (
+        fiveDayChange >= 10
+    ) {
+
+        return " ↑ Improving Fast";
+
+    }
+
+
+    if (
+        fiveDayChange >= 3
+    ) {
+
+        return " ↑ Improving";
+
+    }
+
+
+    if (
+        fiveDayChange <= -10
+    ) {
+
+        return " ↓ Deteriorating Fast";
+
+    }
+
+
+    if (
+        fiveDayChange <= -3
+    ) {
+
+        return " ↓ Deteriorating";
+
+    }
+
+
+    return " → Stable";
+
+}
+
+
+/* =========================================================
+   VIX STATUS
+========================================================= */
+
+function vixStatus(
+    value
+) {
+
+    if (
+        !valid(value)
+    ) {
+
+        return "⚪ Unknown";
+
+    }
+
+
+    if (
+        value < 15
+    ) {
+
+        return "🟢 Very Calm";
+
+    }
+
+
+    if (
+        value < 20
+    ) {
+
+        return "🟢 Normal";
+
+    }
+
+
+    if (
+        value < 25
+    ) {
+
+        return "🟡 Caution";
+
+    }
+
+
+    if (
+        value < 30
+    ) {
+
+        return "🟠 Elevated Risk";
+
+    }
+
+
+    if (
+        value < 40
+    ) {
+
+        return "🔴 High Risk";
+
+    }
+
+
+    return "🔴 Panic";
+
+}
+
+
+/* =========================================================
+   US 10Y STATUS
+========================================================= */
+
+function yieldStatus(
+    value
+) {
+
+    if (
+        !valid(value)
+    ) {
+
+        return "⚪ Unknown";
+
+    }
+
+
+    if (
+        value < 3.5
+    ) {
+
+        return "🟢 Low Yield";
+
+    }
+
+
+    if (
+        value < 4.2
+    ) {
+
+        return "🟢 Normal";
+
+    }
+
+
+    if (
+        value < 4.7
+    ) {
+
+        return "🟡 High Yield";
+
+    }
+
+
+    if (
+        value < 5
+    ) {
+
+        return "🟠 Very High";
+
+    }
+
+
+    return "🔴 Extreme";
+
+}
+
+
+/* =========================================================
+   GOLD STATUS
+========================================================= */
+
+function goldStatus(
+    twentyDayChange
+) {
+
+    if (
+        !valid(
+            twentyDayChange
+        )
+    ) {
+
+        return "⚪ Neutral";
+
+    }
+
+
+    if (
+        twentyDayChange >= 5
+    ) {
+
+        return "🟡 Strong Up";
+
+    }
+
+
+    if (
+        twentyDayChange >= 2
+    ) {
+
+        return "🟢 Up";
+
+    }
+
+
+    if (
+        twentyDayChange <= -5
+    ) {
+
+        return "🔴 Strong Down";
+
+    }
+
+
+    if (
+        twentyDayChange <= -2
+    ) {
+
+        return "🟠 Down";
+
+    }
+
+
+    return "⚪ Neutral";
+
+}
+
+
+/* =========================================================
+   USD/TWD STATUS
+========================================================= */
+
+function twdStatus(
+    twentyDayChange
+) {
+
+    if (
+        !valid(
+            twentyDayChange
+        )
+    ) {
+
+        return "⚪ Stable";
+
+    }
+
+
+    if (
+        twentyDayChange >= 3
+    ) {
+
+        return "🔴 TWD Weakening";
+
+    }
+
+
+    if (
+        twentyDayChange >= 1
+    ) {
+
+        return "🟠 USD Strong";
+
+    }
+
+
+    if (
+        twentyDayChange <= -3
+    ) {
+
+        return "🟢 TWD Strong";
+
+    }
+
+
+    if (
+        twentyDayChange <= -1
+    ) {
+
+        return "🟢 USD Weak";
+
+    }
+
+
+    return "⚪ Stable";
+
+}
+
+
+/* =========================================================
+   ASSET VALUE FORMAT
+========================================================= */
+
+function formatAssetValue(
+    symbol,
+    value
+) {
+
+    if (
+        !valid(value)
+    ) {
+
+        return "--";
+
+    }
+
+
+    if (
+        symbol === "^VIX"
+    ) {
+
+        return value.toFixed(2);
+
+    }
+
+
+    if (
+        symbol === "^TNX"
+    ) {
+
+        return (
+            value.toFixed(2) +
+            "%"
+        );
+
+    }
+
+
+    if (
+        symbol === "GC=F"
+    ) {
+
+        return (
+            "$" +
+            value.toFixed(2)
+        );
+
+    }
+
+
+    if (
+        symbol === "TWD=X"
+    ) {
+
+        return value.toFixed(3);
+
+    }
+
+
+    return value.toFixed(2);
+
+}
+
+
+/* =========================================================
+   REFRESH MACRO / RISK MONITOR
 ========================================================= */
 
 async function refreshMacro() {
 
     const definitions = [
+
         {
-            name: "VIX",
-            symbol: "^VIX",
-            infoKey: "vix"
+            name:
+                "VIX",
+
+            symbol:
+                "^VIX",
+
+            infoKey:
+                "vix"
         },
+
         {
-            name: "US 10Y",
-            symbol: "^TNX",
-            infoKey: "us10y"
+            name:
+                "US 10Y",
+
+            symbol:
+                "^TNX",
+
+            infoKey:
+                "us10y"
         },
+
         {
-            name: "Gold",
-            symbol: "GC=F",
-            infoKey: "gold"
+            name:
+                "Gold",
+
+            symbol:
+                "GC=F",
+
+            infoKey:
+                "gold"
         },
+
         {
-            name: "USD/TWD",
-            symbol: "TWD=X",
-            infoKey: "usdtwd"
+            name:
+                "USD/TWD",
+
+            symbol:
+                "TWD=X",
+
+            infoKey:
+                "usdtwd"
         }
+
     ];
 
-    const results =
+
+    /*
+    Yahoo Finance data
+    */
+
+    const yahooResults =
         await Promise.all(
 
             definitions.map(
+
                 async definition => {
 
                     try {
 
-                        return {
-                            ...definition,
-                            ...await getMarketData(
+                        const marketData =
+                            await getMarketData(
                                 definition.symbol
-                            ),
-                            error: false
-                        };
+                            );
 
-                    } catch (error) {
 
                         return {
+
                             ...definition,
-                            error: true,
-                            message: error.message
+
+                            ...marketData,
+
+                            error:
+                                false
+
                         };
+
                     }
+
+                    catch (error) {
+
+                        console.error(
+                            `[MarketOS] ${definition.symbol} error`,
+                            error
+                        );
+
+
+                        return {
+
+                            ...definition,
+
+                            error:
+                                true,
+
+                            message:
+                                error.message
+
+                        };
+
+                    }
+
                 }
+
             )
+
         );
 
-    $("macroTable").innerHTML =
-        results.map(item => {
 
-            if (item.error) {
+    /*
+    Fear & Greed data
+    */
+
+    let fearGreedResult;
+
+
+    try {
+
+        fearGreedResult =
+            await getFearGreedData();
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "[MarketOS] Fear & Greed error",
+            error
+        );
+
+
+        fearGreedResult = {
+
+            name:
+                "Fear & Greed",
+
+            symbol:
+                "FEAR_GREED",
+
+            infoKey:
+                "feargreed",
+
+            error:
+                true,
+
+            message:
+                error.message
+
+        };
+
+    }
+
+
+    /*
+    Fear & Greed 放第一列
+    */
+
+    const results = [
+
+        fearGreedResult,
+
+        ...yahooResults
+
+    ];
+
+
+    const rows =
+        results.map(
+
+            item => {
+
+
+                /*
+                Individual API error
+                */
+
+                if (
+                    item.error
+                ) {
+
+                    return `
+                    <tr>
+
+                        <td>
+
+                            <button
+                                class="asset"
+                                data-info="${item.infoKey}"
+                                type="button"
+                            >
+
+                                ${escapeHTML(item.name)}
+                                ⓘ
+
+                            </button>
+
+                        </td>
+
+
+                        <td
+                            colspan="5"
+                            class="red"
+                        >
+
+                            ⚠️
+                            ${escapeHTML(item.message)}
+
+                        </td>
+
+                    </tr>
+                    `;
+
+                }
+
+
+                /*
+                ====================================
+                FEAR & GREED ROW
+                ====================================
+                */
+
+                if (
+                    item.symbol ===
+                    "FEAR_GREED"
+                ) {
+
+                    const sentiment =
+                        fearGreedStatus(
+                            item.price
+                        );
+
+
+                    const direction =
+                        fearGreedTrend(
+                            item.d5
+                        );
+
+
+                    return `
+                    <tr>
+
+                        <td>
+
+                            <button
+                                class="asset"
+                                data-info="feargreed"
+                                type="button"
+                            >
+
+                                Fear & Greed
+                                ⓘ
+
+                            </button>
+
+                        </td>
+
+
+                        <td class="blue">
+
+                            <b>
+
+                                ${item.price.toFixed(1)}
+
+                            </b>
+
+                        </td>
+
+
+                        <td>
+
+                            ${formatPoints(item.d1)}
+
+                        </td>
+
+
+                        <td>
+
+                            ${formatPoints(item.d5)}
+
+                        </td>
+
+
+                        <td>
+
+                            ${formatPoints(item.d20)}
+
+                        </td>
+
+
+                        <td>
+
+                            ${sentiment}${direction}
+
+                        </td>
+
+                    </tr>
+                    `;
+
+                }
+
+
+                /*
+                ====================================
+                OTHER MACRO ASSETS
+                ====================================
+                */
+
+                const change1D =
+                    percentageChange(
+                        item.values,
+                        1
+                    );
+
+
+                const change5D =
+                    percentageChange(
+                        item.values,
+                        5
+                    );
+
+
+                const change20D =
+                    percentageChange(
+                        item.values,
+                        20
+                    );
+
+
+                let display1D =
+                    formatChange(
+                        change1D
+                    );
+
+
+                let display5D =
+                    formatChange(
+                        change5D
+                    );
+
+
+                let display20D =
+                    formatChange(
+                        change20D
+                    );
+
+
+                let status =
+                    "⚪ Neutral";
+
+
+                /*
+                US 10Y 使用 basis points
+                */
+
+                if (
+                    item.symbol ===
+                    "^TNX"
+                ) {
+
+                    display1D =
+                        formatBP(
+                            yieldChangeBP(
+                                item.values,
+                                1
+                            )
+                        );
+
+
+                    display5D =
+                        formatBP(
+                            yieldChangeBP(
+                                item.values,
+                                5
+                            )
+                        );
+
+
+                    display20D =
+                        formatBP(
+                            yieldChangeBP(
+                                item.values,
+                                20
+                            )
+                        );
+
+
+                    status =
+                        yieldStatus(
+                            item.price
+                        );
+
+                }
+
+
+                /*
+                VIX
+                */
+
+                else if (
+                    item.symbol ===
+                    "^VIX"
+                ) {
+
+                    status =
+                        vixStatus(
+                            item.price
+                        );
+
+                }
+
+
+                /*
+                Gold
+                */
+
+                else if (
+                    item.symbol ===
+                    "GC=F"
+                ) {
+
+                    status =
+                        goldStatus(
+                            change20D
+                        );
+
+                }
+
+
+                /*
+                USD/TWD
+                */
+
+                else if (
+                    item.symbol ===
+                    "TWD=X"
+                ) {
+
+                    status =
+                        twdStatus(
+                            change20D
+                        );
+
+                }
+
 
                 return `
                 <tr>
+
                     <td>
+
                         <button
-                            class="asset-button"
+                            class="asset"
                             data-info="${item.infoKey}"
                             type="button"
                         >
-                            ${escapeHTML(item.name)} ⓘ
+
+                            ${escapeHTML(item.name)}
+                            ⓘ
+
                         </button>
+
                     </td>
 
-                    <td colspan="5" class="red">
-                        ⚠️ ${escapeHTML(item.message)}
+
+                    <td class="blue">
+
+                        <b>
+
+                            ${formatAssetValue(
+                                item.symbol,
+                                item.price
+                            )}
+
+                        </b>
+
                     </td>
+
+
+                    <td>
+
+                        ${display1D}
+
+                    </td>
+
+
+                    <td>
+
+                        ${display5D}
+
+                    </td>
+
+
+                    <td>
+
+                        ${display20D}
+
+                    </td>
+
+
+                    <td>
+
+                        ${status}
+
+                    </td>
+
                 </tr>
                 `;
+
             }
 
-            const change1D =
-                percentageChange(
-                    item.values,
-                    1
-                );
+        );
 
-            const change5D =
-                percentageChange(
-                    item.values,
-                    5
-                );
 
-            const change20D =
-                percentageChange(
-                    item.values,
-                    20
-                );
+    $("macroTable").innerHTML =
+        rows.join("");
 
-            let display1D =
-                formatChange(change1D);
-
-            let display5D =
-                formatChange(change5D);
-
-            let display20D =
-                formatChange(change20D);
-
-            let status =
-                "⚪ Neutral";
-
-            if (item.symbol === "^TNX") {
-
-                display1D =
-                    formatBP(
-                        yieldChangeBP(
-                            item.values,
-                            1
-                        )
-                    );
-
-                display5D =
-                    formatBP(
-                        yieldChangeBP(
-                            item.values,
-                            5
-                        )
-                    );
-
-                display20D =
-                    formatBP(
-                        yieldChangeBP(
-                            item.values,
-                            20
-                        )
-                    );
-
-                status =
-                    yieldStatus(item.price);
-            }
-
-            if (item.symbol === "^VIX") {
-                status =
-                    vixStatus(item.price);
-            }
-
-            if (item.symbol === "GC=F") {
-                status =
-                    goldStatus(change20D);
-            }
-
-            if (item.symbol === "TWD=X") {
-                status =
-                    twdStatus(change20D);
-            }
-
-            return `
-            <tr>
-                <td>
-                    <button
-                        class="asset-button"
-                        data-info="${item.infoKey}"
-                        type="button"
-                    >
-                        ${escapeHTML(item.name)} ⓘ
-                    </button>
-                </td>
-
-                <td class="blue">
-                    <b>
-                        ${formatAssetValue(
-                            item.symbol,
-                            item.price
-                        )}
-                    </b>
-                </td>
-
-                <td>${display1D}</td>
-                <td>${display5D}</td>
-                <td>${display20D}</td>
-                <td>${status}</td>
-            </tr>
-            `;
-
-        }).join("");
 
     return results;
+
 }
 
 
 /* =========================================================
-   ETF
+   REFRESH ETF DASHBOARD
 ========================================================= */
 
 async function refreshETF() {
@@ -1690,6 +3824,7 @@ async function refreshETF() {
         await Promise.all(
 
             ETF_SYMBOLS.map(
+
                 async symbol => {
 
                     try {
@@ -1699,8 +3834,15 @@ async function refreshETF() {
                                 symbol
                             );
 
+
+                        /*
+                        Cache timestamp + price
+                        for Custom Range
+                        */
+
                         etfSeriesCache[symbol] =
                             data.series;
+
 
                         const ma20 =
                             sma(
@@ -1708,11 +3850,13 @@ async function refreshETF() {
                                 20
                             );
 
+
                         const ma50 =
                             sma(
                                 data.values,
                                 50
                             );
+
 
                         const ma200 =
                             sma(
@@ -1720,100 +3864,242 @@ async function refreshETF() {
                                 200
                             );
 
+
                         const rsi14 =
                             rsi(
                                 data.values,
                                 14
                             );
 
+
+                        const trend =
+                            trendLight(
+                                data.price,
+                                ma20,
+                                ma50,
+                                ma200
+                            );
+
+
                         return {
-                            symbol,
-                            price: data.price,
-                            ma20,
-                            ma50,
-                            ma200,
-                            rsi14,
+
+                            symbol:
+                                symbol,
+
+                            price:
+                                data.price,
+
+                            ma20:
+                                ma20,
+
+                            ma50:
+                                ma50,
+
+                            ma200:
+                                ma200,
+
+                            rsi14:
+                                rsi14,
+
                             trend:
-                                trendLight(
-                                    data.price,
-                                    ma20,
-                                    ma50,
-                                    ma200
-                                ),
-                            error: false
+                                trend,
+
+                            error:
+                                false
+
                         };
 
-                    } catch (error) {
+                    }
+
+                    catch (error) {
+
+                        console.error(
+                            `[MarketOS] ${symbol} error`,
+                            error
+                        );
+
 
                         return {
-                            symbol,
-                            error: true,
-                            message: error.message
+
+                            symbol:
+                                symbol,
+
+                            error:
+                                true,
+
+                            message:
+                                error.message
+
                         };
+
                     }
+
                 }
+
             )
+
         );
 
-    $("etfTable").innerHTML =
-        results.map(item => {
 
-            if (item.error) {
+    const rows =
+        results.map(
+
+            item => {
+
+
+                if (
+                    item.error
+                ) {
+
+                    return `
+                    <tr>
+
+                        <td>
+
+                            <button
+                                class="asset"
+                                data-info="${item.symbol.toLowerCase()}"
+                                type="button"
+                            >
+
+                                ${item.symbol}
+                                ⓘ
+
+                            </button>
+
+                        </td>
+
+
+                        <td
+                            colspan="6"
+                            class="red"
+                        >
+
+                            ⚠️
+                            ${escapeHTML(item.message)}
+
+                        </td>
+
+                    </tr>
+                    `;
+
+                }
+
 
                 return `
                 <tr>
+
                     <td>
+
                         <button
-                            class="asset-button"
+                            class="asset"
                             data-info="${item.symbol.toLowerCase()}"
                             type="button"
                         >
-                            ${item.symbol} ⓘ
+
+                            ${item.symbol}
+                            ⓘ
+
                         </button>
+
                     </td>
 
-                    <td colspan="6" class="red">
-                        ⚠️ ${escapeHTML(item.message)}
+
+                    <td class="blue">
+
+                        <b>
+
+                            ${fixed(
+                                item.price,
+                                2
+                            )}
+
+                        </b>
+
                     </td>
+
+
+                    <td>
+
+                        ${fixed(
+                            item.ma20,
+                            2
+                        )}
+
+                    </td>
+
+
+                    <td>
+
+                        ${fixed(
+                            item.ma50,
+                            2
+                        )}
+
+                    </td>
+
+
+                    <td>
+
+                        ${fixed(
+                            item.ma200,
+                            2
+                        )}
+
+                    </td>
+
+
+                    <td>
+
+                        ${fixed(
+                            item.rsi14,
+                            1
+                        )}
+
+                    </td>
+
+
+                    <td
+                        style="
+                            font-size:21px;
+                        "
+                    >
+
+                        ${item.trend}
+
+                    </td>
+
                 </tr>
                 `;
+
             }
 
-            return `
-            <tr>
-                <td>
-                    <button
-                        class="asset-button"
-                        data-info="${item.symbol.toLowerCase()}"
-                        type="button"
-                    >
-                        ${item.symbol} ⓘ
-                    </button>
-                </td>
+        );
 
-                <td class="blue">
-                    <b>${fixed(item.price)}</b>
-                </td>
 
-                <td>${fixed(item.ma20)}</td>
-                <td>${fixed(item.ma50)}</td>
-                <td>${fixed(item.ma200)}</td>
-                <td>${fixed(item.rsi14, 1)}</td>
+    $("etfTable").innerHTML =
+        rows.join("");
 
-                <td style="font-size:21px;">
-                    ${item.trend}
-                </td>
-            </tr>
-            `;
-
-        }).join("");
 
     return results;
+
 }
 
 
 /* =========================================================
-   MARKET DECISION
+   MARKET / RISK / ACTION DECISION ENGINE
+
+   Priority:
+
+   1. ETF Trend
+   2. VIX Primary Risk Control
+   3. Fear & Greed Sentiment Modifier
+
+   Protection:
+
+   - Bear cannot be changed to Bull by sentiment.
+   - VIX >= 30 is a hard Risk-Off override.
+   - VIX >= 40 is an Extreme Risk override.
 ========================================================= */
 
 function updateMarketDecision(
@@ -1821,57 +4107,196 @@ function updateMarketDecision(
     macro
 ) {
 
+    /*
+    Valid ETF results
+    */
+
     const validETF =
         etfs.filter(
-            item => !item.error
-        );
-
-    const greenCount =
-        validETF.filter(
             item =>
-                item.trend === "🟢"
-        ).length;
-
-    const redCount =
-        validETF.filter(
-            item =>
-                item.trend === "🔴" ||
-                item.trend === "🔴🔴"
-        ).length;
-
-    const vix =
-        macro.find(
-            item =>
-                item.symbol === "^VIX" &&
                 !item.error
         );
 
+
+    /*
+    Count bullish ETFs
+    */
+
+    const greenCount =
+        validETF.filter(
+
+            item =>
+                item.trend ===
+                "🟢"
+
+        ).length;
+
+
+    /*
+    Count bearish ETFs
+    */
+
+    const redCount =
+        validETF.filter(
+
+            item =>
+
+                item.trend ===
+                    "🔴"
+
+                ||
+
+                item.trend ===
+                    "🔴🔴"
+
+        ).length;
+
+
+    /*
+    Find VIX result
+    */
+
+    const vix =
+        macro.find(
+
+            item =>
+
+                item.symbol ===
+                    "^VIX"
+
+                &&
+
+                !item.error
+
+        );
+
+
+    /*
+    Find Fear & Greed result
+    */
+
+    const fearGreed =
+        macro.find(
+
+            item =>
+
+                item.symbol ===
+                    "FEAR_GREED"
+
+                &&
+
+                !item.error
+
+        );
+
+
+    const vixValue =
+        vix
+            ? vix.price
+            : null;
+
+
+    const fearGreedValue =
+        fearGreed
+            ? fearGreed.price
+            : null;
+
+
+    /*
+    =========================================
+    STEP 1
+
+    ETF MARKET REGIME
+    =========================================
+    */
+
     let market;
+
     let risk;
+
     let action;
 
-    if (greenCount >= 3) {
 
-        market = "🟢 Bull";
-        risk = "LOW";
-        action = "ADD";
+    /*
+    ETF Bull
+    */
 
-    } else if (redCount >= 3) {
+    if (
+        greenCount >= 3
+    ) {
 
-        market = "🔴 Bear";
-        risk = "HIGH";
-        action = "REDUCE";
+        market =
+            "🟢 Bull";
 
-    } else {
+        risk =
+            "LOW";
 
-        market = "🟡 Mixed";
-        risk = "NORMAL";
-        action = "HOLD";
+        action =
+            "ADD";
+
     }
 
-    if (vix) {
 
-        if (vix.price >= 40) {
+    /*
+    ETF Bear
+    */
+
+    else if (
+        redCount >= 3
+    ) {
+
+        market =
+            "🔴 Bear";
+
+        risk =
+            "HIGH";
+
+        action =
+            "REDUCE";
+
+    }
+
+
+    /*
+    ETF Mixed
+    */
+
+    else {
+
+        market =
+            "🟡 Mixed";
+
+        risk =
+            "NORMAL";
+
+        action =
+            "HOLD";
+
+    }
+
+
+    /*
+    =========================================
+    STEP 2
+
+    VIX PRIMARY RISK CONTROL
+    =========================================
+    */
+
+    if (
+        valid(vixValue)
+    ) {
+
+
+        /*
+        VIX >= 40
+
+        Extreme Risk
+        */
+
+        if (
+            vixValue >= 40
+        ) {
 
             market =
                 "🔴 EXTREME RISK";
@@ -1882,7 +4307,18 @@ function updateMarketDecision(
             action =
                 "DEFENSIVE";
 
-        } else if (vix.price >= 30) {
+        }
+
+
+        /*
+        VIX 30 - 40
+
+        Hard Risk-Off
+        */
+
+        else if (
+            vixValue >= 30
+        ) {
 
             market =
                 "🔴 Risk-Off";
@@ -1893,9 +4329,27 @@ function updateMarketDecision(
             action =
                 "REDUCE";
 
-        } else if (vix.price >= 25) {
+        }
 
-            if (redCount >= 3) {
+
+        /*
+        VIX 25 - 30
+
+        Elevated Risk
+        */
+
+        else if (
+            vixValue >= 25
+        ) {
+
+
+            /*
+            ETF Bear remains Bear
+            */
+
+            if (
+                redCount >= 3
+            ) {
 
                 market =
                     "🔴 Bear";
@@ -1906,7 +4360,16 @@ function updateMarketDecision(
                 action =
                     "REDUCE";
 
-            } else if (greenCount >= 3) {
+            }
+
+
+            /*
+            ETF Bull becomes Bull Weakening
+            */
+
+            else if (
+                greenCount >= 3
+            ) {
 
                 market =
                     "🟡 Bull Weakening";
@@ -1915,9 +4378,16 @@ function updateMarketDecision(
                     "RISING";
 
                 action =
-                    "HOLD / DO NOT ADD";
+                    "DO NOT ADD";
 
-            } else {
+            }
+
+
+            /*
+            ETF Mixed becomes Transition
+            */
+
+            else {
 
                 market =
                     "🟠 Transition";
@@ -1927,11 +4397,26 @@ function updateMarketDecision(
 
                 action =
                     "DO NOT ADD";
+
             }
 
-        } else if (vix.price >= 20) {
+        }
 
-            if (redCount >= 3) {
+
+        /*
+        VIX 20 - 25
+
+        Moderate / Caution
+        */
+
+        else if (
+            vixValue >= 20
+        ) {
+
+
+            if (
+                redCount >= 3
+            ) {
 
                 market =
                     "🔴 Bear";
@@ -1942,18 +4427,26 @@ function updateMarketDecision(
                 action =
                     "REDUCE";
 
-            } else if (greenCount >= 3) {
+            }
+
+
+            else if (
+                greenCount >= 3
+            ) {
 
                 market =
-                    "🟢 Bull";
+                    "🟢 Bull / Moderate Risk";
 
                 risk =
                     "MODERATE";
 
                 action =
-                    "HOLD / SELECTIVE ADD";
+                    "SELECTIVE ADD";
 
-            } else {
+            }
+
+
+            else {
 
                 market =
                     "🟡 Mixed";
@@ -1963,11 +4456,378 @@ function updateMarketDecision(
 
                 action =
                     "HOLD";
+
             }
+
         }
+
     }
 
-    if (validETF.length === 0) {
+
+    /*
+    =========================================
+    STEP 3
+
+    FEAR & GREED SENTIMENT MODIFIER
+
+    Fear & Greed is allowed to modify
+    the result only when VIX < 25
+    or VIX data is unavailable.
+    =========================================
+    */
+
+    const fearGreedCanModify =
+
+        valid(
+            fearGreedValue
+        )
+
+        &&
+
+        (
+            !valid(
+                vixValue
+            )
+
+            ||
+
+            vixValue < 25
+        );
+
+
+    if (
+        fearGreedCanModify
+    ) {
+
+
+        /*
+        --------------------------------------
+        ETF BULL
+        --------------------------------------
+        */
+
+        if (
+            greenCount >= 3
+        ) {
+
+
+            /*
+            Extreme Fear
+
+            Trend is bullish,
+            but sentiment is extremely weak.
+            */
+
+            if (
+                fearGreedValue <= 24
+            ) {
+
+                market =
+                    "🟡 Sentiment Divergence";
+
+                risk =
+                    "RISING";
+
+                action =
+                    "HOLD";
+
+            }
+
+
+            /*
+            Fear
+
+            Trend is bullish,
+            but sentiment confirmation is weak.
+            */
+
+            else if (
+                fearGreedValue <= 44
+            ) {
+
+                market =
+                    "🟢 Bull / Caution";
+
+                risk =
+                    "MODERATE";
+
+                action =
+                    "SELECTIVE ADD";
+
+            }
+
+
+            /*
+            Neutral or Greed
+            */
+
+            else if (
+                fearGreedValue <= 75
+            ) {
+
+
+                /*
+                VIX below 20:
+                Bull + Normal VIX
+                + Neutral/Greed sentiment
+                */
+
+                if (
+                    !valid(vixValue)
+                    ||
+                    vixValue < 20
+                ) {
+
+                    market =
+                        "🟢 Bull";
+
+                    risk =
+                        "LOW";
+
+                    action =
+                        "ADD";
+
+                }
+
+
+                /*
+                VIX 20 - 25:
+                maintain moderate caution
+                */
+
+                else {
+
+                    market =
+                        "🟢 Bull / Moderate Risk";
+
+                    risk =
+                        "MODERATE";
+
+                    action =
+                        "SELECTIVE ADD";
+
+                }
+
+            }
+
+
+            /*
+            Extreme Greed
+
+            Do not convert this into
+            a stronger BUY signal.
+            */
+
+            else {
+
+                market =
+                    "🟢 Bull / Overheated";
+
+                risk =
+                    "MODERATE";
+
+                action =
+                    "SELECTIVE ADD";
+
+            }
+
+        }
+
+
+        /*
+        --------------------------------------
+        ETF MIXED
+
+        This branch only applies when
+        ETF regime is not Bear.
+        --------------------------------------
+        */
+
+        else if (
+            redCount < 3
+        ) {
+
+
+            /*
+            Fear or Extreme Fear
+            */
+
+            if (
+                fearGreedValue <= 44
+            ) {
+
+                market =
+                    "🟠 Mixed / Weak";
+
+                risk =
+                    "RISING";
+
+                action =
+                    "DO NOT ADD";
+
+            }
+
+
+            /*
+            Neutral
+            */
+
+            else if (
+                fearGreedValue <= 55
+            ) {
+
+                market =
+                    "🟡 Mixed";
+
+                risk =
+                    "NORMAL";
+
+                action =
+                    "HOLD";
+
+            }
+
+
+            /*
+            Greed
+            */
+
+            else if (
+                fearGreedValue <= 75
+            ) {
+
+                market =
+                    "🟡 Mixed / Improving";
+
+                risk =
+                    "NORMAL";
+
+                action =
+                    "HOLD";
+
+            }
+
+
+            /*
+            Extreme Greed,
+            but ETF trend is still Mixed.
+            */
+
+            else {
+
+                market =
+                    "🟡 Mixed / Overheated";
+
+                risk =
+                    "MODERATE";
+
+                action =
+                    "HOLD";
+
+            }
+
+        }
+
+    }
+
+
+    /*
+    =========================================
+    HARD PROTECTION 1
+
+    ETF Bear cannot be changed to Bull,
+    HOLD, SELECTIVE ADD or ADD
+    by Fear & Greed.
+    =========================================
+    */
+
+    if (
+        redCount >= 3
+        &&
+        (
+            !valid(vixValue)
+            ||
+            vixValue < 30
+        )
+    ) {
+
+        market =
+            "🔴 Bear";
+
+        risk =
+            "HIGH";
+
+        action =
+            "REDUCE";
+
+    }
+
+
+    /*
+    =========================================
+    HARD PROTECTION 2
+
+    Reapply VIX hard override after
+    Fear & Greed modification.
+    =========================================
+    */
+
+    if (
+        valid(vixValue)
+    ) {
+
+
+        /*
+        VIX >= 40
+        */
+
+        if (
+            vixValue >= 40
+        ) {
+
+            market =
+                "🔴 EXTREME RISK";
+
+            risk =
+                "EXTREME";
+
+            action =
+                "DEFENSIVE";
+
+        }
+
+
+        /*
+        VIX 30 - 40
+        */
+
+        else if (
+            vixValue >= 30
+        ) {
+
+            market =
+                "🔴 Risk-Off";
+
+            risk =
+                "HIGH";
+
+            action =
+                "REDUCE";
+
+        }
+
+    }
+
+
+    /*
+    =========================================
+    DATA ERROR PROTECTION
+    =========================================
+    */
+
+    if (
+        validETF.length === 0
+    ) {
 
         market =
             "⚪ DATA ERROR";
@@ -1977,212 +4837,574 @@ function updateMarketDecision(
 
         action =
             "WAIT";
+
     }
+
+
+    /*
+    =========================================
+    UPDATE DASHBOARD
+    =========================================
+    */
 
     $("marketStatus").textContent =
         market;
 
+
     $("riskStatus").textContent =
         risk;
 
+
     $("actionStatus").textContent =
         action;
+
+
+    /*
+    Debug information
+    */
+
+    console.log(
+        "[MarketOS Decision]",
+        {
+
+            ETF_Bull_Count:
+                greenCount,
+
+            ETF_Bear_Count:
+                redCount,
+
+            VIX:
+                vixValue,
+
+            FearGreed:
+                fearGreedValue,
+
+            Final_Market:
+                market,
+
+            Final_Risk:
+                risk,
+
+            Final_Action:
+                action
+
+        }
+    );
+
+}
+/* =========================================================
+   LOCAL DATE → YYYY-MM-DD
+========================================================= */
+
+function localISO(
+    date
+) {
+
+    const adjustedDate =
+        new Date(
+
+            date.getTime()
+
+            -
+
+            date.getTimezoneOffset()
+            * 60000
+
+        );
+
+
+    return adjustedDate
+        .toISOString()
+        .slice(
+            0,
+            10
+        );
+
 }
 
 
 /* =========================================================
-   CUSTOM RANGE
+   QUICK RANGE BUTTONS
+
+   1W
+   1M
+   3M
+   6M
+   YTD
+   1Y
 ========================================================= */
 
-function setQuickRange(rangeName) {
+function setQuickRange(
+    rangeName
+) {
 
-    const end =
+    const endDate =
         new Date();
 
-    const start =
-        new Date(end);
 
-    if (rangeName === "1W") {
-
-        start.setDate(
-            end.getDate() - 7
+    const startDate =
+        new Date(
+            endDate
         );
 
-    } else if (rangeName === "1M") {
 
-        start.setMonth(
-            end.getMonth() - 1
+    /*
+    Last 1 week
+    */
+
+    if (
+        rangeName ===
+        "1W"
+    ) {
+
+        startDate.setDate(
+
+            endDate.getDate()
+            - 7
+
         );
 
-    } else if (rangeName === "3M") {
-
-        start.setMonth(
-            end.getMonth() - 3
-        );
-
-    } else if (rangeName === "6M") {
-
-        start.setMonth(
-            end.getMonth() - 6
-        );
-
-    } else if (rangeName === "YTD") {
-
-        start.setFullYear(
-            end.getFullYear(),
-            0,
-            1
-        );
-
-    } else if (rangeName === "1Y") {
-
-        start.setFullYear(
-            end.getFullYear() - 1
-        );
     }
 
+
+    /*
+    Last 1 month
+    */
+
+    else if (
+        rangeName ===
+        "1M"
+    ) {
+
+        startDate.setMonth(
+
+            endDate.getMonth()
+            - 1
+
+        );
+
+    }
+
+
+    /*
+    Last 3 months
+    */
+
+    else if (
+        rangeName ===
+        "3M"
+    ) {
+
+        startDate.setMonth(
+
+            endDate.getMonth()
+            - 3
+
+        );
+
+    }
+
+
+    /*
+    Last 6 months
+    */
+
+    else if (
+        rangeName ===
+        "6M"
+    ) {
+
+        startDate.setMonth(
+
+            endDate.getMonth()
+            - 6
+
+        );
+
+    }
+
+
+    /*
+    Year To Date
+    */
+
+    else if (
+        rangeName ===
+        "YTD"
+    ) {
+
+        startDate.setFullYear(
+
+            endDate.getFullYear(),
+
+            0,
+
+            1
+
+        );
+
+    }
+
+
+    /*
+    Last 1 year
+    */
+
+    else if (
+        rangeName ===
+        "1Y"
+    ) {
+
+        startDate.setFullYear(
+
+            endDate.getFullYear()
+            - 1
+
+        );
+
+    }
+
+
+    /*
+    Update date inputs
+    */
+
     $("startDate").value =
-        localISO(start);
+        localISO(
+            startDate
+        );
+
 
     $("endDate").value =
-        localISO(end);
+        localISO(
+            endDate
+        );
+
+
+    /*
+    Highlight selected
+    quick button
+    */
 
     document
-        .querySelectorAll("[data-range]")
-        .forEach(button => {
+        .querySelectorAll(
+            "[data-range]"
+        )
+        .forEach(
+            button => {
 
-            button.classList.toggle(
-                "active",
-                button.dataset.range ===
-                    rangeName
-            );
-        });
+                button.classList.toggle(
+
+                    "active",
+
+                    button.dataset.range ===
+                        rangeName
+
+                );
+
+            }
+        );
+
+
+    /*
+    Immediately analyze
+    */
 
     analyzeCustomRange();
+
 }
 
+
+/* =========================================================
+   CUSTOM RANGE ANALYSIS
+========================================================= */
 
 function analyzeCustomRange() {
 
     const startDate =
         $("startDate").value;
 
+
     const endDate =
         $("endDate").value;
+
+
+    /*
+    Read Neutral Band
+
+    Default = ±2%
+    */
 
     let neutralBand =
         Number(
             $("neutralBand").value
         );
 
-    if (!valid(neutralBand)) {
-        neutralBand = 2;
+
+    /*
+    Invalid input protection
+    */
+
+    if (
+        !valid(
+            neutralBand
+        )
+    ) {
+
+        neutralBand =
+            2;
+
     }
+
+
+    /*
+    Clamp between
+    0.1% and 30%
+    */
 
     neutralBand =
         Math.min(
+
             30,
+
             Math.max(
+
                 0.1,
+
                 neutralBand
+
             )
+
         );
+
 
     $("neutralBand").value =
         neutralBand.toFixed(1);
 
+
     const rangeError =
         $("rangeError");
+
 
     rangeError.style.display =
         "none";
 
+
+    rangeError.textContent =
+        "";
+
+
+    /*
+    Date validation
+    */
+
     if (
-        !startDate ||
-        !endDate ||
+        !startDate
+        ||
+        !endDate
+        ||
         startDate > endDate
     ) {
 
         rangeError.textContent =
             "請輸入有效日期，且開始日期不能晚於結束日期。";
 
+
         rangeError.style.display =
             "block";
 
+
         return;
+
     }
+
+
+    /*
+    Convert selected dates
+    into UNIX timestamp
+    */
 
     const startTimestamp =
         new Date(
             `${startDate}T00:00:00`
-        ).getTime() / 1000;
+        ).getTime()
+        / 1000;
+
 
     const endTimestamp =
         new Date(
             `${endDate}T23:59:59`
-        ).getTime() / 1000;
+        ).getTime()
+        / 1000;
 
-    let bullishCount = 0;
-    let bearishCount = 0;
-    let validCount = 0;
 
-    const rows = [];
+    /*
+    Result counters
+    */
+
+    let bullishCount =
+        0;
+
+
+    let bearishCount =
+        0;
+
+
+    let neutralCount =
+        0;
+
+
+    let validCount =
+        0;
+
+
+    const rows =
+        [];
+
+
+    /*
+    Analyze:
+
+    SPY
+    QQQ
+    SOXX
+    IWM
+    */
 
     for (
-        const symbol of ETF_SYMBOLS
+        const symbol
+        of ETF_SYMBOLS
     ) {
 
+
+        /*
+        Get cached historical data
+        */
+
         const allSeries =
-            etfSeriesCache[symbol] ||
-            [];
+            etfSeriesCache[symbol]
+            || [];
+
+
+        /*
+        Keep trading days
+        inside selected range
+        */
 
         const selectedSeries =
             allSeries.filter(
+
                 item =>
-                    valid(item.timestamp) &&
+
+                    valid(
+                        item.timestamp
+                    )
+
+                    &&
+
                     item.timestamp >=
-                        startTimestamp &&
+                        startTimestamp
+
+                    &&
+
                     item.timestamp <=
                         endTimestamp
+
             );
 
+
+        /*
+        Need at least
+        start + end prices
+        */
+
         if (
-            selectedSeries.length < 2
+            selectedSeries.length <
+            2
         ) {
 
-            rows.push(`
-            <tr>
-                <td>${symbol}</td>
+            rows.push(
+                `
+                <tr>
 
-                <td colspan="5" class="red">
-                    區間資料不足。請確認 Worker 回傳 timestamp，
-                    並提供足夠的歷史期間。
-                </td>
-            </tr>
-            `);
+                    <td>
+                        <b>
+                            ${symbol}
+                        </b>
+                    </td>
+
+
+                    <td
+                        colspan="5"
+                        class="red"
+                    >
+
+                        區間資料不足。
+
+                        請確認 Worker
+                        回傳 timestamp，
+                        並提供足夠歷史資料。
+
+                    </td>
+
+                </tr>
+                `
+            );
+
 
             continue;
+
         }
 
+
         validCount++;
+
+
+        /*
+        First valid trading day
+        */
 
         const first =
             selectedSeries[0];
 
+
+        /*
+        Last valid trading day
+        */
+
         const last =
             selectedSeries[
-                selectedSeries.length - 1
+                selectedSeries.length
+                - 1
             ];
 
+
+        /*
+        Calculate range return
+        */
+
         const returnPercentage =
+
             (
-                last.close /
-                first.close -
+                (
+                    last.close
+                    /
+                    first.close
+                )
+                -
                 1
-            ) * 100;
+            )
+
+            * 100;
+
+
+        /*
+        Individual ETF signal
+        */
 
         let signal =
             "🟡 Neutral";
+
 
         if (
             returnPercentage >=
@@ -2192,9 +5414,13 @@ function analyzeCustomRange() {
             signal =
                 "🟢 Bullish";
 
+
             bullishCount++;
 
-        } else if (
+        }
+
+
+        else if (
             returnPercentage <=
             -neutralBand
         ) {
@@ -2202,130 +5428,357 @@ function analyzeCustomRange() {
             signal =
                 "🔴 Bearish";
 
+
             bearishCount++;
+
         }
 
+
+        else {
+
+            neutralCount++;
+
+        }
+
+
+        /*
+        Taiwan stock style:
+
+        Up = Red
+        Down = Green
+        */
+
         const colorClass =
+
             returnPercentage > 0
+
                 ? "red"
-                : returnPercentage < 0
-                    ? "green"
-                    : "gray";
+
+                :
+
+            returnPercentage < 0
+
+                ? "green"
+
+                :
+
+            "gray";
+
+
+        /*
+        Actual dates used
+        */
 
         const startUsed =
             new Date(
-                first.timestamp * 1000
-            ).toLocaleDateString(
+                first.timestamp
+                * 1000
+            )
+            .toLocaleDateString(
                 "zh-TW"
             );
+
 
         const endUsed =
             new Date(
-                last.timestamp * 1000
-            ).toLocaleDateString(
+                last.timestamp
+                * 1000
+            )
+            .toLocaleDateString(
                 "zh-TW"
             );
 
-        rows.push(`
-        <tr>
-            <td>
-                <b>${symbol}</b>
-            </td>
 
-            <td>
-                ${first.close.toFixed(2)}
-            </td>
+        /*
+        Table row
+        */
 
-            <td>
-                ${last.close.toFixed(2)}
-            </td>
+        rows.push(
+            `
+            <tr>
 
-            <td class="${colorClass}">
-                ${
-                    returnPercentage >= 0
-                        ? "+"
-                        : ""
-                }${returnPercentage.toFixed(2)}%
-            </td>
+                <td>
 
-            <td>
-                ${signal}
-            </td>
+                    <b>
+                        ${symbol}
+                    </b>
 
-            <td>
-                ${startUsed} → ${endUsed}
-            </td>
-        </tr>
-        `);
+                </td>
+
+
+                <td>
+
+                    ${first.close.toFixed(2)}
+
+                </td>
+
+
+                <td>
+
+                    ${last.close.toFixed(2)}
+
+                </td>
+
+
+                <td
+                    class="${colorClass}"
+                >
+
+                    ${
+                        returnPercentage >= 0
+                            ? "+"
+                            : ""
+                    }
+
+                    ${returnPercentage.toFixed(2)}%
+
+                </td>
+
+
+                <td>
+
+                    ${signal}
+
+                </td>
+
+
+                <td>
+
+                    ${startUsed}
+                    →
+                    ${endUsed}
+
+                </td>
+
+            </tr>
+            `
+        );
+
     }
+
+
+    /*
+    Update Custom Range table
+    */
 
     $("rangeTable").innerHTML =
         rows.join("");
 
+
+    /*
+    Determine final
+    Custom Range Trend
+    */
+
     let rangeStatus =
         "🟡 Mixed / Neutral";
 
-    if (validCount === 0) {
+
+    /*
+    No usable data
+    */
+
+    if (
+        validCount === 0
+    ) {
 
         rangeStatus =
             "⚪ DATA ERROR";
 
-    } else if (bullishCount >= 3) {
+    }
+
+
+    /*
+    At least 3 bullish ETFs
+    */
+
+    else if (
+        bullishCount >= 3
+    ) {
 
         rangeStatus =
             "🟢 Custom Bullish";
 
-    } else if (bearishCount >= 3) {
+    }
+
+
+    /*
+    At least 3 bearish ETFs
+    */
+
+    else if (
+        bearishCount >= 3
+    ) {
 
         rangeStatus =
             "🔴 Custom Bearish";
+
     }
+
+
+    /*
+    Otherwise Mixed
+    */
+
+    else {
+
+        rangeStatus =
+            "🟡 Mixed / Neutral";
+
+    }
+
+
+    /*
+    Update result
+    */
 
     $("rangeStatus").textContent =
         rangeStatus;
 
+
     $("rangeSummary").textContent =
-        `門檻 ±${neutralBand.toFixed(1)}%；` +
-        `Bullish ${bullishCount} 支，` +
-        `Bearish ${bearishCount} 支。` +
-        `此結果不覆蓋即時 Action。`;
+
+        `門檻 ±${neutralBand.toFixed(1)}%；`
+
+        +
+
+        `Bullish ${bullishCount} 支，`
+
+        +
+
+        `Bearish ${bearishCount} 支，`
+
+        +
+
+        `Neutral ${neutralCount} 支。`
+
+        +
+
+        ` Custom Range 不覆蓋即時 Action。`;
+
+
+    console.log(
+        "[Custom Range]",
+        {
+
+            Start:
+                startDate,
+
+            End:
+                endDate,
+
+            NeutralBand:
+                neutralBand,
+
+            Bullish:
+                bullishCount,
+
+            Bearish:
+                bearishCount,
+
+            Neutral:
+                neutralCount,
+
+            Result:
+                rangeStatus
+
+        }
+    );
+
 }
 
 
 /* =========================================================
-   REFRESH ALL
+   MASTER REFRESH
 ========================================================= */
 
 async function refreshAll() {
 
-    if (refreshing) {
+    /*
+    Prevent duplicate refresh
+    */
+
+    if (
+        refreshing
+    ) {
+
+        console.log(
+            "[MarketOS] Refresh already running"
+        );
+
+
         return;
+
     }
 
-    refreshing = true;
+
+    refreshing =
+        true;
+
+
+    /*
+    UI:
+    loading state
+    */
 
     $("refreshButton").disabled =
         true;
 
+
     $("refreshButton").textContent =
         "⏳ 更新中...";
+
 
     $("loadingStatus").textContent =
         "正在取得市場資料...";
 
+
     $("errorBox").style.display =
         "none";
 
+
+    $("errorBox").textContent =
+        "";
+
+
+    console.log(
+        "[MarketOS] Refresh started"
+    );
+
+
     try {
 
-        const results =
-            await Promise.allSettled([
-                refreshMacro(),
-                refreshETF()
-            ]);
 
-        let macro = [];
-        let etfs = [];
+        /*
+        Macro + ETF
+        load in parallel
+        */
+
+        const results =
+            await Promise.allSettled(
+                [
+
+                    refreshMacro(),
+
+                    refreshETF()
+
+                ]
+            );
+
+
+        let macro =
+            [];
+
+
+        let etfs =
+            [];
+
+
+        /*
+        =====================================
+        MACRO RESULT
+        =====================================
+        */
 
         if (
             results[0].status ===
@@ -2335,16 +5788,42 @@ async function refreshAll() {
             macro =
                 results[0].value;
 
-        } else {
-
-            $("macroTable").innerHTML = `
-            <tr>
-                <td colspan="6" class="red">
-                    ⚠️ Macro 更新失敗
-                </td>
-            </tr>
-            `;
         }
+
+
+        else {
+
+            console.error(
+                "[MarketOS] Macro refresh failed",
+                results[0].reason
+            );
+
+
+            $("macroTable").innerHTML =
+                `
+                <tr>
+
+                    <td
+                        colspan="6"
+                        class="red"
+                    >
+
+                        ⚠️
+                        Macro 更新失敗
+
+                    </td>
+
+                </tr>
+                `;
+
+        }
+
+
+        /*
+        =====================================
+        ETF RESULT
+        =====================================
+        */
 
         if (
             results[1].status ===
@@ -2354,135 +5833,450 @@ async function refreshAll() {
             etfs =
                 results[1].value;
 
-        } else {
-
-            $("etfTable").innerHTML = `
-            <tr>
-                <td colspan="7" class="red">
-                    ⚠️ ETF 更新失敗
-                </td>
-            </tr>
-            `;
         }
 
-        updateMarketDecision(
-            etfs,
-            macro
-        );
+
+        else {
+
+            console.error(
+                "[MarketOS] ETF refresh failed",
+                results[1].reason
+            );
+
+
+            $("etfTable").innerHTML =
+                `
+                <tr>
+
+                    <td
+                        colspan="7"
+                        class="red"
+                    >
+
+                        ⚠️
+                        ETF 更新失敗
+
+                    </td>
+
+                </tr>
+                `;
+
+        }
+
+
+        /*
+        =====================================
+        MARKET DECISION
+        =====================================
+        */
+
+        if (
+            etfs.length > 0
+        ) {
+
+            updateMarketDecision(
+                etfs,
+                macro
+            );
+
+        }
+
+
+        else {
+
+            $("marketStatus").textContent =
+                "⚪ DATA ERROR";
+
+
+            $("riskStatus").textContent =
+                "UNKNOWN";
+
+
+            $("actionStatus").textContent =
+                "WAIT";
+
+        }
+
+
+        /*
+        =====================================
+        COUNT INDIVIDUAL DATA ERRORS
+        =====================================
+        */
+
+        const macroErrors =
+            macro.filter(
+
+                item =>
+                    item.error
+
+            ).length;
+
+
+        const etfErrors =
+            etfs.filter(
+
+                item =>
+                    item.error
+
+            ).length;
+
+
+        if (
+            macroErrors > 0
+            ||
+            etfErrors > 0
+        ) {
+
+            $("errorBox").textContent =
+
+                `⚠️ 部分資料失敗：`
+
+                +
+
+                `Macro ${macroErrors} / `
+
+                +
+
+                `ETF ${etfErrors}`;
+
+
+            $("errorBox").style.display =
+                "block";
+
+        }
+
+
+        /*
+        =====================================
+        LAST UPDATE TIME
+        =====================================
+        */
 
         $("lastUpdate").textContent =
-            "最後更新：" +
+
+            "最後更新："
+
+            +
+
             new Date()
                 .toLocaleString(
                     "zh-TW"
                 );
 
+
         $("loadingStatus").textContent =
             "✅ 更新完成";
 
+
+        /*
+        =====================================
+        UPDATE CUSTOM RANGE
+
+        Refresh Range analysis
+        using newest cached ETF data.
+        =====================================
+        */
+
         if (
-            $("startDate").value &&
+            $("startDate").value
+            &&
             $("endDate").value
         ) {
+
             analyzeCustomRange();
+
         }
 
-    } catch (error) {
+
+        console.log(
+            "[MarketOS] Refresh completed"
+        );
+
+    }
+
+
+    catch (
+        error
+    ) {
+
+        /*
+        Fatal protection
+        */
+
+        console.error(
+            "[MarketOS] Fatal error",
+            error
+        );
+
 
         $("errorBox").textContent =
-            "⚠️ 更新失敗：" +
+
+            "⚠️ 更新失敗："
+
+            +
+
             error.message;
+
 
         $("errorBox").style.display =
             "block";
 
+
         $("loadingStatus").textContent =
             "更新失敗";
+
 
         $("marketStatus").textContent =
             "⚪ ERROR";
 
+
         $("riskStatus").textContent =
             "UNKNOWN";
+
 
         $("actionStatus").textContent =
             "WAIT";
 
-    } finally {
+    }
 
-        refreshing = false;
+
+    finally {
+
+
+        refreshing =
+            false;
+
 
         $("refreshButton").disabled =
             false;
 
+
         $("refreshButton").textContent =
             "🔄 立即更新";
+
     }
+
 }
 
 
 /* =========================================================
-   EVENTS
+   QUICK RANGE EVENT
 ========================================================= */
 
-$("quickButtons").addEventListener(
-    "click",
-    event => {
+$("quickButtons")
+    .addEventListener(
+        "click",
+        event => {
 
-        const button =
-            event.target.closest(
-                "[data-range]"
-            );
+            const button =
+                event.target.closest(
+                    "[data-range]"
+                );
 
-        if (button) {
+
+            if (
+                !button
+            ) {
+
+                return;
+
+            }
+
 
             setQuickRange(
                 button.dataset.range
             );
+
         }
-    }
-);
-
-
-$("analyzeRange").addEventListener(
-    "click",
-    analyzeCustomRange
-);
-
-
-$("refreshButton").addEventListener(
-    "click",
-    refreshAll
-);
+    );
 
 
 /* =========================================================
-   INITIALIZE
+   CUSTOM ANALYZE EVENT
+========================================================= */
+
+$("analyzeRange")
+    .addEventListener(
+        "click",
+        () => {
+
+            /*
+            Manual date selection means
+            quick preset is no longer
+            necessarily active.
+            */
+
+            document
+                .querySelectorAll(
+                    "[data-range]"
+                )
+                .forEach(
+                    button => {
+
+                        button
+                            .classList
+                            .remove(
+                                "active"
+                            );
+
+                    }
+                );
+
+
+            analyzeCustomRange();
+
+        }
+    );
+
+
+/* =========================================================
+   REFRESH BUTTON EVENT
+========================================================= */
+
+$("refreshButton")
+    .addEventListener(
+        "click",
+        refreshAll
+    );
+
+
+/* =========================================================
+   DATE INPUT CHANGE
+
+   Clear quick-button highlight
+   when dates are manually changed.
+========================================================= */
+
+$("startDate")
+    .addEventListener(
+        "change",
+        () => {
+
+            document
+                .querySelectorAll(
+                    "[data-range]"
+                )
+                .forEach(
+                    button => {
+
+                        button
+                            .classList
+                            .remove(
+                                "active"
+                            );
+
+                    }
+                );
+
+        }
+    );
+
+
+$("endDate")
+    .addEventListener(
+        "change",
+        () => {
+
+            document
+                .querySelectorAll(
+                    "[data-range]"
+                )
+                .forEach(
+                    button => {
+
+                        button
+                            .classList
+                            .remove(
+                                "active"
+                            );
+
+                    }
+                );
+
+        }
+    );
+
+
+/* =========================================================
+   INITIAL DATE RANGE
+
+   Default:
+   latest 1 month
 ========================================================= */
 
 const today =
     new Date();
 
+
 const oneMonthAgo =
-    new Date(today);
+    new Date(
+        today
+    );
+
 
 oneMonthAgo.setMonth(
-    today.getMonth() - 1
+
+    today.getMonth()
+    - 1
+
 );
 
+
 $("startDate").value =
-    localISO(oneMonthAgo);
+    localISO(
+        oneMonthAgo
+    );
+
 
 $("endDate").value =
-    localISO(today);
+    localISO(
+        today
+    );
+
+
+/* =========================================================
+   STARTUP
+========================================================= */
+
+console.log(
+    "[MarketOS] V5 JavaScript loaded successfully"
+);
+
+
+console.log(
+    "[MarketOS] Decision priority: ETF > VIX > Fear & Greed"
+);
+
+
+/*
+Initial update
+*/
 
 refreshAll();
 
+
+/*
+Automatic update:
+every 15 minutes
+*/
+
 setInterval(
+
     refreshAll,
+
     REFRESH_INTERVAL
+
 );
+
+
+/* =========================================================
+   END JAVASCRIPT
+========================================================= */
+
 </script>
 
+
 </body>
+
 </html>
